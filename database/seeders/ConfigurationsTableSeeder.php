@@ -14,14 +14,14 @@ class ConfigurationsTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('configurations')->delete();
-        
+
         \DB::table('configurations')->insert(array (
-            0 => 
+            0 =>
             array (
-                'id' => 1,
+                'id' => null,
                 'key' => 'name',
                 'value' => 'SysBase',
                 'descripcion' => 'SysBase',
@@ -29,9 +29,9 @@ class ConfigurationsTableSeeder extends Seeder
                 'updated_at' => '2021-07-16 09:30:10',
                 'deleted_at' => NULL,
             ),
-            1 => 
+            1 =>
             array (
-                'id' => 2,
+                'id' => null,
                 'key' => 'divisa',
                 'value' => 'Q',
                 'descripcion' => 'Símbolo de la moneda que se utiliza',
@@ -39,9 +39,9 @@ class ConfigurationsTableSeeder extends Seeder
                 'updated_at' => '1972-08-03 18:19:12',
                 'deleted_at' => NULL,
             ),
-            2 => 
+            2 =>
             array (
-                'id' => 3,
+                'id' => null,
                 'key' => 'cantidad_decimales',
                 'value' => '2',
                 'descripcion' => 'Cantidad de decimales para cantidades que no sean de precio ',
@@ -49,9 +49,9 @@ class ConfigurationsTableSeeder extends Seeder
                 'updated_at' => '1985-03-05 20:25:28',
                 'deleted_at' => NULL,
             ),
-            3 => 
+            3 =>
             array (
-                'id' => 4,
+                'id' => null,
                 'key' => 'cantidad_decimales_precio',
                 'value' => '2',
                 'descripcion' => 'Cantidad de decimales para cantidades de precio',
@@ -59,9 +59,9 @@ class ConfigurationsTableSeeder extends Seeder
                 'updated_at' => '2006-08-13 11:44:56',
                 'deleted_at' => NULL,
             ),
-            4 => 
+            4 =>
             array (
-                'id' => 5,
+                'id' => null,
                 'key' => 'separador_miles',
                 'value' => ',',
                 'descripcion' => 'Símbolo para separa los miles o millares en las cantidades',
@@ -69,9 +69,9 @@ class ConfigurationsTableSeeder extends Seeder
                 'updated_at' => '1971-09-03 00:11:04',
                 'deleted_at' => NULL,
             ),
-            5 => 
+            5 =>
             array (
-                'id' => 6,
+                'id' => null,
                 'key' => 'separador_decimal',
                 'value' => '.',
                 'descripcion' => 'Símbolo para separar los decimales en las cantidades',
@@ -79,9 +79,9 @@ class ConfigurationsTableSeeder extends Seeder
                 'updated_at' => '2014-01-03 11:09:29',
                 'deleted_at' => NULL,
             ),
-            6 => 
+            6 =>
             array (
-                'id' => 7,
+                'id' => null,
                 'key' => 'mail_pruebas',
                 'value' => 'altamiranoesdras@gmail.com',
                 'descripcion' => 'Email al que se envían los correos cuando el entorno de la aplicación esta en modo debug o local',
@@ -89,9 +89,9 @@ class ConfigurationsTableSeeder extends Seeder
                 'updated_at' => '1993-12-16 05:19:18',
                 'deleted_at' => NULL,
             ),
-            7 => 
+            7 =>
             array (
-                'id' => 8,
+                'id' => null,
                 'key' => 'telefono_negocio',
                 'value' => '12345678',
                 'descripcion' => '12345678',
@@ -99,9 +99,9 @@ class ConfigurationsTableSeeder extends Seeder
                 'updated_at' => '2021-07-16 09:30:10',
                 'deleted_at' => NULL,
             ),
-            8 => 
+            8 =>
             array (
-                'id' => 9,
+                'id' => null,
                 'key' => 'direccion_negocio',
                 'value' => 'Dirección Empresa',
                 'descripcion' => 'Dirección Empresa',
@@ -109,9 +109,9 @@ class ConfigurationsTableSeeder extends Seeder
                 'updated_at' => '2021-07-16 09:30:10',
                 'deleted_at' => NULL,
             ),
-            9 => 
+            9 =>
             array (
-                'id' => 10,
+                'id' => null,
                 'key' => 'correo_negocio',
                 'value' => 'cooreo@empresa.com',
                 'descripcion' => 'cooreo@empresa.com',
@@ -120,7 +120,7 @@ class ConfigurationsTableSeeder extends Seeder
                 'deleted_at' => NULL,
             ),
         ));
-        
-        
+
+
     }
 }

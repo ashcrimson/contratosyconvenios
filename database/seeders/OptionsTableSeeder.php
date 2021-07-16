@@ -20,7 +20,7 @@ class OptionsTableSeeder extends Seeder
         \DB::table('options')->insert(array (
             0 =>
             array (
-                'id' => 1,
+                'id' => null,
                 'option_id' => NULL,
                 'nombre' => 'Dashboard',
                 'ruta' => 'dashboard',
@@ -36,7 +36,7 @@ class OptionsTableSeeder extends Seeder
             ),
             1 =>
             array (
-                'id' => 2,
+                'id' => null,
                 'option_id' => NULL,
                 'nombre' => 'Admin',
                 'ruta' => '',
@@ -52,7 +52,7 @@ class OptionsTableSeeder extends Seeder
             ),
             2 =>
             array (
-                'id' => 3,
+                'id' => null,
                 'option_id' => 2,
                 'nombre' => 'Usuarios',
                 'ruta' => 'users.index',
@@ -68,7 +68,7 @@ class OptionsTableSeeder extends Seeder
             ),
             3 =>
             array (
-                'id' => 4,
+                'id' => null,
                 'option_id' => 2,
                 'nombre' => 'Roles',
                 'ruta' => 'roles.index',
@@ -84,7 +84,7 @@ class OptionsTableSeeder extends Seeder
             ),
             4 =>
             array (
-                'id' => 5,
+                'id' => null,
                 'option_id' => 2,
                 'nombre' => 'Permisos',
                 'ruta' => 'permissions.index',
@@ -100,7 +100,7 @@ class OptionsTableSeeder extends Seeder
             ),
             5 =>
             array (
-                'id' => 6,
+                'id' => null,
                 'option_id' => 2,
                 'nombre' => 'Configuraciones',
                 'ruta' => 'profile.business',
@@ -116,7 +116,7 @@ class OptionsTableSeeder extends Seeder
             ),
             6 =>
             array (
-                'id' => 7,
+                'id' => null,
                 'option_id' => NULL,
                 'nombre' => 'Developer',
                 'ruta' => 'x',
@@ -132,7 +132,7 @@ class OptionsTableSeeder extends Seeder
             ),
             7 =>
             array (
-                'id' => 8,
+                'id' => null,
                 'option_id' => 7,
                 'nombre' => 'Prueba API\'S',
                 'ruta' => 'dev.prueba.api',
@@ -148,7 +148,7 @@ class OptionsTableSeeder extends Seeder
             ),
             8 =>
             array (
-                'id' => 9,
+                'id' => null,
                 'option_id' => 7,
                 'nombre' => 'Configuraciones',
                 'ruta' => 'dev.configurations.index',
@@ -164,7 +164,7 @@ class OptionsTableSeeder extends Seeder
             ),
             9 =>
             array (
-                'id' => 10,
+                'id' => null,
                 'option_id' => 7,
                 'nombre' => 'Clientes Passport',
                 'ruta' => 'dev.passport.clients',
@@ -180,7 +180,7 @@ class OptionsTableSeeder extends Seeder
             ),
             10 =>
             array (
-                'id' => 11,
+                'id' => null,
                 'option_id' => 7,
                 'nombre' => 'Menu',
                 'ruta' => 'options.index',
