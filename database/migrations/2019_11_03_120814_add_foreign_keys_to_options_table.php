@@ -14,7 +14,7 @@ class AddForeignKeysToOptionsTable extends Migration {
 	{
 		Schema::table('options', function(Blueprint $table)
 		{
-			$table->foreign('option_id', 'fk_options_options1')->references('id')->on('options');
+//			$table->foreign('option_id', 'fk_options_options1')->references('id')->on('options');
 		});
 	}
 
@@ -28,7 +28,7 @@ class AddForeignKeysToOptionsTable extends Migration {
 	{
 		Schema::table('options', function(Blueprint $table)
 		{
-			$table->dropForeign('fk_options_options1');
+//			$table->dropForeign('fk_options_options1');
 		});
 	}
 
