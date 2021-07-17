@@ -47,8 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('permissions', 'PermissionController');
 
-    Route::resource('projects', 'ProjectController');
-
+    Route::resource('areas', 'AreaController');
 });
 
 
