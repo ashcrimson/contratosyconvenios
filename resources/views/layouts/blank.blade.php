@@ -22,26 +22,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <style>
-        .background-image {
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: url("{{asset('/img/fondo_login.png')}}") no-repeat;
-            background-size: cover;
-            -moz-background-size: cover;
-            -webkit-background-size: cover;
-            -o-background-size: cover;
-            width: 100%;
-            height: 100%;
-            -webkit-filter: blur(5px);
-            -moz-filter: blur(5px);
-            -o-filter: blur(5px);
-            -ms-filter: blur(5px);
-            filter: blur(5px);
-            z-index: -999999;
-        }
-    </style>
+  
 
 
 </head>
