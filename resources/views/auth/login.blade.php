@@ -5,8 +5,9 @@
 @section('content')
 
     <div class="login-box">
-    <img src="{{getLogo()}}" alt="Logo" class="img-responsive">
+    
         <div class="login-logo text-dark text-uppercase text-bold"  >
+            <p><img src="{{getLogo()}}" alt="Logo" class="img-responsive"></p>
             <a href="{{ route('home') }}"><b style="color: black !important;">{{ config('app.name', 'Laravel') }}</b></a>
         </div>
         <!-- /.login-logo -->
