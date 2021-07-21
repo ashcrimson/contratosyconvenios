@@ -52,10 +52,12 @@ class LicitacionController extends AppBaseController
      */
     public function store(CreateLicitacionRequest $request)
     {
-        $input = $request->all();
+        $request->merge([
+            'user_crea' => auth()->user()->id
+        ]);
 
         /** @var Licitacion $licitacion */
-        $licitacion = Licitacion::create($input);
+        $licitacion = Licitacion::create($request->all());
 
         Flash::success('Licitacion guardado exitosamente.');
 
@@ -122,6 +124,10 @@ class LicitacionController extends AppBaseController
 
             return redirect(route('licitaciones.index'));
         }
+
+        $request->merge([
+            'user_actualiza' => auth()->user()->id
+        ]);
 
         $licitacion->fill($request->all());
         $licitacion->save();

@@ -7,19 +7,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Licitacion
  * @package App\Models
- * @version July 21, 2021, 3:15 pm CST
+ * @version July 21, 2021, 4:51 pm CST
  *
+ * @property \App\Models\User $userCrea
+ * @property \App\Models\User $userActualiza
  * @property \Illuminate\Database\Eloquent\Collection $contratos
  * @property string $numero
  * @property string $descripcion
  * @property number $presupuesto
+ * @property integer $user_crea
+ * @property integer $user_actualiza
  */
 class Licitacion extends Model
 {
     use SoftDeletes;
 
     public $table = 'licitaciones';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -31,7 +35,9 @@ class Licitacion extends Model
     public $fillable = [
         'numero',
         'descripcion',
-        'presupuesto'
+        'presupuesto',
+        'user_crea',
+        'user_actualiza'
     ];
 
     /**
@@ -43,7 +49,9 @@ class Licitacion extends Model
         'id' => 'integer',
         'numero' => 'string',
         'descripcion' => 'string',
-        'presupuesto' => 'float'
+        'presupuesto' => 'decimal:0',
+        'user_crea' => 'integer',
+        'user_actualiza' => 'integer'
     ];
 
     /**
@@ -52,13 +60,26 @@ class Licitacion extends Model
      * @var array
      */
     public static $rules = [
-        'numero' => 'required|string|max:45',
+        'numero' => 'required|string|max:255',
         'descripcion' => 'required|string',
         'presupuesto' => 'required|numeric',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function userCrea()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'user_crea');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function userActualiza()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'user_actualiza');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -30,7 +30,9 @@ class LicitacionesTableSeeder extends Seeder
             Licitacion::create([
                 'numero' => $licitacion->nro_licitacion,
                 'descripcion' => $licitacion->detalle,
-                'presupuesto' => $licitacion->presupuesto
+                'presupuesto' => $licitacion->presupuesto,
+                'user_crea' => $licitacion->creado_por,
+                'user_actualiza' => $licitacion->actualizado_por
             ]);
         }
 

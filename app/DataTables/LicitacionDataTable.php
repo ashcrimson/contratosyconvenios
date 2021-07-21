@@ -29,9 +29,15 @@ class LicitacionDataTable extends DataTable
                  return $licitacion->id;
 
                  //se debe crear la vista modal_detalles
-                 //return view('licitaciones.modal_detalles',compact('licitacion'))->render();
+                 //return view('licitacions.modal_detalles',compact('licitacion'))->render();
 
              })
+                ->editColumn('user_crea.name',function (Licitacion $licitacion){
+                    return $licitacion->userCrea->name ?? '';
+                })
+               ->editColumn('user_actualiza.name',function (Licitacion $licitacion){
+                   return $licitacion->userActualiza->name ?? '';
+               })
              ->rawColumns(['action','id']);
 
     }
@@ -44,7 +50,7 @@ class LicitacionDataTable extends DataTable
      */
     public function query(Licitacion $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['userCrea','userActualiza']);
     }
 
     /**
@@ -77,7 +83,7 @@ class LicitacionDataTable extends DataTable
                 'language' => ['url' => asset('js/SpanishDataTables.json')],
                 //'scrollX' => false,
                 'responsive' => true,
-                'stateSave' => true,
+//                'stateSave' => true,
                 'buttons' => [
                     //['extend' => 'create', 'text' => '<i class="fa fa-plus"></i> <span class="d-none d-sm-inline">Crear</span>'],
                     ['extend' => 'print', 'text' => '<i class="fa fa-print"></i> <span class="d-none d-sm-inline">Imprimir</span>'],
@@ -98,7 +104,9 @@ class LicitacionDataTable extends DataTable
         return [
             'numero',
             'descripcion',
-            'presupuesto'
+            'presupuesto',
+            'creado_por' => ['data' => 'user_crea.name','name' => 'userCrea.name','orderable' => false],
+            'actualizado_por'  => ['data' => 'user_actualiza.name','name' => 'userActualiza.name','orderable' => false]
         ];
     }
 
