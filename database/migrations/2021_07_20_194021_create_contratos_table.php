@@ -15,10 +15,10 @@ class CreateContratosTable extends Migration
     {
         Schema::create('contratos', function (Blueprint $table) {
             $table->id();
-            $table->integer('tipo_id')->index('fk_contratos_contratos_tipos1_idx');
-            $table->integer('moneda_id')->index('fk_contratos_monedas1_idx');
-            $table->integer('proveedor_id')->index('fk_contratos_proveedores1_idx');
-            $table->unsignedBigInteger('licitacion_id')->nullable()->index('fk_contratos_licitaciones1_idx');
+            $table->integer('tipo_id')->index('fk_ctr_tipos1_idx');
+            $table->integer('moneda_id')->index('fk_ctr_monedas1_idx');
+            $table->integer('proveedor_id')->index('fk_ctr_proveedores1_idx');
+            $table->unsignedBigInteger('licitacion_id')->nullable()->index('fk_ctr_licitaciones1_idx');
             $table->string('monto', 45);
             $table->date('fecha_alerta');
             $table->date('fecha_inicio');
@@ -29,10 +29,10 @@ class CreateContratosTable extends Migration
             $table->string('numero_boleta_garantia', 45);
             $table->date('fecha_vencimiento_boleta');
             $table->date('alerta_vencimiento_boleta');
-            $table->unsignedBigInteger('estado_id')->index('fk_contratos_contratos_estados1_idx');
+            $table->unsignedBigInteger('estado_id')->index('fk_ctr_estados1_idx');
             $table->timestamps();
             $table->softDeletes();
-            $table->unsignedBigInteger('areas_id')->index('fk_contratos_areas1_idx');
+            $table->unsignedBigInteger('areas_id')->index('fk_ctr_areas1_idx');
         });
     }
 

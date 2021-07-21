@@ -15,7 +15,7 @@ class AddForeignKeysToOrdenesComprasTable extends Migration
     {
         Schema::table('ordenes_compras', function (Blueprint $table) {
             $table->foreign('contrato_id', 'fk_ordenes_compras_contratos1')->references('id')->on('contratos');
-            $table->foreign('estado_id', 'fk_ordenes_compras_ordenes_compras_estados1')->references('id')->on('ordenes_compras_estados');
+            $table->foreign('estado_id', 'fk_ordenes_compras_estados1')->references('id')->on('ordenes_compras_estados');
         });
     }
 
@@ -28,7 +28,7 @@ class AddForeignKeysToOrdenesComprasTable extends Migration
     {
         Schema::table('ordenes_compras', function (Blueprint $table) {
             $table->dropForeign('fk_ordenes_compras_contratos1');
-            $table->dropForeign('fk_ordenes_compras_ordenes_compras_estados1');
+            $table->dropForeign('fk_ordenes_compras_estados1');
         });
     }
 }

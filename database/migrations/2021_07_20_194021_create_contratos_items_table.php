@@ -15,7 +15,7 @@ class CreateContratosItemsTable extends Migration
     {
         Schema::create('contratos_items', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->unsignedBigInteger('contrato_id')->index('fk_contratos_items_contratos1_idx');
+            $table->unsignedBigInteger('contrato_id')->index('fk_ctr_items_contratos1_idx');
             $table->string('codigo', 45);
             $table->string('descripcion');
             $table->decimal('cantidad_total', 14);

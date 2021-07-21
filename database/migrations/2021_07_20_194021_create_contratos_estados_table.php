@@ -15,7 +15,7 @@ class CreateContratosEstadosTable extends Migration
     {
         Schema::create('contratos_estados', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 45)->unique('nombre_UNIQUE');
+            $table->string('nombre', 45)->unique();
             $table->timestamps();
             $table->softDeletes();
         });

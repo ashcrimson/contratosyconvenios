@@ -14,8 +14,8 @@ class CreateContratoHasAreaTable extends Migration
     public function up()
     {
         Schema::create('contrato_has_area', function (Blueprint $table) {
-            $table->unsignedBigInteger('contrato_id')->index('fk_contratos_has_areas_contratos1_idx');
-            $table->unsignedBigInteger('area_id')->index('fk_contratos_has_areas_areas1_idx');
+            $table->unsignedBigInteger('contrato_id')->index('fk_ctr_area_contrato1_idx');
+            $table->unsignedBigInteger('area_id')->index('fk_ctr_area_area1_idx');
             $table->primary(['contrato_id', 'area_id']);
         });
     }

@@ -16,7 +16,7 @@ class CreateAreasTable extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cargo_id')->index('fk_areas_cargos1_idx');
-            $table->string('nombre')->unique('nombre_UNIQUE');
+            $table->string('nombre')->unique();
             $table->timestamps();
             $table->softDeletes();
         });
