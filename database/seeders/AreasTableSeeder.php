@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Area;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AreasTableSeeder extends Seeder
 {
@@ -14,67 +16,26 @@ class AreasTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('areas')->delete();
-        
-        \DB::table('areas')->insert(array (
-            0 => 
-            array (
-                'id' => 1,
-                'cargo_id' => 20,
-                'nombre' => 'Infraestructura',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'deleted_at' => NULL,
-            ),
-            1 => 
-            array (
-                'id' => 2,
-                'cargo_id' => 20,
-                'nombre' => 'Sistemas',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'deleted_at' => NULL,
-            ),
-            2 => 
-            array (
-                'id' => 3,
-                'cargo_id' => 20,
-                'nombre' => 'Mesa de Ayuda',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'deleted_at' => NULL,
-            ),
-            3 => 
-            array (
-                'id' => 8,
-                'cargo_id' => 18,
-                'nombre' => 'Mantenimiento',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'deleted_at' => NULL,
-            ),
-            4 => 
-            array (
-                'id' => 9,
-                'cargo_id' => 18,
-                'nombre' => 'Logistica',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'deleted_at' => NULL,
-            ),
-            5 => 
-            array (
-                'id' => 10,
-                'cargo_id' => 18,
-                'nombre' => 'Mejoramiento Continuo',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'deleted_at' => NULL,
-            ),
-        ));
-        
-        
+
+        DB::table('areas')->delete();
+
+        $areas = DB::connection('old')->table('AREAS')->orderBy('ID_AREA')->get();
+
+        foreach ($areas as $index => $area) {
+            Area::create([
+                'id' => $area->id_area,
+                'cargo_id' => $area->id_cargo,
+                'nombre' => $area->area
+            ]);
+        }
+
+        $maxId = $areas->max('id_area');
+
+        setStartValSequence('AREAS_ID_SEQ',$maxId);
+
+
+
+
     }
 }

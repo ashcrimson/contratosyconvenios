@@ -97,8 +97,9 @@ class AreaDataTable extends DataTable
     {
         return [
             'id',
+            'nombre' => ['name' =>'nombre','data' => 'nombre'],
             'cargo' => ['name' =>'cargo.nombre','data' => 'cargo.nombre'],
-            'nombre'
+
         ];
     }
 

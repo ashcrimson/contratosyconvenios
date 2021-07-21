@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use App\Extenciones\NumeroALetras;
+use Illuminate\Support\Facades\DB;
 
 
 /**
@@ -262,4 +263,11 @@ function nfp($numero,$cantidad_decimales=null,$separador_decimal=null,$separador
     $separador_miles = $separador_miles ?? config('app.separador_miles');
 
     return number_format($numero,$cantidad_decimales,$separador_decimal,$separador_miles);
+}
+
+function setStartValSequence($nameSeq,$start){
+
+    for ($i=1;$i<=$start;$i++){
+        $query = DB::table('DUAL')->select($nameSeq.".NEXTVAL" )->get();
+    }
 }
