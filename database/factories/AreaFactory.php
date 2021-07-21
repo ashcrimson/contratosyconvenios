@@ -8,7 +8,9 @@ use Faker\Generator as Faker;
 $factory->define(Area::class, function (Faker $faker) {
 
     return [
-        'AREA' => $this->faker->word,
-        'ID_CARGO' => $this->faker->randomDigitNotNull
+        'cargo_id' => $this->faker->word,
+        'nombre' => $this->faker->word,
+        'created_at' => $this->faker->date('Y-m-d H:i:s'),
+        'updated_at' => $this->faker->date('Y-m-d H:i:s'),
     ];
 });

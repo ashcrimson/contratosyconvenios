@@ -20,7 +20,7 @@ class AreaDataTable extends DataTable
 
        return $dataTable->addColumn('action', function(Area $area){
 
-                 $id = $area->id_area;
+                 $id = $area->id;
 
                  return view('areas.datatables_actions',compact('area','id'))->render();
              })
@@ -44,7 +44,7 @@ class AreaDataTable extends DataTable
      */
     public function query(Area $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['cargo']);
     }
 
     /**
@@ -96,9 +96,9 @@ class AreaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id_area',
-            'area',
-            'id_cargo'
+            'id',
+            'cargo_id',
+            'nombre'
         ];
     }
 

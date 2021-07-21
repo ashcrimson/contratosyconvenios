@@ -1,10 +1,10 @@
-<!-- Area Field -->
-{!! Form::label('AREA', 'Area:') !!}
-{!! $area->AREA !!}<br>
+<!-- Cargo Id Field -->
+{!! Form::label('cargo_id', 'Cargo Id:') !!}
+{!! $area->cargo_id !!}<br>
 
 
-<!-- Id Cargo Field -->
-{!! Form::label('ID_CARGO', 'Id Cargo:') !!}
-{!! $area->ID_CARGO !!}<br>
+<!-- Nombre Field -->
+{!! Form::label('nombre', 'Nombre:') !!}
+{!! $area->nombre !!}<br>
 
 
