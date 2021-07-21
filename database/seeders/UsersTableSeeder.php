@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Area;
 use App\Models\Option;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
@@ -19,7 +21,37 @@ class UsersTableSeeder extends Seeder
 
 
 
-        //Usuario admin
+
+        /**
+         * Usuarios migracos
+         */
+        $usuarios = DB::connection('old')->table('USUARIOS')->orderBy('ID_USUARIO')->get();
+
+
+        foreach ($usuarios as $index => $user) {
+
+            $username = (strstr($user->mail, '@', true) . "\n");
+
+            User::create([
+                'id' => $user->id_usuario,
+                'username' => $username,
+                'name' => $user->nombre,
+                'email' => $user->mail,
+                'password' => bcrypt("123"),
+                'area_id' => $user->id_area,
+                'cargo_id' => $user->id_cargo,
+            ]);
+        }
+
+        $maxId = $usuarios->max('id_usuario');
+
+        setStartValSequence('USERS_ID_SEQ',$maxId);
+
+
+
+        /**
+         * Usuarios Locales
+         */
         User::factory(1)->create([
             "username" => "dev",
             "name" => "Developer",
@@ -52,24 +84,5 @@ class UsersTableSeeder extends Seeder
 
         });
 
-        User::factory(1)->create([
-            "username" => "Tester",
-            "name" => "Tester",
-            "password" => bcrypt("123")
-        ])->each(function (User $user){
-            $user->syncRoles(Role::TESTER);
-            $user->options()->sync(Option::pluck('id')->toArray());
-            $user->shortcuts()->sync([3,4,5,6]);
-
-        });
-
-        User::factory(6)->create([
-            "password" => bcrypt("123")
-        ])->each(function (User $user){
-            $user->syncRoles(Role::USER);
-            $user->options()->sync(Option::pluck('id')->toArray());
-            $user->shortcuts()->sync([3,4,5,6]);
-
-        });
     }
 }

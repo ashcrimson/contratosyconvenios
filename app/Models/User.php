@@ -16,19 +16,22 @@ use Spatie\Permission\Traits\HasRoles;
 /**
  * Class User
  * @package App\Models
- * @version January 28, 2020, 1:44 pm CST
+ * @version July 21, 2021, 4:10 pm CST
  *
- * @property \Illuminate\Database\Eloquent\Collection options
- * @property string username
- * @property string name
- * @property string email
- * @property string|\Carbon\Carbon email_verified_at
- * @property string password
- * @property string thumb
- * @property string img
- * @property string provider
- * @property string provider_uid
- * @property string remember_token
+ * @property \App\Models\Area $area
+ * @property \App\Models\Cargo $cargo
+ * @property \Illuminate\Database\Eloquent\Collection $bitacoras
+ * @property \Illuminate\Database\Eloquent\Collection $options
+ * @property string $username
+ * @property string $name
+ * @property string $email
+ * @property string|\Carbon\Carbon $email_verified_at
+ * @property string $password
+ * @property string $provider
+ * @property string $provider_uid
+ * @property integer $area_id
+ * @property integer $cargo_id
+ * @property string $remember_token
  */
 class User extends Authenticatable implements  MustVerifyEmail,HasMedia
 {
@@ -40,7 +43,16 @@ class User extends Authenticatable implements  MustVerifyEmail,HasMedia
      * @var array
      */
     protected $fillable = [
-        'username','name', 'email', 'password','provider','provider_uid'
+        'username',
+        'name',
+        'email',
+        'email_verified_at',
+        'password',
+        'provider',
+        'provider_uid',
+        'area_id',
+        'cargo_id',
+        'remember_token'
     ];
 
     /**
@@ -58,7 +70,17 @@ class User extends Authenticatable implements  MustVerifyEmail,HasMedia
      * @var array
      */
     protected $casts = [
+        'id' => 'integer',
+        'username' => 'string',
+        'name' => 'string',
+        'email' => 'string',
         'email_verified_at' => 'datetime',
+        'password' => 'string',
+        'provider' => 'string',
+        'provider_uid' => 'string',
+        'area_id' => 'integer',
+        'cargo_id' => 'integer',
+        'remember_token' => 'string'
     ];
 
     protected $with = ['options.children'];
@@ -80,6 +102,30 @@ class User extends Authenticatable implements  MustVerifyEmail,HasMedia
         'email'    => 'sometimes|required|email|max:255|unique:users',
         'password' => 'required|min:6',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function area()
+    {
+        return $this->belongsTo(\App\Models\Area::class, 'area_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function cargo()
+    {
+        return $this->belongsTo(\App\Models\Cargo::class, 'cargo_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function bitacoras()
+    {
+        return $this->hasMany(\App\Models\Bitacora::class, 'users_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
