@@ -18,6 +18,8 @@ class CreateLicitacionesTable extends Migration
             $table->string('numero')->unique();
             $table->text('descripcion');
             $table->decimal('presupuesto', 14, 0);
+            $table->unsignedBigInteger('user_crea')->nullable()->index('fk_licitaciones_users1_idx');
+            $table->unsignedBigInteger('user_actualiza')->nullable()->index('fk_licitaciones_users2_idx');
             $table->timestamps();
             $table->softDeletes();
         });

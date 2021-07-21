@@ -14,7 +14,8 @@ class AddForeignKeysToBitacorasTable extends Migration
     public function up()
     {
         Schema::table('bitacoras', function (Blueprint $table) {
-            $table->foreign('users_id', 'fk_bitacoras_users1')->references('id')->on('users');
+            $table->foreign('user_crea', 'fk_bitacoras_users1')->references('id')->on('users');
+            $table->foreign('user_actualiza', 'fk_bitacoras_users2')->references('id')->on('users');
         });
     }
 
@@ -27,6 +28,7 @@ class AddForeignKeysToBitacorasTable extends Migration
     {
         Schema::table('bitacoras', function (Blueprint $table) {
             $table->dropForeign('fk_bitacoras_users1');
+            $table->dropForeign('fk_bitacoras_users2');
         });
     }
 }

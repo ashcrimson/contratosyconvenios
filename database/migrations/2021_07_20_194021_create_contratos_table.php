@@ -30,9 +30,11 @@ class CreateContratosTable extends Migration
             $table->date('fecha_vencimiento_boleta');
             $table->date('alerta_vencimiento_boleta');
             $table->unsignedBigInteger('estado_id')->index('fk_ctr_estados1_idx');
+            $table->unsignedBigInteger('area_id')->index('fk_ctr_areas1_idx');
+            $table->unsignedBigInteger('user_crea')->index('fk_contratos_users1_idx');
+            $table->unsignedBigInteger('user_actualiza')->nullable()->index('fk_contratos_users2_idx');
             $table->timestamps();
             $table->softDeletes();
-            $table->unsignedBigInteger('areas_id')->index('fk_ctr_areas1_idx');
         });
     }
 

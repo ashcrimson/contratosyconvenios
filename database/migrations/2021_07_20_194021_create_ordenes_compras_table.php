@@ -24,6 +24,8 @@ class CreateOrdenesComprasTable extends Migration
             $table->string('descripcion', 45)->nullable();
             $table->tinyInteger('tiene_detalles')->nullable();
             $table->unsignedBigInteger('estado_id')->index('fk_ord_compras_estados1_idx');
+            $table->unsignedBigInteger('user_crea')->index('fk_ord_compras_users1_idx');
+            $table->unsignedBigInteger('user_actualiza')->nullable()->index('fk_ord_compras_users2_idx');
             $table->timestamps();
             $table->softDeletes();
         });
