@@ -22,14 +22,14 @@ class LicitacionDataTable extends DataTable
 
                  $id = $licitacion->id;
 
-                 return view('licitacions.datatables_actions',compact('licitacion','id'))->render();
+                 return view('licitaciones.datatables_actions',compact('licitacion','id'))->render();
              })
              ->editColumn('id',function (Licitacion $licitacion){
 
                  return $licitacion->id;
 
                  //se debe crear la vista modal_detalles
-                 //return view('licitacions.modal_detalles',compact('licitacion'))->render();
+                 //return view('licitaciones.modal_detalles',compact('licitacion'))->render();
 
              })
              ->rawColumns(['action','id']);

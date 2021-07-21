@@ -24,7 +24,7 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
 
         Route::resource('proveedors', 'ProveedorAPIController');
 
-        Route::resource('licitacions', 'LicitacionAPIController');
+        Route::resource('licitaciones', 'LicitacionAPIController');
     });
 
 

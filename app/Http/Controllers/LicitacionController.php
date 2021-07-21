@@ -30,7 +30,7 @@ class LicitacionController extends AppBaseController
      */
     public function index(LicitacionDataTable $licitacionDataTable)
     {
-        return $licitacionDataTable->render('licitacions.index');
+        return $licitacionDataTable->render('licitaciones.index');
     }
 
     /**
@@ -40,7 +40,7 @@ class LicitacionController extends AppBaseController
      */
     public function create()
     {
-        return view('licitacions.create');
+        return view('licitaciones.create');
     }
 
     /**
@@ -59,7 +59,7 @@ class LicitacionController extends AppBaseController
 
         Flash::success('Licitacion guardado exitosamente.');
 
-        return redirect(route('licitacions.index'));
+        return redirect(route('licitaciones.index'));
     }
 
     /**
@@ -77,10 +77,10 @@ class LicitacionController extends AppBaseController
         if (empty($licitacion)) {
             Flash::error('Licitacion no encontrado');
 
-            return redirect(route('licitacions.index'));
+            return redirect(route('licitaciones.index'));
         }
 
-        return view('licitacions.show')->with('licitacion', $licitacion);
+        return view('licitaciones.show')->with('licitacion', $licitacion);
     }
 
     /**
@@ -98,10 +98,10 @@ class LicitacionController extends AppBaseController
         if (empty($licitacion)) {
             Flash::error('Licitacion no encontrado');
 
-            return redirect(route('licitacions.index'));
+            return redirect(route('licitaciones.index'));
         }
 
-        return view('licitacions.edit')->with('licitacion', $licitacion);
+        return view('licitaciones.edit')->with('licitacion', $licitacion);
     }
 
     /**
@@ -120,7 +120,7 @@ class LicitacionController extends AppBaseController
         if (empty($licitacion)) {
             Flash::error('Licitacion no encontrado');
 
-            return redirect(route('licitacions.index'));
+            return redirect(route('licitaciones.index'));
         }
 
         $licitacion->fill($request->all());
@@ -128,7 +128,7 @@ class LicitacionController extends AppBaseController
 
         Flash::success('Licitacion actualizado con éxito.');
 
-        return redirect(route('licitacions.index'));
+        return redirect(route('licitaciones.index'));
     }
 
     /**
@@ -148,13 +148,13 @@ class LicitacionController extends AppBaseController
         if (empty($licitacion)) {
             Flash::error('Licitacion no encontrado');
 
-            return redirect(route('licitacions.index'));
+            return redirect(route('licitaciones.index'));
         }
 
         $licitacion->delete();
 
         Flash::success('Licitacion deleted successfully.');
 
-        return redirect(route('licitacions.index'));
+        return redirect(route('licitaciones.index'));
     }
 }

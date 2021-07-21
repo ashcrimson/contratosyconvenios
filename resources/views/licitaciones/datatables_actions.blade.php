@@ -1,11 +1,11 @@
 @can('Ver Licitacions')
-<a href="{{ route('licitacions.show', $id) }}" data-toggle="tooltip" title="Ver" class='btn btn-default btn-sm'>
+<a href="{{ route('licitaciones.show', $id) }}" data-toggle="tooltip" title="Ver" class='btn btn-default btn-sm'>
     <i class="fa fa-eye"></i>
 </a>
 @endcan
 
 @can('Editar Licitacions')
-<a href="{{ route('licitacions.edit', $id) }}" data-toggle="tooltip" title="Editar" class='btn btn-outline-info btn-sm'>
+<a href="{{ route('licitaciones.edit', $id) }}" data-toggle="tooltip" title="Editar" class='btn btn-outline-info btn-sm'>
     <i class="fa fa-edit"></i>
 </a>
 @endcan
@@ -16,7 +16,7 @@
 </a>
 
 
-<form action="{{ route('licitacions.destroy', $id)}}" method="POST" id="delete-form{{$id}}">
+<form action="{{ route('licitaciones.destroy', $id)}}" method="POST" id="delete-form{{$id}}">
     @method('DELETE')
     @csrf
 </form>

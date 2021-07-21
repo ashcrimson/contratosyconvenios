@@ -18,7 +18,7 @@ class LicitacionAPIController extends AppBaseController
 {
     /**
      * Display a listing of the Licitacion.
-     * GET|HEAD /licitacions
+     * GET|HEAD /licitaciones
      *
      * @param Request $request
      * @return Response
@@ -41,7 +41,7 @@ class LicitacionAPIController extends AppBaseController
 
     /**
      * Store a newly created Licitacion in storage.
-     * POST /licitacions
+     * POST /licitaciones
      *
      * @param CreateLicitacionAPIRequest $request
      *
@@ -59,7 +59,7 @@ class LicitacionAPIController extends AppBaseController
 
     /**
      * Display the specified Licitacion.
-     * GET|HEAD /licitacions/{id}
+     * GET|HEAD /licitaciones/{id}
      *
      * @param int $id
      *
@@ -79,7 +79,7 @@ class LicitacionAPIController extends AppBaseController
 
     /**
      * Update the specified Licitacion in storage.
-     * PUT/PATCH /licitacions/{id}
+     * PUT/PATCH /licitaciones/{id}
      *
      * @param int $id
      * @param UpdateLicitacionAPIRequest $request
@@ -103,7 +103,7 @@ class LicitacionAPIController extends AppBaseController
 
     /**
      * Remove the specified Licitacion from storage.
-     * DELETE /licitacions/{id}
+     * DELETE /licitaciones/{id}
      *
      * @param int $id
      *

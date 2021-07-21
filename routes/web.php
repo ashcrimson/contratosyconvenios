@@ -55,5 +55,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('proveedors', 'ProveedorController');
 
-    Route::resource('licitacions', 'LicitacionController');
+    Route::resource('licitaciones', 'LicitacionController');
 });

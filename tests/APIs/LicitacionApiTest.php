@@ -19,7 +19,7 @@ class LicitacionApiTest extends TestCase
 
         $this->response = $this->json(
             'POST',
-            '/api/licitacions', $licitacion
+            '/api/licitaciones', $licitacion
         );
 
         $this->assertApiResponse($licitacion);
@@ -34,7 +34,7 @@ class LicitacionApiTest extends TestCase
 
         $this->response = $this->json(
             'GET',
-            '/api/licitacions/'.$licitacion->id
+            '/api/licitaciones/'.$licitacion->id
         );
 
         $this->assertApiResponse($licitacion->toArray());
@@ -50,7 +50,7 @@ class LicitacionApiTest extends TestCase
 
         $this->response = $this->json(
             'PUT',
-            '/api/licitacions/'.$licitacion->id,
+            '/api/licitaciones/'.$licitacion->id,
             $editedLicitacion
         );
 
@@ -66,13 +66,13 @@ class LicitacionApiTest extends TestCase
 
         $this->response = $this->json(
             'DELETE',
-             '/api/licitacions/'.$licitacion->id
+             '/api/licitaciones/'.$licitacion->id
          );
 
         $this->assertApiSuccess();
         $this->response = $this->json(
             'GET',
-            '/api/licitacions/'.$licitacion->id
+            '/api/licitaciones/'.$licitacion->id
         );
 
         $this->response->assertStatus(404);
