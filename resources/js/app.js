@@ -85,3 +85,16 @@ Vue.component(
     'passport-personal-access-tokens',
     require('./components/passport/PersonalAccessTokens.vue').default
 );
+
+require('bootstrap-toggle/js/bootstrap-toggle.js');
+
+
+import Multiselect from 'vue-multiselect'
+
+// register globally
+Vue.component('multiselect', Multiselect);
+
+
+import SelectCargo from "./components/SelectCargo";
+
+Vue.component('select-cargo',SelectCargo);

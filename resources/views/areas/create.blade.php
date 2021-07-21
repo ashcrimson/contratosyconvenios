@@ -29,10 +29,8 @@
             <div class="card">
                 <div class="card-body">
                     {!! Form::open(['route' => 'areas.store','class' => 'wait-on-submit']) !!}
+                        @include('areas.fields')
                         <div class="form-row">
-
-                            @include('areas.fields')
-
                             <!-- Submit Field -->
                             <div class="form-group col-sm-12 text-right">
                                 <a href="{!! route('areas.index') !!}" class="btn btn-outline-secondary">
