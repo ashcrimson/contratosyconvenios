@@ -19,6 +19,8 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
         Route::resource('areas', 'AreaAPIController');
 
         Route::resource('cargos', 'CargoAPIController');
+
+        Route::resource('monedas', 'MonedaAPIController');
     });
 
 

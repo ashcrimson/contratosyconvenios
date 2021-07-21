@@ -50,8 +50,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('areas', 'AreaController');
 
     Route::resource('cargos', 'CargoController');
+
+    Route::resource('monedas', 'MonedaController');
 });
-
-
-
-
