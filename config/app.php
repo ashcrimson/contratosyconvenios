@@ -2,6 +2,8 @@
 
 return [
 
+    'login_ldpa' => (bool) env('APP_LOGIN_LDAP', true),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
