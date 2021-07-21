@@ -54,4 +54,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('monedas', 'MonedaController');
 
     Route::resource('proveedors', 'ProveedorController');
+
+    Route::resource('licitacions', 'LicitacionController');
 });
