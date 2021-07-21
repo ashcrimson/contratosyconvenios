@@ -48,6 +48,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('permissions', 'PermissionController');
 
     Route::resource('areas', 'AreaController');
+
+    Route::resource('cargos', 'CargoController');
 });
+
+
 
 
