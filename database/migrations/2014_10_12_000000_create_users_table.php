@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('provider')->nullable();
             $table->string('provider_uid')->nullable();
-            $table->unsignedBigInteger('area_id')->index('fk_users_areas1_idx');
-            $table->unsignedBigInteger('cargo_id')->index('fk_users_cargos1_idx');
+            $table->unsignedBigInteger('area_id')->nullable()->index('fk_users_areas1_idx');
+            $table->unsignedBigInteger('cargo_id')->nullable()->index('fk_users_cargos1_idx');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
