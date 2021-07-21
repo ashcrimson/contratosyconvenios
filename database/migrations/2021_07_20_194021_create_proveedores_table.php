@@ -17,11 +17,11 @@ class CreateProveedoresTable extends Migration
             $table->integer('id', true);
             $table->string('rut');
             $table->string('razon_social');
-            $table->string('nombre_fantasia');
-            $table->string('telefono', 30);
-            $table->string('email');
-            $table->string('comuna');
-            $table->string('direccion');
+            $table->string('nombre_fantasia')->nullable();
+            $table->string('telefono', 30)->nullable();
+            $table->string('email')->nullable();
+            $table->string('comuna')->nullable();
+            $table->string('direccion')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
