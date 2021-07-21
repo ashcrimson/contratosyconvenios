@@ -216,7 +216,7 @@ class OptionsTableSeeder extends Seeder
                 'id' => '13',
                 'option_id' => '12',
                 'nombre' => 'Proveedores',
-                'ruta' => 'proveedore.index',
+                'ruta' => 'proveedors.index',
                 'descripcion' => NULL,
                 'icono_l' => 'fa-circle-notch',
                 'icono_r' => NULL,
