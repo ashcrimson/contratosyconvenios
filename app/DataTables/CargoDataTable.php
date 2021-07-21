@@ -57,7 +57,7 @@ class CargoDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
+            ->addAction(['width' => '120px', 'printablAe' => false])
             ->ajax([
                 'data' => "function(data) { formatDataDataTables($('#formFiltersDatatables').serializeArray(), data);   }"
             ])
@@ -96,6 +96,7 @@ class CargoDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id',
             'nombre'
         ];
     }

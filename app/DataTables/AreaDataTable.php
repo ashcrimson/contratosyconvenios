@@ -73,7 +73,7 @@ class AreaDataTable extends DataTable
                                         <"col-sm-6 order-1 order-sm-2 text-right" l>
 
                                     >',
-                'order'   => [[0, 'desc']],
+                'order'   => [[1, 'asc']],
                 'language' => ['url' => asset('js/SpanishDataTables.json')],
                 //'scrollX' => false,
                 'responsive' => true,
@@ -97,7 +97,7 @@ class AreaDataTable extends DataTable
     {
         return [
             'id',
-            'cargo_id',
+            'cargo' => ['name' =>'cargo.nombre','data' => 'cargo.nombre'],
             'nombre'
         ];
     }
