@@ -15,9 +15,9 @@ class CreateLicitacionesTable extends Migration
     {
         Schema::create('licitaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('numero', 45)->unique('numero_UNIQUE');
+            $table->string('numero')->unique();
             $table->text('descripcion');
-            $table->float('presupuesto', 10, 0);
+            $table->decimal('presupuesto', 14, 0);
             $table->timestamps();
             $table->softDeletes();
         });
