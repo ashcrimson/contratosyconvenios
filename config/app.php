@@ -2,7 +2,7 @@
 
 return [
 
-    'login_ldpa' => (bool) env('APP_LOGIN_LDAP', true),
+    'login_ldpa' => (bool) env('APP_LOGIN_LDAP', false),
 
     /*
     |--------------------------------------------------------------------------
