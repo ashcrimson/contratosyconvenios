@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MonedasTableSeeder::class);
         $this->call(ProveedoresTableSeeder::class);
         $this->call(LicitacionesTableSeeder::class);
+        $this->call(ContratosEstadosTableSeeder::class);
     }
 }

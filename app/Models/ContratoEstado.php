@@ -17,9 +17,13 @@ class ContratoEstado extends Model
     use SoftDeletes;
 
     public $table = 'contratos_estados';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    const INGRESADO =   1;
+    const ASIGNADO =    2;
+    const FINALIZADO =  3;
 
 
     protected $dates = ['deleted_at'];
