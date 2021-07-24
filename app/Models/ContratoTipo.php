@@ -17,9 +17,12 @@ class ContratoTipo extends Model
     use SoftDeletes;
 
     public $table = 'contratos_tipos';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    const CON_LICITACION =  1;
+    const TRATO_DIRECTO =   2;
 
 
     protected $dates = ['deleted_at'];
