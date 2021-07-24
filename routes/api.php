@@ -25,7 +25,10 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
         Route::resource('proveedors', 'ProveedorAPIController');
 
         Route::resource('licitaciones', 'LicitacionAPIController');
+
+        Route::resource('contrato_estados', 'ContratoEstadoAPIController');
     });
 
 
 });
+

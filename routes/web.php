@@ -56,4 +56,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('proveedors', 'ProveedorController');
 
     Route::resource('licitaciones', 'LicitacionController');
+
+    Route::resource('contratoEstados', 'ContratoEstadoController');
+
 });
+
+
