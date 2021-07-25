@@ -14,7 +14,7 @@ class AddForeignKeysToContratosTable extends Migration
     public function up()
     {
         Schema::table('contratos', function (Blueprint $table) {
-            $table->foreign('area_id', 'fk_contratos_areas1')->references('id')->on('areas');
+            $table->foreign('cargo_id', 'fk_contratos_cargos1')->references('id')->on('areas');
             $table->foreign('estado_id', 'fk_contratos_estados1')->references('id')->on('contratos_estados');
             $table->foreign('tipo_id', 'fk_contratos_tipos1')->references('id')->on('contratos_tipos');
             $table->foreign('licitacion_id', 'fk_contratos_licitaciones1')->references('id')->on('licitaciones');
@@ -33,7 +33,7 @@ class AddForeignKeysToContratosTable extends Migration
     public function down()
     {
         Schema::table('contratos', function (Blueprint $table) {
-            $table->dropForeign('fk_contratos_areas1');
+            $table->dropForeign('fk_contratos_cargos1');
             $table->dropForeign('fk_contratos_estados1');
             $table->dropForeign('fk_contratos_tipos1');
             $table->dropForeign('fk_contratos_licitaciones1');
