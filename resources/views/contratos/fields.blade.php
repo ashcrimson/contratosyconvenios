@@ -4,10 +4,10 @@
     {!! Form::number('tipo_id', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Moneda Id Field -->
+<!-- Licitacion Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('moneda_id', 'Moneda Id:') !!}
-    {!! Form::number('moneda_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('licitacion_id', 'Licitacion Id:') !!}
+    {!! Form::number('licitacion_id', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Proveedor Id Field -->
@@ -16,32 +16,33 @@
     {!! Form::number('proveedor_id', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Licitacion Id Field -->
+<!-- Cargo Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('licitacion_id', 'Licitacion Id:') !!}
-    {!! Form::number('licitacion_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('cargo_id', 'Cargo Id:') !!}
+    {!! Form::number('cargo_id', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Moneda Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('moneda_id', 'Moneda Id:') !!}
+    {!! Form::number('moneda_id', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Monto Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('monto', 'Monto:') !!}
-    {!! Form::text('monto', null, ['class' => 'form-control','maxlength' => 45,'maxlength' => 45]) !!}
+    {!! Form::number('monto', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Fecha Alerta Field -->
+<!-- Estado Alerta Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('fecha_alerta', 'Fecha Alerta:') !!}
-    {!! Form::date('fecha_alerta', null, ['class' => 'form-control','id'=>'fecha_alerta']) !!}
+    {!! Form::label('estado_alerta', 'Estado Alerta:') !!}
+    <label class="checkbox-inline">
+        {!! Form::hidden('estado_alerta', 0) !!}
+        {!! Form::checkbox('estado_alerta', '1', null) !!}
+    </label>
 </div>
 
-@section('scripts')
-    <script type="text/javascript">
-        $('#fecha_alerta').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
-@endsection
 
 <!-- Fecha Inicio Field -->
 <div class="form-group col-sm-6">
@@ -145,16 +146,22 @@
     </script>
 @endsection
 
+<!-- Monto Boleta Garantia Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('monto_boleta_garantia', 'Monto Boleta Garantia:') !!}
+    {!! Form::number('monto_boleta_garantia', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Id Mercado Publico Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('id_mercado_publico', 'Id Mercado Publico:') !!}
+    {!! Form::text('id_mercado_publico', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
 <!-- Estado Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('estado_id', 'Estado Id:') !!}
     {!! Form::number('estado_id', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Area Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('area_id', 'Area Id:') !!}
-    {!! Form::number('area_id', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- User Crea Field -->

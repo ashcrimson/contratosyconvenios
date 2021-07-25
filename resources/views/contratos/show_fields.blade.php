@@ -3,9 +3,9 @@
 {!! $contrato->tipo_id !!}<br>
 
 
-<!-- Moneda Id Field -->
-{!! Form::label('moneda_id', 'Moneda Id:') !!}
-{!! $contrato->moneda_id !!}<br>
+<!-- Licitacion Id Field -->
+{!! Form::label('licitacion_id', 'Licitacion Id:') !!}
+{!! $contrato->licitacion_id !!}<br>
 
 
 <!-- Proveedor Id Field -->
@@ -13,9 +13,14 @@
 {!! $contrato->proveedor_id !!}<br>
 
 
-<!-- Licitacion Id Field -->
-{!! Form::label('licitacion_id', 'Licitacion Id:') !!}
-{!! $contrato->licitacion_id !!}<br>
+<!-- Cargo Id Field -->
+{!! Form::label('cargo_id', 'Cargo Id:') !!}
+{!! $contrato->cargo_id !!}<br>
+
+
+<!-- Moneda Id Field -->
+{!! Form::label('moneda_id', 'Moneda Id:') !!}
+{!! $contrato->moneda_id !!}<br>
 
 
 <!-- Monto Field -->
@@ -23,9 +28,9 @@
 {!! $contrato->monto !!}<br>
 
 
-<!-- Fecha Alerta Field -->
-{!! Form::label('fecha_alerta', 'Fecha Alerta:') !!}
-{!! $contrato->fecha_alerta !!}<br>
+<!-- Estado Alerta Field -->
+{!! Form::label('estado_alerta', 'Estado Alerta:') !!}
+{!! $contrato->estado_alerta !!}<br>
 
 
 <!-- Fecha Inicio Field -->
@@ -68,14 +73,19 @@
 {!! $contrato->alerta_vencimiento_boleta !!}<br>
 
 
+<!-- Monto Boleta Garantia Field -->
+{!! Form::label('monto_boleta_garantia', 'Monto Boleta Garantia:') !!}
+{!! $contrato->monto_boleta_garantia !!}<br>
+
+
+<!-- Id Mercado Publico Field -->
+{!! Form::label('id_mercado_publico', 'Id Mercado Publico:') !!}
+{!! $contrato->id_mercado_publico !!}<br>
+
+
 <!-- Estado Id Field -->
 {!! Form::label('estado_id', 'Estado Id:') !!}
 {!! $contrato->estado_id !!}<br>
-
-
-<!-- Area Id Field -->
-{!! Form::label('area_id', 'Area Id:') !!}
-{!! $contrato->area_id !!}<br>
 
 
 <!-- User Crea Field -->

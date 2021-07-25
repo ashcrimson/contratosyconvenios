@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Contrato;
 use App\Models\ContratoEstado;
 use App\Models\ContratoTipo;
+use App\Models\Licitacion;
 use App\Models\Moneda;
 use App\Models\Proveedor;
 use Illuminate\Database\Seeder;
@@ -15,6 +16,7 @@ class ContratosTableSeeder extends Seeder
 
     private $monedas;
     private $proveedores;
+    private $licitaciones;
     /**
      * ContratosTableSeeder constructor.
      */
@@ -22,6 +24,7 @@ class ContratosTableSeeder extends Seeder
     {
         $this->monedas = Moneda::all();
         $this->proveedores = Proveedor::all();
+        $this->licitaciones = Licitacion::all();
     }
 
 
@@ -44,26 +47,26 @@ class ContratosTableSeeder extends Seeder
                 'tipo_id' => $this->getTipo($contrato),
                 'moneda_id' => $this->getMoneda($contrato),
                 'proveedor_id' => $this->getProveedor($contrato),
-                'licitacion_id' => $contrato->nro_licitacion,
+                'cargo_id' => $contrato->id_cargo,
+                'licitacion_id' => $this->getLicitacion($contrato),
                 'monto' => $contrato->monto,
-                'fecha_alerta' => $contrato->estado_alerta,
+                'estado_alerta' => $contrato->estado_alerta,
                 'fecha_inicio' => $contrato->fecha_inicio,
                 'fecha_termino' => $contrato->fecha_termino,
                 'fecha_aprobacion' => $contrato->fecha_aprobacion,
                 'fecha_alerta_vencimiento' => $contrato->fecha_alerta_vencimiento,
                 'fecha_vencimiento_boleta' => $contrato->fecha_vencimiento_boleta,
-                'alerta_vencimiento_boleta' => $contrato->id_contrato,
+                'alerta_vencimiento_boleta' => $contrato->alerta_vencimiento_boleta,
                 'numero_boleta_garantia' => $contrato->nro_boleta_garantia,
+                'monto_boleta_garantia' => $contrato->monto_boleta_garantia,
+                'id_mercado_publico' => $contrato->id_mercado_publico,
                 'objeto' => $contrato->objeto_contrato,
                 'estado_id' => ContratoEstado::INGRESADO,
-                'contrato_id' => $contrato->id_contrato,
-                'user_crea' => $contrato->id_contrato,
-                'user_actualiza' => $contrato->id_contrato,
+                'user_crea' => $contrato->creado_por,
+                'user_actualiza' => $contrato->actualizado_por,
             ];
 
-            dd($data);
-
-            Contrato::create();
+            Contrato::create($data);
         }
 
         $maxId = $contratos->max('id_contrato');
@@ -88,11 +91,16 @@ class ContratosTableSeeder extends Seeder
 
     function getMoneda($contrato){
         $moneda = $this->monedas->where('codigo',$contrato->id_moneda)->first();
-        return $moneda->id;
+        return $moneda->id ?? null;
     }
 
     function getProveedor($contrato){
         return $this->proveedores->where('rut',$contrato->rut_proveedor)->first()->id;
+    }
+
+    function getLicitacion($contrato){
+//        dd($contrato->nro_licitacion);
+        return $this->licitaciones->where('numero',$contrato->nro_licitacion)->first()->id ?? null;
     }
 }
 

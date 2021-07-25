@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Contrato
  * @package App\Models
- * @version July 24, 2021, 2:32 pm CST
+ * @version July 24, 2021, 7:30 pm CST
  *
- * @property \App\Models\Area $area
+ * @property \App\Models\Cargo $cargo
  * @property \App\Models\ContratosEstado $estado
  * @property \App\Models\Licitacione $licitacion
  * @property \App\Models\Moneda $moneda
@@ -17,15 +17,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \App\Models\ContratosTipo $tipo
  * @property \App\Models\User $userCrea
  * @property \App\Models\User $userActualiza
- * @property \Illuminate\Database\Eloquent\Collection $area2s
+ * @property \Illuminate\Database\Eloquent\Collection $areas
  * @property \Illuminate\Database\Eloquent\Collection $contratosItems
  * @property \Illuminate\Database\Eloquent\Collection $ordenesCompras
  * @property integer $tipo_id
- * @property integer $moneda_id
- * @property integer $proveedor_id
  * @property integer $licitacion_id
- * @property string $monto
- * @property string $fecha_alerta
+ * @property integer $proveedor_id
+ * @property integer $cargo_id
+ * @property integer $moneda_id
+ * @property number $monto
+ * @property boolean $estado_alerta
  * @property string $fecha_inicio
  * @property string $fecha_termino
  * @property string $fecha_aprobacion
@@ -34,8 +35,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $numero_boleta_garantia
  * @property string $fecha_vencimiento_boleta
  * @property string $alerta_vencimiento_boleta
+ * @property number $monto_boleta_garantia
+ * @property string $id_mercado_publico
  * @property integer $estado_id
- * @property integer $area_id
  * @property integer $user_crea
  * @property integer $user_actualiza
  */
@@ -55,11 +57,12 @@ class Contrato extends Model
 
     public $fillable = [
         'tipo_id',
-        'moneda_id',
-        'proveedor_id',
         'licitacion_id',
+        'proveedor_id',
+        'cargo_id',
+        'moneda_id',
         'monto',
-        'fecha_alerta',
+        'estado_alerta',
         'fecha_inicio',
         'fecha_termino',
         'fecha_aprobacion',
@@ -68,8 +71,9 @@ class Contrato extends Model
         'numero_boleta_garantia',
         'fecha_vencimiento_boleta',
         'alerta_vencimiento_boleta',
+        'monto_boleta_garantia',
+        'id_mercado_publico',
         'estado_id',
-        'area_id',
         'user_crea',
         'user_actualiza'
     ];
@@ -82,11 +86,12 @@ class Contrato extends Model
     protected $casts = [
         'id' => 'integer',
         'tipo_id' => 'integer',
-        'moneda_id' => 'integer',
-        'proveedor_id' => 'integer',
         'licitacion_id' => 'integer',
-        'monto' => 'string',
-        'fecha_alerta' => 'date',
+        'proveedor_id' => 'integer',
+        'cargo_id' => 'integer',
+        'moneda_id' => 'integer',
+        'monto' => 'decimal:0',
+        'estado_alerta' => 'boolean',
         'fecha_inicio' => 'date',
         'fecha_termino' => 'date',
         'fecha_aprobacion' => 'date',
@@ -95,8 +100,9 @@ class Contrato extends Model
         'numero_boleta_garantia' => 'string',
         'fecha_vencimiento_boleta' => 'date',
         'alerta_vencimiento_boleta' => 'date',
+        'monto_boleta_garantia' => 'decimal:0',
+        'id_mercado_publico' => 'string',
         'estado_id' => 'integer',
-        'area_id' => 'integer',
         'user_crea' => 'integer',
         'user_actualiza' => 'integer'
     ];
@@ -108,11 +114,12 @@ class Contrato extends Model
      */
     public static $rules = [
         'tipo_id' => 'required|integer',
-        'moneda_id' => 'required|integer',
-        'proveedor_id' => 'required|integer',
         'licitacion_id' => 'nullable',
-        'monto' => 'required|string|max:45',
-        'fecha_alerta' => 'required',
+        'proveedor_id' => 'required|integer',
+        'cargo_id' => 'required',
+        'moneda_id' => 'required|integer',
+        'monto' => 'required|numeric',
+        'estado_alerta' => 'required|boolean',
         'fecha_inicio' => 'required',
         'fecha_termino' => 'required',
         'fecha_aprobacion' => 'required',
@@ -121,8 +128,9 @@ class Contrato extends Model
         'numero_boleta_garantia' => 'required|string|max:45',
         'fecha_vencimiento_boleta' => 'required',
         'alerta_vencimiento_boleta' => 'required',
+        'monto_boleta_garantia' => 'required|numeric',
+        'id_mercado_publico' => 'required|string|max:255',
         'estado_id' => 'required',
-        'area_id' => 'required',
         'user_crea' => 'required',
         'user_actualiza' => 'nullable',
         'created_at' => 'nullable',
@@ -133,9 +141,9 @@ class Contrato extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function area()
+    public function cargo()
     {
-        return $this->belongsTo(\App\Models\Area::class, 'area_id');
+        return $this->belongsTo(\App\Models\Cargo::class, 'cargo_id');
     }
 
     /**
@@ -197,7 +205,7 @@ class Contrato extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      **/
-    public function area2s()
+    public function areas()
     {
         return $this->belongsToMany(\App\Models\Area::class, 'contrato_has_area');
     }

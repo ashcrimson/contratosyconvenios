@@ -97,11 +97,12 @@ class ContratoDataTable extends DataTable
     {
         return [
             'tipo_id',
-            'moneda_id',
-            'proveedor_id',
             'licitacion_id',
+            'proveedor_id',
+            'cargo_id',
+            'moneda_id',
             'monto',
-            'fecha_alerta',
+            'estado_alerta',
             'fecha_inicio',
             'fecha_termino',
             'fecha_aprobacion',
@@ -110,8 +111,9 @@ class ContratoDataTable extends DataTable
             'numero_boleta_garantia',
             'fecha_vencimiento_boleta',
             'alerta_vencimiento_boleta',
+            'monto_boleta_garantia',
+            'id_mercado_publico',
             'estado_id',
-            'area_id',
             'user_crea',
             'user_actualiza'
         ];
