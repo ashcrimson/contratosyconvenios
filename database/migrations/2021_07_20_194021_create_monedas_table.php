@@ -17,6 +17,7 @@ class CreateMonedasTable extends Migration
             $table->integer('id', true);
             $table->string('nombre', 45);
             $table->string('codigo', 45);
+            $table->string('simbolo', 45)->nullable();
             $table->float('equivalencia', 10, 0);
             $table->timestamps();
             $table->softDeletes();

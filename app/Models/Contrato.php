@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version July 24, 2021, 7:30 pm CST
  *
  * @property \App\Models\Cargo $cargo
- * @property \App\Models\ContratosEstado $estado
- * @property \App\Models\Licitacione $licitacion
+ * @property \App\Models\ContratoEstado $estado
+ * @property \App\Models\Licitacion $licitacion
  * @property \App\Models\Moneda $moneda
- * @property \App\Models\Proveedore $proveedor
- * @property \App\Models\ContratosTipo $tipo
+ * @property \App\Models\Proveedor $proveedor
+ * @property \App\Models\ContratoTipo $tipo
  * @property \App\Models\User $userCrea
  * @property \App\Models\User $userActualiza
  * @property \Illuminate\Database\Eloquent\Collection $areas
@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $cargo_id
  * @property integer $moneda_id
  * @property number $monto
+ * @property number $saldo
  * @property boolean $estado_alerta
  * @property string $fecha_inicio
  * @property string $fecha_termino
@@ -46,14 +47,14 @@ class Contrato extends Model
     use SoftDeletes;
 
     public $table = 'contratos';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
 
     protected $dates = ['deleted_at'];
 
-
+    protected $appends = ['saldo'];
 
     public $fillable = [
         'tipo_id',
@@ -151,7 +152,7 @@ class Contrato extends Model
      **/
     public function estado()
     {
-        return $this->belongsTo(\App\Models\ContratosEstado::class, 'estado_id');
+        return $this->belongsTo(\App\Models\ContratoEstado::class, 'estado_id');
     }
 
     /**
@@ -159,7 +160,7 @@ class Contrato extends Model
      **/
     public function licitacion()
     {
-        return $this->belongsTo(\App\Models\Licitacione::class, 'licitacion_id');
+        return $this->belongsTo(\App\Models\Licitacion::class, 'licitacion_id');
     }
 
     /**
@@ -175,7 +176,7 @@ class Contrato extends Model
      **/
     public function proveedor()
     {
-        return $this->belongsTo(\App\Models\Proveedore::class, 'proveedor_id');
+        return $this->belongsTo(\App\Models\Proveedor::class, 'proveedor_id');
     }
 
     /**
@@ -183,7 +184,7 @@ class Contrato extends Model
      **/
     public function tipo()
     {
-        return $this->belongsTo(\App\Models\ContratosTipo::class, 'tipo_id');
+        return $this->belongsTo(\App\Models\ContratoTipo::class, 'tipo_id');
     }
 
     /**
@@ -215,7 +216,7 @@ class Contrato extends Model
      **/
     public function contratosItems()
     {
-        return $this->hasMany(\App\Models\ContratosItem::class, 'contrato_id');
+        return $this->hasMany(\App\Models\ContratoItem::class, 'contrato_id');
     }
 
     /**
@@ -223,6 +224,16 @@ class Contrato extends Model
      **/
     public function ordenesCompras()
     {
-        return $this->hasMany(\App\Models\OrdenesCompra::class, 'contrato_id');
+        return $this->hasMany(\App\Models\OrdenCompra::class, 'contrato_id');
+    }
+
+    public function getSaldoAttribute()
+    {
+        return $this->monto;
+    }
+
+    public function getMontoBoletaGarantiaFAttribute()
+    {
+        return $this->moneda->simbolo." ".nfp($this->monto_boleta_garantia);
     }
 }

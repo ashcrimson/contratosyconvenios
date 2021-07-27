@@ -1,31 +1,26 @@
 <!-- Tipo Id Field -->
-{!! Form::label('tipo_id', 'Tipo Id:') !!}
-{!! $contrato->tipo_id !!}<br>
+{!! Form::label('tipo_id', 'Tipo') !!}
+{!! $contrato->tipo->nombre !!}<br>
 
 
 <!-- Licitacion Id Field -->
-{!! Form::label('licitacion_id', 'Licitacion Id:') !!}
-{!! $contrato->licitacion_id !!}<br>
+{!! Form::label('licitacion_id', 'Licitacion') !!}
+{!! $contrato->licitacion->numero ?? '' !!}<br>
 
 
 <!-- Proveedor Id Field -->
-{!! Form::label('proveedor_id', 'Proveedor Id:') !!}
-{!! $contrato->proveedor_id !!}<br>
+{!! Form::label('proveedor_id', 'Proveedor') !!}
+{!! $contrato->proveedor->razon_social !!}<br>
 
 
 <!-- Cargo Id Field -->
-{!! Form::label('cargo_id', 'Cargo Id:') !!}
-{!! $contrato->cargo_id !!}<br>
-
-
-<!-- Moneda Id Field -->
-{!! Form::label('moneda_id', 'Moneda Id:') !!}
-{!! $contrato->moneda_id !!}<br>
+{!! Form::label('cargo_id', 'Cargo') !!}
+{!! $contrato->cargo->nombre !!}<br>
 
 
 <!-- Monto Field -->
 {!! Form::label('monto', 'Monto:') !!}
-{!! $contrato->monto !!}<br>
+{!! $contrato->moneda->codigo." ".nfp($contrato->monto) !!}<br>
 
 
 <!-- Estado Alerta Field -->
@@ -75,7 +70,7 @@
 
 <!-- Monto Boleta Garantia Field -->
 {!! Form::label('monto_boleta_garantia', 'Monto Boleta Garantia:') !!}
-{!! $contrato->monto_boleta_garantia !!}<br>
+{!! $contrato->monto_boleta_garantia_f !!}<br>
 
 
 <!-- Id Mercado Publico Field -->
@@ -84,17 +79,17 @@
 
 
 <!-- Estado Id Field -->
-{!! Form::label('estado_id', 'Estado Id:') !!}
-{!! $contrato->estado_id !!}<br>
+{!! Form::label('estado_id', 'Estado') !!}
+{!! $contrato->estado->nombre !!}<br>
 
 
 <!-- User Crea Field -->
 {!! Form::label('user_crea', 'User Crea:') !!}
-{!! $contrato->user_crea !!}<br>
+{!! $contrato->userCrea->name ?? '' !!}<br>
 
 
 <!-- User Actualiza Field -->
 {!! Form::label('user_actualiza', 'User Actualiza:') !!}
-{!! $contrato->user_actualiza !!}<br>
+{!! $contrato->userActualiza->name ?? '' !!}<br>
 
 

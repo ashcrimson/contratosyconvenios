@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Database\Eloquent\Collection $contratos
  * @property string $nombre
  * @property string $codigo
+ * @property string $simbolo
  * @property number $equivalencia
  */
 class Moneda extends Model
@@ -19,7 +20,7 @@ class Moneda extends Model
     use SoftDeletes;
 
     public $table = 'monedas';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -31,6 +32,7 @@ class Moneda extends Model
     public $fillable = [
         'nombre',
         'codigo',
+        'simbolo',
         'equivalencia'
     ];
 

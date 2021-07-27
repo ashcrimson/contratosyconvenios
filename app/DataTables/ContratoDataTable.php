@@ -26,12 +26,21 @@ class ContratoDataTable extends DataTable
              })
              ->editColumn('id',function (Contrato $contrato){
 
-                 return $contrato->id;
+                 $id = $contrato->id;
 
                  //se debe crear la vista modal_detalles
-                 //return view('contratos.modal_detalles',compact('contrato'))->render();
+                 return view('contratos.modal_detalles',compact('contrato','id'))->render();
 
              })
+           ->editColumn('licitacion.numero',function (Contrato $contrato){
+               return $contrato->licitacion->numero ?? null;
+           })
+           ->editColumn('monto' ,function (Contrato  $contrato){
+               return nfp($contrato->monto);
+           })
+           ->editColumn('saldo' ,function (Contrato  $contrato){
+               return nfp($contrato->saldo);
+           })
              ->rawColumns(['action','id']);
 
     }
@@ -44,7 +53,7 @@ class ContratoDataTable extends DataTable
      */
     public function query(Contrato $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['tipo','userCrea','userActualiza','estado','licitacion','moneda','proveedor']);
     }
 
     /**
@@ -96,26 +105,15 @@ class ContratoDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'tipo_id',
-            'licitacion_id',
-            'proveedor_id',
-            'cargo_id',
-            'moneda_id',
-            'monto',
-            'estado_alerta',
-            'fecha_inicio',
-            'fecha_termino',
-            'fecha_aprobacion',
-            'fecha_alerta_vencimiento',
-            'objeto',
-            'numero_boleta_garantia',
-            'fecha_vencimiento_boleta',
-            'alerta_vencimiento_boleta',
-            'monto_boleta_garantia',
+            'id',
             'id_mercado_publico',
-            'estado_id',
-            'user_crea',
-            'user_actualiza'
+//            'tipo' => ['data' => 'tipo.nombre','name' => 'tipo.nombre','orderable' => false],
+            'proveedor' => ['data' => 'proveedor.razon_social','name' => 'proveedor.razon_social','orderable' => false],
+            'licitacion' => ['data' => 'licitacion.numero','name' => 'licitacion.numero','orderable' => false],
+            'monto',
+            'saldo' => ['searchable' => false,'orderable' => false],
+//            'creado_por' => ['data' => 'user_crea.name','name' => 'userCrea.name','orderable' => false],
+//            'actualizado_por'  => ['data' => 'user_actualiza.name','name' => 'userActualiza.name','orderable' => false]
         ];
     }
 

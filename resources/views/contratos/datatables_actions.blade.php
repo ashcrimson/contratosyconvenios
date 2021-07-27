@@ -1,7 +1,10 @@
 @can('Ver Contratos')
-<a href="{{ route('contratos.show', $id) }}" data-toggle="tooltip" title="Ver" class='btn btn-default btn-sm'>
-    <i class="fa fa-eye"></i>
-</a>
+    <span data-toggle="tooltip" title="Ver">
+
+        <a href="#" data-toggle="modal" data-target="#modalDetalleContrato{{$id}}" class='btn btn-default btn-sm'>
+            <i class="fa fa-eye"></i>
+        </a>
+    </span>
 @endcan
 
 @can('Editar Contratos')
