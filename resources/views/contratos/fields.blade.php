@@ -16,7 +16,7 @@
     </div>
 
     <!-- Licitacion Id Field -->
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-4" v-show="esConLicitacion">
         <select-licitacion :items="licitaciones" v-model="licitacion" label="Licitacion"></select-licitacion>
     </div>
 
@@ -141,6 +141,15 @@
 
         },
         methods: {
+
+        },
+        computed:{
+            esConLicitacion(){
+                if (!this.tipo)
+                    return false;
+
+                return this.tipo.id=='{{\App\Models\ContratoTipo::CON_LICITACION}}';
+            }
 
         }
     });
