@@ -30,6 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LicitacionesTableSeeder::class);
         $this->call(ContratosEstadosTableSeeder::class);
         $this->call(ContratosTiposTableSeeder::class);
-        //$this->call(ContratosTableSeeder::class);
+        $this->call(ContratosTableSeeder::class);
     }
 }
