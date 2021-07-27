@@ -271,3 +271,11 @@ function setStartValSequence($nameSeq,$start){
         $query = DB::table('DUAL')->select($nameSeq.".NEXTVAL" )->get();
     }
 }
+
+function onlyDate($dateTime=null){
+
+    if (!$dateTime)
+        return null;
+
+    return  Carbon::parse($dateTime)->format('Y-m-d');
+}

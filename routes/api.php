@@ -22,7 +22,7 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
 
         Route::resource('monedas', 'MonedaAPIController');
 
-        Route::resource('proveedors', 'ProveedorAPIController');
+        Route::resource('proveedores', 'ProveedorAPIController');
 
         Route::resource('licitaciones', 'LicitacionAPIController');
 

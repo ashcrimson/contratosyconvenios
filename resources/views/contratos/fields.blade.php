@@ -1,177 +1,146 @@
-<!-- Tipo Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('tipo_id', 'Tipo Id:') !!}
-    {!! Form::number('tipo_id', null, ['class' => 'form-control']) !!}
+<div class="form-row" id="fieldsContratos">
+
+    <!-- Id Mercado Publico Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('id_mercado_publico', 'Id Mercado Publico:') !!}
+        {!! Form::text('id_mercado_publico', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+    </div>
+
+    <!-- Tipo Id Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('tipo_id', 'Tipo') !!}
+
+        <multiselect v-model="tipo" :options="tipos" label="nombre" placeholder="Seleccione uno...">
+        </multiselect>
+        <input type="hidden" name="tipo_id" :value="tipo ? tipo.id : null">
+    </div>
+
+    <!-- Licitacion Id Field -->
+    <div class="form-group col-sm-6">
+        <select-licitacion :items="licitaciones" v-model="licitacion" label="Licitacion"></select-licitacion>
+    </div>
+
+    <!-- Proveedor Id Field -->
+    <div class="form-group col-sm-6">
+        <select-proveedor :items="proveedores" v-model="proveedor" label="Proveedor"></select-proveedor>
+    </div>
+
+    <!-- Cargo Id Field -->
+    <div class="form-group col-sm-6">
+        <select-cargo :items="cargos" v-model="cargo" label="Cargo"></select-cargo>
+    </div>
+
+    <!-- Moneda Id Field -->
+    <div class="form-group col-sm-6">
+        <select-moneda :items="monedas" v-model="moneda" label="Moneda"></select-moneda>
+    </div>
+
+    <!-- Monto Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('monto', 'Monto:') !!}
+        {!! Form::number('monto', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Estado Alerta Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('estado_alerta', 'Estado Alerta:') !!}
+        <label class="checkbox-inline">
+            <input type="hidden" name="estado_alerta" value="0">
+            {!! Form::checkbox('estado_alerta', '1', null) !!}
+        </label>
+    </div>
+
+
+    <!-- Fecha Inicio Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('fecha_inicio', 'Fecha Inicio:') !!}
+        {!! Form::date('fecha_inicio', onlyDate($contrato->fecha_inicio ?? null), ['class' => 'form-control','id'=>'fecha_inicio']) !!}
+    </div>
+
+
+    <!-- Fecha Termino Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('fecha_termino', 'Fecha Termino:') !!}
+        {!! Form::date('fecha_termino', onlyDate($contrato->fecha_termino ?? null), ['class' => 'form-control','id'=>'fecha_termino']) !!}
+    </div>
+
+
+
+    <!-- Fecha Aprobacion Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('fecha_aprobacion', 'Fecha Aprobacion:') !!}
+        {!! Form::date('fecha_aprobacion', onlyDate($contrato->fecha_aprobacion ?? null), ['class' => 'form-control','id'=>'fecha_aprobacion']) !!}
+    </div>
+
+
+    <!-- Fecha Alerta Vencimiento Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('fecha_alerta_vencimiento', 'Fecha Alerta Vencimiento:') !!}
+        {!! Form::date('fecha_alerta_vencimiento', onlyDate($contrato->fecha_alerta_vencimiento ?? null), ['class' => 'form-control','id'=>'fecha_alerta_vencimiento']) !!}
+    </div>
+
+
+    <!-- Objeto Field -->
+    <div class="form-group col-sm-12 col-lg-12">
+        {!! Form::label('objeto', 'Objeto:') !!}
+        {!! Form::textarea('objeto', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Numero Boleta Garantia Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('numero_boleta_garantia', 'Numero Boleta Garantia:') !!}
+        {!! Form::text('numero_boleta_garantia', null, ['class' => 'form-control','maxlength' => 45,'maxlength' => 45]) !!}
+    </div>
+
+    <!-- Monto Boleta Garantia Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('monto_boleta_garantia', 'Monto Boleta Garantia:') !!}
+        {!! Form::number('monto_boleta_garantia', null, ['class' => 'form-control']) !!}
+    </div>
+
+
+    <!-- Fecha Vencimiento Boleta Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('fecha_vencimiento_boleta', 'Fecha Vencimiento Boleta:') !!}
+        {!! Form::date('fecha_vencimiento_boleta', onlyDate($contrato->fecha_vencimiento_boleta ?? null), ['class' => 'form-control','id'=>'fecha_vencimiento_boleta']) !!}
+    </div>
+
+
+    <!-- Alerta Vencimiento Boleta Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('alerta_vencimiento_boleta', 'Alerta Vencimiento Boleta:') !!}
+        {!! Form::date('alerta_vencimiento_boleta', onlyDate($contrato->alerta_vencimiento_boleta ?? null), ['class' => 'form-control','id'=>'alerta_vencimiento_boleta']) !!}
+    </div>
+
 </div>
+@push('scripts')
+<script>
+    new Vue({
+        el: '#fieldsContratos',
+        name: 'fieldsContratos',
+        created() {
 
-<!-- Licitacion Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('licitacion_id', 'Licitacion Id:') !!}
-    {!! Form::number('licitacion_id', null, ['class' => 'form-control']) !!}
-</div>
+        },
+        data: {
+            cargos : @json(\App\Models\Cargo::all() ?? []),
+            cargo: @json($contrato->cargo ?? null),
 
-<!-- Proveedor Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('proveedor_id', 'Proveedor Id:') !!}
-    {!! Form::number('proveedor_id', null, ['class' => 'form-control']) !!}
-</div>
+            proveedores : @json(\App\Models\Proveedor::all() ?? []),
+            proveedor: @json($contrato->proveedor ?? null),
 
-<!-- Cargo Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('cargo_id', 'Cargo Id:') !!}
-    {!! Form::number('cargo_id', null, ['class' => 'form-control']) !!}
-</div>
+            licitaciones : @json(\App\Models\Licitacion::all() ?? []),
+            licitacion: @json($contrato->licitacion ?? null),
 
-<!-- Moneda Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('moneda_id', 'Moneda Id:') !!}
-    {!! Form::number('moneda_id', null, ['class' => 'form-control']) !!}
-</div>
+            tipos : @json(\App\Models\ContratoTipo::all() ?? []),
+            tipo: @json($contrato->tipo ?? null),
 
-<!-- Monto Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('monto', 'Monto:') !!}
-    {!! Form::number('monto', null, ['class' => 'form-control']) !!}
-</div>
+            monedas : @json(\App\Models\Moneda::all() ?? []),
+            moneda: @json($contrato->moneda ?? null),
 
-<!-- Estado Alerta Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('estado_alerta', 'Estado Alerta:') !!}
-    <label class="checkbox-inline">
-        {!! Form::hidden('estado_alerta', 0) !!}
-        {!! Form::checkbox('estado_alerta', '1', null) !!}
-    </label>
-</div>
+        },
+        methods: {
 
-
-<!-- Fecha Inicio Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('fecha_inicio', 'Fecha Inicio:') !!}
-    {!! Form::date('fecha_inicio', null, ['class' => 'form-control','id'=>'fecha_inicio']) !!}
-</div>
-
-@section('scripts')
-    <script type="text/javascript">
-        $('#fecha_inicio').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
-@endsection
-
-<!-- Fecha Termino Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('fecha_termino', 'Fecha Termino:') !!}
-    {!! Form::date('fecha_termino', null, ['class' => 'form-control','id'=>'fecha_termino']) !!}
-</div>
-
-@section('scripts')
-    <script type="text/javascript">
-        $('#fecha_termino').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
-@endsection
-
-<!-- Fecha Aprobacion Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('fecha_aprobacion', 'Fecha Aprobacion:') !!}
-    {!! Form::date('fecha_aprobacion', null, ['class' => 'form-control','id'=>'fecha_aprobacion']) !!}
-</div>
-
-@section('scripts')
-    <script type="text/javascript">
-        $('#fecha_aprobacion').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
-@endsection
-
-<!-- Fecha Alerta Vencimiento Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('fecha_alerta_vencimiento', 'Fecha Alerta Vencimiento:') !!}
-    {!! Form::date('fecha_alerta_vencimiento', null, ['class' => 'form-control','id'=>'fecha_alerta_vencimiento']) !!}
-</div>
-
-@section('scripts')
-    <script type="text/javascript">
-        $('#fecha_alerta_vencimiento').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
-@endsection
-
-<!-- Objeto Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('objeto', 'Objeto:') !!}
-    {!! Form::textarea('objeto', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Numero Boleta Garantia Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('numero_boleta_garantia', 'Numero Boleta Garantia:') !!}
-    {!! Form::text('numero_boleta_garantia', null, ['class' => 'form-control','maxlength' => 45,'maxlength' => 45]) !!}
-</div>
-
-<!-- Fecha Vencimiento Boleta Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('fecha_vencimiento_boleta', 'Fecha Vencimiento Boleta:') !!}
-    {!! Form::date('fecha_vencimiento_boleta', null, ['class' => 'form-control','id'=>'fecha_vencimiento_boleta']) !!}
-</div>
-
-@section('scripts')
-    <script type="text/javascript">
-        $('#fecha_vencimiento_boleta').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
-@endsection
-
-<!-- Alerta Vencimiento Boleta Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('alerta_vencimiento_boleta', 'Alerta Vencimiento Boleta:') !!}
-    {!! Form::date('alerta_vencimiento_boleta', null, ['class' => 'form-control','id'=>'alerta_vencimiento_boleta']) !!}
-</div>
-
-@section('scripts')
-    <script type="text/javascript">
-        $('#alerta_vencimiento_boleta').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
-@endsection
-
-<!-- Monto Boleta Garantia Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('monto_boleta_garantia', 'Monto Boleta Garantia:') !!}
-    {!! Form::number('monto_boleta_garantia', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Id Mercado Publico Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('id_mercado_publico', 'Id Mercado Publico:') !!}
-    {!! Form::text('id_mercado_publico', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
-</div>
-
-<!-- Estado Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('estado_id', 'Estado Id:') !!}
-    {!! Form::number('estado_id', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- User Crea Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('user_crea', 'User Crea:') !!}
-    {!! Form::number('user_crea', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- User Actualiza Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('user_actualiza', 'User Actualiza:') !!}
-    {!! Form::number('user_actualiza', null, ['class' => 'form-control']) !!}
-</div>
+        }
+    });
+</script>
+@endpush

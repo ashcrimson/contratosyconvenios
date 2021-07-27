@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateContratoRequest;
 use App\Http\Requests\UpdateContratoRequest;
 use App\Models\Contrato;
+use App\Models\ContratoEstado;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -52,10 +53,13 @@ class ContratoController extends AppBaseController
      */
     public function store(CreateContratoRequest $request)
     {
-        $input = $request->all();
+        $request->merge([
+            'user_crea' => auth()->user()->id,
+            'estado_id' => ContratoEstado::INGRESADO,
+        ]);
 
         /** @var Contrato $contrato */
-        $contrato = Contrato::create($input);
+        $contrato = Contrato::create($request->all());
 
         Flash::success('Contrato guardado exitosamente.');
 
@@ -122,6 +126,10 @@ class ContratoController extends AppBaseController
 
             return redirect(route('contratos.index'));
         }
+
+        $request->merge([
+            'user_actualiza' => auth()->user()->id
+        ]);
 
         $contrato->fill($request->all());
         $contrato->save();

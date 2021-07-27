@@ -131,12 +131,6 @@ class Contrato extends Model
         'alerta_vencimiento_boleta' => 'required',
         'monto_boleta_garantia' => 'required|numeric',
         'id_mercado_publico' => 'required|string|max:255',
-        'estado_id' => 'required',
-        'user_crea' => 'required',
-        'user_actualiza' => 'nullable',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
     ];
 
     /**

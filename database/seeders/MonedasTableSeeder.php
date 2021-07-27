@@ -23,7 +23,7 @@ class MonedasTableSeeder extends Seeder
         $monedas = DB::connection('old')->table('MONEDA')->orderBy('CODIGO')->get();
 
         foreach ($monedas as $index => $moneda) {
-            dump($moneda);
+//            dump($moneda);
             Moneda::create([
                 'nombre' => $moneda->nombre,
                 'codigo' => $moneda->codigo,

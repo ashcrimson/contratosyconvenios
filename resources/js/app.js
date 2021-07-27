@@ -98,3 +98,15 @@ Vue.component('multiselect', Multiselect);
 import SelectCargo from "./components/SelectCargo";
 
 Vue.component('select-cargo',SelectCargo);
+
+import SelectProveedor from "./components/SelectProveedor";
+
+Vue.component('select-proveedor',SelectProveedor);
+
+import SelectMoneda from "./components/SelectMoneda";
+
+Vue.component('select-moneda',SelectMoneda)
+
+import SelectLicitacion from "./components/SelectLicitacion";
+
+Vue.component('select-licitacion',SelectLicitacion);

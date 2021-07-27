@@ -49,10 +49,12 @@ class LicitacionAPIController extends AppBaseController
      */
     public function store(CreateLicitacionAPIRequest $request)
     {
-        $input = $request->all();
+        $request->merge([
+            'user_crea' => auth()->user()->id
+        ]);
 
         /** @var Licitacion $licitacion */
-        $licitacion = Licitacion::create($input);
+        $licitacion = Licitacion::create($request->all());
 
         return $this->sendResponse($licitacion->toArray(), 'Licitacion guardado exitosamente');
     }
@@ -94,6 +96,10 @@ class LicitacionAPIController extends AppBaseController
         if (empty($licitacion)) {
             return $this->sendError('Licitacion no encontrado');
         }
+
+        $request->merge([
+            'user_actualiza' => auth()->user()->id
+        ]);
 
         $licitacion->fill($request->all());
         $licitacion->save();

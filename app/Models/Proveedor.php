@@ -23,7 +23,7 @@ class Proveedor extends Model
     use SoftDeletes;
 
     public $table = 'proveedores';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -66,14 +66,12 @@ class Proveedor extends Model
     public static $rules = [
         'rut' => 'required|string|max:255',
         'razon_social' => 'required|string|max:255',
-        'nombre_fantasia' => 'required|string|max:255',
-        'telefono' => 'required|string|max:30',
-        'email' => 'required|string|max:255',
-        'comuna' => 'required|string|max:255',
-        'direccion' => 'required|string|max:255',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
+        'nombre_fantasia' => 'nullable|string|max:255',
+        'telefono' => 'nullable|string|max:30',
+        'email' => 'nullable|string|max:255',
+        'comuna' => 'nullable|string|max:255',
+        'direccion' => 'nullable|string|max:255',
+
     ];
 
     /**
