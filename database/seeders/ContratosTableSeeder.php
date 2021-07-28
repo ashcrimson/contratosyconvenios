@@ -71,7 +71,7 @@ class ContratosTableSeeder extends Seeder
 
         $maxId = $contratos->max('id_contrato');
 
-        setStartValSequence('AREAS_ID_SEQ',$maxId);
+        setStartValSequence('CONTRATOS_ID_SEQ',$maxId);
 
 
 

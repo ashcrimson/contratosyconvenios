@@ -17,13 +17,21 @@ class OrdenCompraEstado extends Model
     use SoftDeletes;
 
     public $table = 'ordenes_compras_estados';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
 
     protected $dates = ['deleted_at'];
 
+    const TEMPORAL =                1;
+    const INGRESADA =               2;
+    const EN_PROCESO =              3;
+    const ACEPTADA =                4;
+    const RECEPCION_CONFORME =      5;
+    const ENVIADA_PROVEEDOR =       6;
+    const ANULACIÓN_REQUERIDA =     7;
+    const ANULADA =                 8;
 
 
     public $fillable = [

@@ -14,17 +14,17 @@ class CreateOrdenesComprasTable extends Migration
     public function up()
     {
         Schema::create('ordenes_compras', function (Blueprint $table) {
-            $table->integer('id')->primary();
-            $table->unsignedBigInteger('contrato_id')->index('fk_ord_compras_contratos1_idx');
-            $table->string('numero', 45);
-            $table->string('fecha_envio', 45);
-            $table->string('total', 45)->nullable();
-            $table->string('codigo', 45);
-            $table->string('cantidad', 45)->nullable();
-            $table->string('descripcion', 45)->nullable();
+            $table->id();
+            $table->unsignedBigInteger('contrato_id')->nullable()->index('fk_ord_compras_contratos1_idx');
+            $table->string('numero');
+            $table->date('fecha_envio');
+            $table->decimal('total', 14,0)->nullable();
+            $table->string('codigo')->nullable();
+            $table->integer('cantidad')->nullable();
+            $table->string('descripcion')->nullable();
             $table->tinyInteger('tiene_detalles')->nullable();
             $table->unsignedBigInteger('estado_id')->index('fk_ord_compras_estados1_idx');
-            $table->unsignedBigInteger('user_crea')->index('fk_ord_compras_users1_idx');
+            $table->unsignedBigInteger('user_crea')->nullable()->index('fk_ord_compras_users1_idx');
             $table->unsignedBigInteger('user_actualiza')->nullable()->index('fk_ord_compras_users2_idx');
             $table->timestamps();
             $table->softDeletes();
