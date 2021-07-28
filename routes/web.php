@@ -64,4 +64,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('contratos', 'ContratoController');
 
     Route::resource('ordenCompraEstados', 'OrdenCompraEstadoController');
+
+    Route::resource('ordenCompras', 'OrdenCompraController');
 });
