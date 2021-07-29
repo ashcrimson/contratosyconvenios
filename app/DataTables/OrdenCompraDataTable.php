@@ -32,6 +32,12 @@ class OrdenCompraDataTable extends DataTable
                  //return view('orden_compras.modal_detalles',compact('ordenCompra'))->render();
 
              })
+           ->editColumn('total' ,function (OrdenCompra  $compra){
+               return dvs().nfp($compra->total);
+           })
+           ->editColumn('fecha_envio' ,function (OrdenCompra  $compra){
+               return $compra->fecha_envio->format('d/m/Y');
+           })
              ->rawColumns(['action','id']);
 
     }
@@ -44,7 +50,7 @@ class OrdenCompraDataTable extends DataTable
      */
     public function query(OrdenCompra $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['contrato','estado']);
     }
 
     /**
@@ -96,17 +102,12 @@ class OrdenCompraDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'contrato_id',
+            'id',
+            'contrato' => ['data' => 'contrato.id_mercado_publico','name' => 'contrato.id_mercado_publico'],
             'numero',
             'fecha_envio',
             'total',
-            'codigo',
-            'cantidad',
-            'descripcion',
-            'tiene_detalles',
-            'estado_id',
-            'user_crea',
-            'user_actualiza'
+            'estado' => ['data' => 'estado.nombre','name' => 'estado.nombre'],
         ];
     }
 

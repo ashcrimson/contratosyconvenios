@@ -33,7 +33,7 @@ class ConfigurationsTableSeeder extends Seeder
             array (
                 'id' => null,
                 'key' => 'divisa',
-                'value' => 'Q',
+                'value' => '$',
                 'descripcion' => 'Símbolo de la moneda que se utiliza',
                 'created_at' => '1983-04-14 07:01:20',
                 'updated_at' => '1972-08-03 18:19:12',
@@ -63,7 +63,7 @@ class ConfigurationsTableSeeder extends Seeder
             array (
                 'id' => null,
                 'key' => 'separador_miles',
-                'value' => ',',
+                'value' => '.',
                 'descripcion' => 'Símbolo para separa los miles o millares en las cantidades',
                 'created_at' => '1974-11-27 20:25:48',
                 'updated_at' => '1971-09-03 00:11:04',
@@ -73,7 +73,7 @@ class ConfigurationsTableSeeder extends Seeder
             array (
                 'id' => null,
                 'key' => 'separador_decimal',
-                'value' => '.',
+                'value' => ',',
                 'descripcion' => 'Símbolo para separar los decimales en las cantidades',
                 'created_at' => '1983-02-28 21:01:09',
                 'updated_at' => '2014-01-03 11:09:29',

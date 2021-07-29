@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;;
 use Illuminate\Database\Eloquent\SoftDeletes;
 /**
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Database\Eloquent\Collection $ordenesComprasDetalles
  * @property integer $contrato_id
  * @property string $numero
- * @property string $fecha_envio
+ * @property Carbon $fecha_envio
  * @property string $total
  * @property string $codigo
  * @property string $cantidad
@@ -31,7 +32,7 @@ class OrdenCompra extends Model
     use SoftDeletes;
 
     public $table = 'ordenes_compras';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -63,7 +64,7 @@ class OrdenCompra extends Model
         'id' => 'integer',
         'contrato_id' => 'integer',
         'numero' => 'string',
-        'fecha_envio' => 'string',
+        'fecha_envio' => 'date',
         'total' => 'string',
         'codigo' => 'string',
         'cantidad' => 'string',
@@ -109,7 +110,7 @@ class OrdenCompra extends Model
      **/
     public function estado()
     {
-        return $this->belongsTo(\App\Models\OrdenesComprasEstado::class, 'estado_id');
+        return $this->belongsTo(\App\Models\OrdenCompraEstado::class, 'estado_id');
     }
 
     /**
