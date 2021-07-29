@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateOrdenCompraRequest;
 use App\Http\Requests\UpdateOrdenCompraRequest;
 use App\Models\OrdenCompra;
+use App\Models\OrdenCompraEstado;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -52,10 +53,15 @@ class OrdenCompraController extends AppBaseController
      */
     public function store(CreateOrdenCompraRequest $request)
     {
-        $input = $request->all();
+
+        $request->merge([
+            'user_crea' => auth()->user()->id,
+            'estado_id' => OrdenCompraEstado::INGRESADA,
+        ]);
+
 
         /** @var OrdenCompra $ordenCompra */
-        $ordenCompra = OrdenCompra::create($input);
+        $ordenCompra = OrdenCompra::create($request->all());
 
         Flash::success('Orden Compra guardado exitosamente.');
 
@@ -122,6 +128,10 @@ class OrdenCompraController extends AppBaseController
 
             return redirect(route('ordenCompras.index'));
         }
+
+        $request->merge([
+            'user_actualiza' => auth()->user()->id
+        ]);
 
         $ordenCompra->fill($request->all());
         $ordenCompra->save();

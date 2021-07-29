@@ -31,7 +31,10 @@
                            :width="60"
                            :value="false"
             />
+
         </div>
+        <input type="hidden" name="tiene_detalles" :value="tiene_detalles ? 1 : 0">
+
     </div>
 
 
@@ -47,7 +50,7 @@
     <!-- Total Field -->
     <div class="form-group col-sm-6">
         {!! Form::label('total', 'Monto:') !!}
-        {!! Form::text('total', null, ['class' => 'form-control','maxlength' => 255]) !!}
+        {!! Form::number('total', null, ['class' => 'form-control','step' => 'any']) !!}
     </div>
 </div>
 

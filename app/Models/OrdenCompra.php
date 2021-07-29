@@ -82,19 +82,11 @@ class OrdenCompra extends Model
      */
     public static $rules = [
         'contrato_id' => 'required',
-        'numero' => 'required|string|max:45',
-        'fecha_envio' => 'required|string|max:45',
-        'total' => 'nullable|string|max:45',
-        'codigo' => 'required|string|max:45',
-        'cantidad' => 'nullable|string|max:45',
-        'descripcion' => 'nullable|string|max:45',
+        'numero' => 'required|string|max:255',
+        'fecha_envio' => 'required|date|max:255',
+        'total' => 'nullable|string|max:255',
+        'descripcion' => 'nullable|string|max:255',
         'tiene_detalles' => 'nullable|boolean',
-        'estado_id' => 'required',
-        'user_crea' => 'required',
-        'user_actualiza' => 'nullable',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
     ];
 
     /**
