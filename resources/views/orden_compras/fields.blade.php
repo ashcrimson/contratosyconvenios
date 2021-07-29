@@ -16,7 +16,7 @@
     <!-- Fecha Envio Field -->
     <div class="form-group col-sm-6">
         {!! Form::label('fecha_envio', 'Fecha de Envío:') !!}
-        {!! Form::date('fecha_envio', null, ['class' => 'form-control']) !!}
+        {!! Form::date('fecha_envio', onlyDate($ordenCompra->fecha_envio ?? null), ['class' => 'form-control']) !!}
     </div>
 
     <!-- Tiene Detalles Field -->
