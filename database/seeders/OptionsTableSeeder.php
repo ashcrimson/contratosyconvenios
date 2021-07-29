@@ -280,7 +280,7 @@ class OptionsTableSeeder extends Seeder
                 'id' => '19',
                 'option_id' => NULL,
                 'nombre' => 'Órdenes de Compra',
-                'ruta' => 'compras.index',
+                'ruta' => 'ordenCompras.index',
                 'descripcion' => NULL,
                 'icono_l' => 'fa-file',
                 'icono_r' => NULL,
