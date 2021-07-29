@@ -67,7 +67,7 @@
             contratos : @json(\App\Models\Contrato::all() ?? []),
             contrato: @json($ordenCompra->contrato ?? null),
 
-            tiene_detalles: false,
+            tiene_detalles: @json($ordenCompra->tiene_detalles ?? null),
         },
         methods: {
 
