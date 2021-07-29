@@ -1,7 +1,10 @@
 @can('Ver Orden Compras')
-<a href="{{ route('ordenCompras.show', $id) }}" data-toggle="tooltip" title="Ver" class='btn btn-default btn-sm'>
-    <i class="fa fa-eye"></i>
-</a>
+    <span data-toggle="tooltip" title="Ver">
+
+        <a href="#"  data-toggle="modal" data-target="#modalDetalleOrdenCompra{{$id}}" class='btn btn-default btn-sm'>
+            <i class="fa fa-eye"></i>
+        </a>
+    </span>
 @endcan
 
 @can('Editar Orden Compras')

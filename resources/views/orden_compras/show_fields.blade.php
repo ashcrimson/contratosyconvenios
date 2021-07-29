@@ -1,6 +1,6 @@
 <!-- Contrato Id Field -->
-{!! Form::label('contrato_id', 'Contrato Id:') !!}
-{!! $ordenCompra->contrato_id !!}<br>
+{!! Form::label('contrato_id', 'Contrato:') !!}
+{!! $ordenCompra->contrato->id_mercado_publico ?? '' !!}<br>
 
 
 <!-- Numero Field -->
@@ -15,41 +15,22 @@
 
 <!-- Total Field -->
 {!! Form::label('total', 'Total:') !!}
-{!! $ordenCompra->total !!}<br>
+{!! dvs().nfp($ordenCompra->total) !!}<br>
 
-
-<!-- Codigo Field -->
-{!! Form::label('codigo', 'Codigo:') !!}
-{!! $ordenCompra->codigo !!}<br>
-
-
-<!-- Cantidad Field -->
-{!! Form::label('cantidad', 'Cantidad:') !!}
-{!! $ordenCompra->cantidad !!}<br>
-
-
-<!-- Descripcion Field -->
-{!! Form::label('descripcion', 'Descripcion:') !!}
-{!! $ordenCompra->descripcion !!}<br>
-
-
-<!-- Tiene Detalles Field -->
-{!! Form::label('tiene_detalles', 'Tiene Detalles:') !!}
-{!! $ordenCompra->tiene_detalles !!}<br>
 
 
 <!-- Estado Id Field -->
-{!! Form::label('estado_id', 'Estado Id:') !!}
-{!! $ordenCompra->estado_id !!}<br>
+{!! Form::label('estado_id', 'Estado:') !!}
+{!! $ordenCompra->estado->nombre !!}<br>
 
 
 <!-- User Crea Field -->
 {!! Form::label('user_crea', 'User Crea:') !!}
-{!! $ordenCompra->user_crea !!}<br>
+{!! $ordenCompra->userCrea->name ?? ''!!}<br>
 
 
 <!-- User Actualiza Field -->
 {!! Form::label('user_actualiza', 'User Actualiza:') !!}
-{!! $ordenCompra->user_actualiza !!}<br>
+{!! $ordenCompra->userActualiza->name ?? '' !!}<br>
 
 

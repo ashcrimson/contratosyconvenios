@@ -26,10 +26,8 @@ class OrdenCompraDataTable extends DataTable
              })
              ->editColumn('id',function (OrdenCompra $ordenCompra){
 
-                 return $ordenCompra->id;
-
-                 //se debe crear la vista modal_detalles
-                 //return view('orden_compras.modal_detalles',compact('ordenCompra'))->render();
+                 $id = $ordenCompra->id;
+                 return view('orden_compras.modal_detalles',compact('ordenCompra','id'))->render();
 
              })
            ->editColumn('total' ,function (OrdenCompra  $compra){
