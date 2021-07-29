@@ -62,4 +62,15 @@ class ContratoTipo extends Model
     {
         return $this->hasMany(\App\Models\Contrato::class, 'tipo_id');
     }
+
+    public function getNombreCortoAttribute()
+    {
+        switch ($this->id){
+            case self::CON_LICITACION:
+                return "LC";
+            case self::TRATO_DIRECTO:
+                return  "TD";
+
+        }
+    }
 }

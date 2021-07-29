@@ -54,7 +54,7 @@ class Contrato extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['saldo'];
+    protected $appends = ['saldo','text'];
 
     public $fillable = [
         'tipo_id',
@@ -229,5 +229,10 @@ class Contrato extends Model
     public function getMontoBoletaGarantiaFAttribute()
     {
         return $this->moneda->simbolo." ".nfp($this->monto_boleta_garantia);
+    }
+
+    public function getTextAttribute()
+    {
+        return $this->tipo->nombre_corto.$this->id." / ".$this->id_mercado_publico;
     }
 }

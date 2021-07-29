@@ -110,3 +110,6 @@ Vue.component('select-moneda',SelectMoneda)
 import SelectLicitacion from "./components/SelectLicitacion";
 
 Vue.component('select-licitacion',SelectLicitacion);
+
+import ToggleButton from 'vue-js-toggle-button';
+Vue.use(ToggleButton);
