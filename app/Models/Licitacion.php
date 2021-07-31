@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\HasDocumento;
 use Illuminate\Database\Eloquent\Model;;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 /**
  * Class Licitacion
  * @package App\Models
@@ -20,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Licitacion extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,HasDocumento;
 
     public $table = 'licitaciones';
 
