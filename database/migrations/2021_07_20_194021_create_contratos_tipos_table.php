@@ -14,7 +14,7 @@ class CreateContratosTiposTable extends Migration
     public function up()
     {
         Schema::create('contratos_tipos', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('nombre')->unique();
             $table->timestamps();
             $table->softDeletes();

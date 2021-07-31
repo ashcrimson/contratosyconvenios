@@ -14,7 +14,7 @@ class CreatePrestacionesTable extends Migration
     public function up()
     {
         Schema::create('prestaciones', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('codgio', 45);
             $table->string('nombre');
             $table->string('valor_nivel_1', 45);

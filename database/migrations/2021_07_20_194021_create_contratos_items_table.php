@@ -14,7 +14,7 @@ class CreateContratosItemsTable extends Migration
     public function up()
     {
         Schema::create('contratos_items', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->unsignedBigInteger('contrato_id')->index('fk_ctr_items_contratos1_idx');
             $table->string('codigo', 45);
             $table->string('descripcion');

@@ -15,11 +15,11 @@ class CreateContratosTable extends Migration
     {
         Schema::create('contratos', function (Blueprint $table) {
             $table->id();
-            $table->integer('tipo_id')->index('fk_ctr_tipos1_idx');
+            $table->unsignedBigInteger('tipo_id')->index('fk_ctr_tipos1_idx');
             $table->unsignedBigInteger('licitacion_id')->nullable()->index('fk_ctr_licitaciones1_idx');
-            $table->integer('proveedor_id')->index('fk_ctr_proveedores1_idx');
+            $table->unsignedBigInteger('proveedor_id')->index('fk_ctr_proveedores1_idx');
             $table->unsignedBigInteger('cargo_id')->nullable()->index('fk_ctr_cargos1_idx');
-            $table->integer('moneda_id')->index('fk_ctr_monedas1_idx');
+            $table->unsignedBigInteger('moneda_id')->index('fk_ctr_monedas1_idx');
             $table->decimal('monto',14,0);
             $table->integer('estado_alerta')->nullable();
             $table->date('fecha_inicio');

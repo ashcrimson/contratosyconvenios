@@ -14,7 +14,7 @@ class CreateMonedasTable extends Migration
     public function up()
     {
         Schema::create('monedas', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('nombre', 45);
             $table->string('codigo', 45);
             $table->string('simbolo', 45)->nullable();

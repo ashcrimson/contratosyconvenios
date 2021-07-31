@@ -14,7 +14,7 @@ class CreateBitacorasTable extends Migration
     public function up()
     {
         Schema::create('bitacoras', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('model_type', 45);
             $table->bigInteger('model_id');
             $table->string('seccion')->nullable();
