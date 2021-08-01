@@ -38,7 +38,17 @@ class LicitacionDataTable extends DataTable
                ->editColumn('user_actualiza.name',function (Licitacion $licitacion){
                    return $licitacion->userActualiza->name ?? '';
                })
-             ->rawColumns(['action','id']);
+           ->editColumn('adjunto' ,function (Licitacion  $licitacion){
+
+               $doc = $licitacion->getLastDocumento();
+               if ($doc){
+                   return "<a href='".route('documentos.descargar',$doc->id)."'>".$doc->file_name."</a>";
+               }
+               else{
+                   return "";
+               }
+           })
+           ->rawColumns(['adjunto','action','id']);
 
     }
 
@@ -105,6 +115,7 @@ class LicitacionDataTable extends DataTable
             'numero',
             'descripcion',
             'presupuesto',
+            'adjunto' => ['searchable' => false,'orderable' => false],
             'creado_por' => ['data' => 'user_crea.name','name' => 'userCrea.name','orderable' => false],
             'actualizado_por'  => ['data' => 'user_actualiza.name','name' => 'userActualiza.name','orderable' => false]
         ];
