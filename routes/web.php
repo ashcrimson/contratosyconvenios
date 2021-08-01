@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('option/orden', 'OptionController@updateOrden')->name('option.order.store');
     Route::resource('options',"OptionController");
 
+    Route::get('documentos/descargar/{documento}',"DocumentoController@descargar")->name('documentos.descargar');
+
     Route::resource('roles', 'RoleController');
 
     Route::resource('permissions', 'PermissionController');

@@ -41,7 +41,18 @@ class ContratoDataTable extends DataTable
            ->editColumn('saldo' ,function (Contrato  $contrato){
                return nfp($contrato->saldo);
            })
-             ->rawColumns(['action','id']);
+
+           ->editColumn('adjunto' ,function (Contrato  $contrato){
+
+               $doc = $contrato->getLastDocumento();
+               if ($doc){
+                   return "<a href='".route('documentos.descargar',$doc->id)."'>".$doc->file_name."</a>";
+               }
+               else{
+                   return "";
+               }
+           })
+             ->rawColumns(['adjunto','action','id']);
 
     }
 
@@ -112,6 +123,7 @@ class ContratoDataTable extends DataTable
             'licitacion' => ['data' => 'licitacion.numero','name' => 'licitacion.numero','orderable' => false],
             'monto',
             'saldo' => ['searchable' => false,'orderable' => false],
+            'adjunto' => ['searchable' => false,'orderable' => false],
 //            'creado_por' => ['data' => 'user_crea.name','name' => 'userCrea.name','orderable' => false],
 //            'actualizado_por'  => ['data' => 'user_actualiza.name','name' => 'userActualiza.name','orderable' => false]
         ];

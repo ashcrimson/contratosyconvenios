@@ -21,6 +21,14 @@ trait HasDocumento
         return $this->morphMany(Documento::class, 'model');
     }
 
+    /**
+     * @return Documento
+     */
+    public function getLastDocumento()
+    {
+        return $this->documentos()->orderBy('id','desc')->first();
+    }
+
 
     /**
      * Assign the given role to the model.
