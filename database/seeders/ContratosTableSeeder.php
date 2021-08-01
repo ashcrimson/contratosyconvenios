@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Contrato;
 use App\Models\ContratoEstado;
 use App\Models\ContratoTipo;
+use App\Models\Documento;
 use App\Models\Licitacion;
 use App\Models\Moneda;
 use App\Models\Proveedor;
@@ -37,7 +38,7 @@ class ContratosTableSeeder extends Seeder
     {
 
 
-        \DB::table('contratos')->delete();
+        DB::table('contratos')->delete();
 
         $contratos = DB::connection('old')->table('CONTRATOS')->orderBy('ID_CONTRATO')->get();
 
@@ -72,6 +73,50 @@ class ContratosTableSeeder extends Seeder
         $maxId = $contratos->max('id_contrato');
 
         setStartValSequence('CONTRATOS_ID_SEQ',$maxId);
+
+
+        /**
+         * se iterean la licitaciones del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
+         * @var Contrato $contrato
+         */
+        foreach (Contrato::all() as $index => $contrato) {
+
+
+//            dd($contrato->id);
+            $documentos = DB::connection('old')->table('DOCUMENTO_CONTRATOS')
+                ->join('DOCUMENTO','DOCUMENTO.NRO_DOCUMENTO','DOCUMENTO_CONTRATOS.NRO_DOCUMENTO')
+                ->where('DOCUMENTO_CONTRATOS.NRO_CONTRATO',$contrato->id)
+                ->get();
+
+
+            if ($documentos->count()>0){
+
+                //iteracion de los documentos de la licitacion x
+                foreach ($documentos as $index => $old) {
+
+                    $newDoc = new Documento([
+                        'name' => $old->nombre,
+                        'file_name' => $old->nombre,
+                        'mime_type' => $old->tipo_archivo,
+                        'size' => $old->peso_archivo,
+                        'data' => null
+                    ]);
+
+                    //se inserta y asocia los datos de documento sin el bianrio o blob
+                    $contrato->documentos()->save($newDoc) ;
+
+                    //se obtiene el documento recien asociado
+                    $newDocStore = $contrato->documentos()->orderBy('id','desc')->first();
+
+                    //se actualiza el nuevo documento con el binario del documento anterior
+                    DB::table('DOCUMENTOS')->whereId($newDocStore->id)->updateLob(
+                        [],
+                        ['data'=>$old->archivo]
+                    );
+                }
+
+            }
+        }
 
 
 
