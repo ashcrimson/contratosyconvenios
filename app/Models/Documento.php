@@ -54,7 +54,6 @@ class Documento extends Model
         'file_name' => 'string',
         'mime_type' => 'string',
         'size' => 'integer',
-        'data' => 'string'
     ];
 
     /**
