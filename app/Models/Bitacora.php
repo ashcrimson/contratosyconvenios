@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasDocumento;
 use Illuminate\Database\Eloquent\Model;;
 use Illuminate\Database\Eloquent\SoftDeletes;
 /**
@@ -21,10 +22,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Bitacora extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,HasDocumento;
 
     public $table = 'bitacoras';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 

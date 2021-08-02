@@ -75,48 +75,9 @@ class ContratosTableSeeder extends Seeder
         setStartValSequence('CONTRATOS_ID_SEQ',$maxId);
 
 
-        /**
-         * se iterean la licitaciones del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
-         * @var Contrato $contrato
-         */
-        foreach (Contrato::all() as $index => $contrato) {
+        $this->migrarDocumentos();
 
-
-//            dd($contrato->id);
-            $documentos = DB::connection('old')->table('DOCUMENTO_CONTRATOS')
-                ->join('DOCUMENTO','DOCUMENTO.NRO_DOCUMENTO','DOCUMENTO_CONTRATOS.NRO_DOCUMENTO')
-                ->where('DOCUMENTO_CONTRATOS.NRO_CONTRATO',$contrato->id)
-                ->get();
-
-
-            if ($documentos->count()>0){
-
-                //iteracion de los documentos de la licitacion x
-                foreach ($documentos as $index => $old) {
-
-                    $newDoc = new Documento([
-                        'name' => $old->nombre,
-                        'file_name' => $old->nombre,
-                        'mime_type' => $old->tipo_archivo,
-                        'size' => $old->peso_archivo,
-                        'data' => null
-                    ]);
-
-                    //se inserta y asocia los datos de documento sin el bianrio o blob
-                    $contrato->documentos()->save($newDoc) ;
-
-                    //se obtiene el documento recien asociado
-                    $newDocStore = $contrato->documentos()->orderBy('id','desc')->first();
-
-                    //se actualiza el nuevo documento con el binario del documento anterior
-                    DB::table('DOCUMENTOS')->whereId($newDocStore->id)->updateLob(
-                        [],
-                        ['data'=>$old->archivo]
-                    );
-                }
-
-            }
-        }
+        $this->migrarBitacoras();
 
 
 
@@ -146,6 +107,104 @@ class ContratosTableSeeder extends Seeder
     function getLicitacion($contrato){
 //        dd($contrato->nro_licitacion);
         return $this->licitaciones->where('numero',$contrato->nro_licitacion)->first()->id ?? null;
+    }
+
+    function migrarDocumentos(){
+        /**
+         * se iterean la licitaciones del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
+         * @var Contrato $contrato
+         */
+        foreach (Contrato::all() as  $contrato) {
+
+
+//            dd($contrato->id);
+            $bitacoras = DB::connection('old')->table('DOCUMENTO_CONTRATOS')
+                ->join('DOCUMENTO','DOCUMENTO.NRO_DOCUMENTO','DOCUMENTO_CONTRATOS.NRO_DOCUMENTO')
+                ->where('DOCUMENTO_CONTRATOS.NRO_CONTRATO',$contrato->id)
+                ->get();
+
+
+            if ($bitacoras->count()>0){
+
+                //iteracion de los documentos de la licitacion x
+                foreach ($bitacoras as  $old) {
+
+                    $newDoc = new Documento([
+                        'name' => $old->nombre,
+                        'file_name' => $old->nombre,
+                        'mime_type' => $old->tipo_archivo,
+                        'size' => $old->peso_archivo,
+                        'data' => null
+                    ]);
+
+                    //se inserta y asocia los datos de documento sin el bianrio o blob
+                    $contrato->documentos()->save($newDoc) ;
+
+                    //se obtiene el documento recien asociado
+                    $newDocStore = $contrato->documentos()->orderBy('id','desc')->first();
+
+                    //se actualiza el nuevo documento con el binario del documento anterior
+                    DB::table('DOCUMENTOS')->whereId($newDocStore->id)->updateLob(
+                        [],
+                        ['data'=>$old->archivo]
+                    );
+                }
+
+            }
+        }
+    }
+
+    function migrarBitacoras(){
+
+        /**
+         * se iterean la licitaciones del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
+         * @var Contrato $contrato
+         */
+        foreach (Contrato::all() as  $contrato) {
+
+
+//            dd($contrato->id);
+            $bitacoras = DB::connection('old')->table('BITACORA')
+                ->join('DOCUMENTO','DOCUMENTO.NRO_DOCUMENTO','BITACORA.NRO_DOCUMENTO')
+                ->where('BITACORA.ID_CONTRATO',$contrato->id)
+                ->get();
+
+
+            if ($bitacoras->count()>0){
+
+                //iteracion de los documentos de la licitacion x
+                foreach ($bitacoras as  $old) {
+
+
+                    $contrato->addBitacora(null,$old->glosa,$old->creado_por) ;
+
+                    //se obtiene la bitacora recien asociado
+                    $newBitacora = $contrato->bitacoras()->orderBy('id','desc')->first();
+
+                    $newDoc = new Documento([
+                        'name' => $old->nombre,
+                        'file_name' => $old->nombre,
+                        'mime_type' => $old->tipo_archivo,
+                        'size' => $old->peso_archivo,
+                        'data' => null
+                    ]);
+
+                    //se inserta y asocia los datos de documento sin el bianrio o blob
+                    $newBitacora->documentos()->save($newDoc) ;
+
+                    //se obtiene el documento recien asociado
+                    $newDocStore = $newBitacora->documentos()->orderBy('id','desc')->first();
+
+                    //se actualiza el nuevo documento con el binario del documento anterior
+                    DB::table('DOCUMENTOS')->whereId($newDocStore->id)->updateLob(
+                        [],
+                        ['data'=>$old->archivo]
+                    );
+                }
+
+            }
+        }
+
     }
 }
 

@@ -30,13 +30,13 @@ trait HasBitacora
      */
     public function addBitacora($titulo=null,$descripcion,$user=null)
     {
-        $user = auth()->user() ?? $user;
+        $user = auth()->user()->id ?? $user;
 
         $bitacora = new Bitacora([
             'seccion' => null,
             'titulo' => $titulo,
             'descripcion' => $descripcion,
-            'user_crea' => auth()->user()->id,
+            'user_crea' => $user,
         ]);
 
         $model = $this->getModel();
