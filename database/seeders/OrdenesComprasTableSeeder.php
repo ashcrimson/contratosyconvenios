@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Contrato;
 use App\Models\ContratoEstado;
+use App\Models\Documento;
 use App\Models\OrdenCompra;
 use App\Models\OrdenCompraEstado;
 use Illuminate\Database\Seeder;
@@ -47,6 +48,51 @@ class OrdenesComprasTableSeeder extends Seeder
         $maxId = $compras->max('id_compra');
 
         setStartValSequence('ORDENES_COMPRAS_ID_SEQ',$maxId);
+
+
+        /**
+         * se iterean la licitaciones del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
+         * @var OrdenCompra $compra
+         */
+        foreach (OrdenCompra::all() as $index => $compra) {
+
+
+//            dd($compra->id);
+            $documentos = DB::connection('old')->table('DOCUMENTO_ORDEN_COMPRA')
+                ->join('DOCUMENTO','DOCUMENTO.NRO_DOCUMENTO','DOCUMENTO_ORDEN_COMPRA.NRO_DOCUMENTO')
+                ->where('DOCUMENTO_ORDEN_COMPRA.NRO_ORDEN_COMPRA',$compra->numero)
+                ->get();
+
+
+            if ($documentos->count()>0){
+
+                //iteracion de los documentos de la licitacion x
+                foreach ($documentos as $index => $old) {
+
+                    $newDoc = new Documento([
+                        'name' => $old->nombre,
+                        'file_name' => $old->nombre,
+                        'mime_type' => $old->tipo_archivo,
+                        'size' => $old->peso_archivo,
+                        'data' => null
+                    ]);
+
+                    //se inserta y asocia los datos de documento sin el bianrio o blob
+                    $compra->documentos()->save($newDoc) ;
+
+                    //se obtiene el documento recien asociado
+                    $newDocStore = $compra->documentos()->orderBy('id','desc')->first();
+
+                    //se actualiza el nuevo documento con el binario del documento anterior
+                    DB::table('DOCUMENTOS')->whereId($newDocStore->id)->updateLob(
+                        [],
+                        ['data'=>$old->archivo]
+                    );
+                }
+
+            }
+        }
+
 
     }
 

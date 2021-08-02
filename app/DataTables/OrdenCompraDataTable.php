@@ -36,7 +36,17 @@ class OrdenCompraDataTable extends DataTable
            ->editColumn('fecha_envio' ,function (OrdenCompra  $compra){
                return $compra->fecha_envio->format('d/m/Y');
            })
-             ->rawColumns(['action','id']);
+           ->editColumn('adjunto' ,function (OrdenCompra $compra){
+
+               $doc = $compra->getLastDocumento();
+               if ($doc){
+                   return "<a href='".route('documentos.descargar',$doc->id)."'>".$doc->file_name."</a>";
+               }
+               else{
+                   return "";
+               }
+           })
+           ->rawColumns(['adjunto','action','id']);
 
     }
 
@@ -105,6 +115,7 @@ class OrdenCompraDataTable extends DataTable
             'numero',
             'fecha_envio',
             'total',
+            'adjunto' => ['searchable' => false,'orderable' => false],
             'estado' => ['data' => 'estado.nombre','name' => 'estado.nombre'],
         ];
     }
