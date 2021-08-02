@@ -18,8 +18,8 @@ class CreateBitacorasTable extends Migration
             $table->morphs('model');
             $table->string('seccion')->nullable();
             $table->string('titulo')->nullable();
-            $table->text('descripcion');
-            $table->unsignedBigInteger('user_crea')->index('fk_bitacoras_users1_idx');
+            $table->text('descripcion')->nullable();
+            $table->unsignedBigInteger('user_crea')->nullable()->index('fk_bitacoras_users1_idx');
             $table->unsignedBigInteger('user_actualiza')->nullable()->index('fk_bitacoras_users2_idx');
             $table->timestamps();
             $table->softDeletes();
