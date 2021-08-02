@@ -15,8 +15,7 @@ class CreateBitacorasTable extends Migration
     {
         Schema::create('bitacoras', function (Blueprint $table) {
             $table->id();
-            $table->string('model_type', 45);
-            $table->bigInteger('model_id');
+            $table->morphs('model');
             $table->string('seccion')->nullable();
             $table->string('titulo')->nullable();
             $table->text('descripcion');
