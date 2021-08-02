@@ -6,7 +6,6 @@ namespace App\Traits;
 
 use App\Models\Bitacora;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Facades\Auth;
 
 trait HasBitacora
 {
@@ -29,17 +28,15 @@ trait HasBitacora
      *
      * @return $this
      */
-    public function addBitacora($titulo,$descripcion,$servicioEstadoId,$user=null)
+    public function addBitacora($titulo=null,$descripcion,$user=null)
     {
-        $user = Auth::user() ?? $user;
+        $user = auth()->user() ?? $user;
 
         $bitacora = new Bitacora([
-            'servicio_estado_id' => $servicioEstadoId,
+            'seccion' => null,
             'titulo' => $titulo,
             'descripcion' => $descripcion,
-            'cliente_puede_ver' => true,
-            'user_id' => $user->id,
-            'sucursal_id' => getSucursal()
+            'user_crea' => auth()->user()->id,
         ]);
 
         $model = $this->getModel();
@@ -65,17 +62,5 @@ trait HasBitacora
         return $this;
     }
 
-    /**
-     * Revoke the given role from the model.
-     *
-     * @param string|\Spatie\Permission\Contracts\Role $role
-     */
-    public function deleteBitacora($bitacora)
-    {
-        $this->bitacoras()->delete($bitacora);
 
-        $this->load('bitacoras');
-
-        return $this;
-    }
 }
