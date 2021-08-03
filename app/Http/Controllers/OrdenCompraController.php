@@ -8,8 +8,10 @@ use App\Http\Requests\CreateOrdenCompraRequest;
 use App\Http\Requests\UpdateOrdenCompraRequest;
 use App\Models\OrdenCompra;
 use App\Models\OrdenCompraEstado;
+use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class OrdenCompraController extends AppBaseController
@@ -59,9 +61,28 @@ class OrdenCompraController extends AppBaseController
             'estado_id' => OrdenCompraEstado::INGRESADA,
         ]);
 
+        try {
+            DB::beginTransaction();
 
-        /** @var OrdenCompra $ordenCompra */
-        $ordenCompra = OrdenCompra::create($request->all());
+            /** @var OrdenCompra $ordenCompra */
+            $ordenCompra = OrdenCompra::create($request->all());
+
+
+            if ($request->hasFile('adjunto')){
+                $file = $request->file('adjunto');
+
+                $ordenCompra->addDocumento($file);
+
+            }
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
+
 
         Flash::success('Orden Compra guardado exitosamente.');
 
@@ -133,8 +154,29 @@ class OrdenCompraController extends AppBaseController
             'user_actualiza' => auth()->user()->id
         ]);
 
-        $ordenCompra->fill($request->all());
-        $ordenCompra->save();
+
+        try {
+            DB::beginTransaction();
+
+            /** @var OrdenCompra $ordenCompra */
+            $ordenCompra->fill($request->all());
+            $ordenCompra->save();
+
+
+            if ($request->hasFile('adjunto')){
+                $file = $request->file('adjunto');
+
+                $ordenCompra->addDocumento($file);
+
+            }
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
 
         Flash::success('Orden Compra actualizado con éxito.');
 

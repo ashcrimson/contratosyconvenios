@@ -45,13 +45,19 @@
     </div>
 
 
-
+    <div class="form-group col-sm-6 ">
+        {!! Form::label('adjunto', 'Adjuntar licitación.:') !!}
+        {!! Form::file('adjunto', ['class' => 'form-control file']) !!}
+    </div>
 
     <!-- Total Field -->
     <div class="form-group col-sm-6">
         {!! Form::label('total', 'Monto:') !!}
         {!! Form::number('total', null, ['class' => 'form-control','step' => 'any']) !!}
     </div>
+
+
+
 </div>
 
 

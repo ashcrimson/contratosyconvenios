@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title_page',__('Edit Orden Compra'))
+@include('layouts.plugins.bootstrap_fileinput')
 
 @section('content')
 
@@ -30,7 +31,7 @@
             <div class="card">
                 <div class="card-body">
 
-                   {!! Form::model($ordenCompra, ['route' => ['ordenCompras.update', $ordenCompra->id], 'method' => 'patch','class' => 'wait-on-submit']) !!}
+                   {!! Form::model($ordenCompra, ['route' => ['ordenCompras.update', $ordenCompra->id], 'method' => 'patch','class' => 'wait-on-submit',"enctype"=>"multipart/form-data"]) !!}
                         <div class="form-row">
 
                             @include('orden_compras.fields')
