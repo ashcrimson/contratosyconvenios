@@ -38,6 +38,9 @@ class LicitacionDataTable extends DataTable
                ->editColumn('user_actualiza.name',function (Licitacion $licitacion){
                    return $licitacion->userActualiza->name ?? '';
                })
+           ->editColumn('presupuesto',function (Licitacion $licitacion){
+               return dvs().nfp($licitacion->presupuesto);
+           })
            ->editColumn('adjunto' ,function (Licitacion  $licitacion){
 
                $doc = $licitacion->getLastDocumento();
@@ -112,6 +115,7 @@ class LicitacionDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id',
             'numero',
             'descripcion',
             'presupuesto',

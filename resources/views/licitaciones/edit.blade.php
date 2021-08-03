@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title_page',__('Edit Licitacion'))
+@include('layouts.plugins.bootstrap_fileinput')
 
 @section('content')
 
@@ -30,7 +31,7 @@
             <div class="card">
                 <div class="card-body">
 
-                   {!! Form::model($licitacion, ['route' => ['licitaciones.update', $licitacion->id], 'method' => 'patch','class' => 'wait-on-submit']) !!}
+                   {!! Form::model($licitacion, ['route' => ['licitaciones.update', $licitacion->id], 'method' => 'patch','class' => 'wait-on-submit',"enctype"=>"multipart/form-data"]) !!}
                         <div class="form-row">
 
                             @include('licitaciones.fields')

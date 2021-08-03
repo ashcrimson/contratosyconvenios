@@ -6,9 +6,11 @@ use App\DataTables\LicitacionDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateLicitacionRequest;
 use App\Http\Requests\UpdateLicitacionRequest;
+use App\Models\Documento;
 use App\Models\Licitacion;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class LicitacionController extends AppBaseController
@@ -56,8 +58,30 @@ class LicitacionController extends AppBaseController
             'user_crea' => auth()->user()->id
         ]);
 
-        /** @var Licitacion $licitacion */
-        $licitacion = Licitacion::create($request->all());
+        try {
+            DB::beginTransaction();
+
+            /** @var Licitacion $licitacion */
+            $licitacion = Licitacion::create($request->all());
+
+
+
+            if ($request->hasFile('adjunto')){
+                $file = $request->file('adjunto');
+
+                $licitacion->addDocumento($file);
+
+            }
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
+
+
 
         Flash::success('Licitacion guardado exitosamente.');
 

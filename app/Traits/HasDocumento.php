@@ -6,7 +6,10 @@ namespace App\Traits;
 
 use App\Models\Documento;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Comment\Doc;
 
 trait HasDocumento
 {
@@ -37,36 +40,35 @@ trait HasDocumento
      *
      * @return $this
      */
-    public function addDocumento($titulo,$descripcion,$servicioEstadoId,$user=null)
+    public function addDocumento(UploadedFile $file)
     {
-        $user = Auth::user() ?? $user;
+
+
+
 
         $documento = new Documento([
-            'name',
-            'file_name',
-            'mime_type',
-            'size',
-            'data'
+            'name' => $file->getClientOriginalName(),
+            'file_name'=> $file->getClientOriginalName(),
+            'mime_type'=> $file->getMimeType(),
+            'size'=> $file->getSize()
         ]);
+
 
         $model = $this->getModel();
 
         if ($model->exists) {
-            $this->documentos()->save($documento);
-            $model->load('documentos');
-        } else {
-            $class = \get_class($model);
+            $docSaved = $this->documentos()->save($documento);
 
-            $class::saved(
-                function ($object) use ($documento, $model) {
-                    static $modelLastFiredOn;
-                    if ($modelLastFiredOn !== null && $modelLastFiredOn === $model) {
-                        return;
-                    }
-                    $object->documentos()->sync($documento, false);
-                    $object->load('documentos');
-                    $modelLastFiredOn = $object;
-                });
+            DB::table('documentos')->whereId($docSaved->id)->updateLob(
+                [],
+                ['data'=> $file->getContent()]
+            );
+
+            $model->load('documentos');
+
+        } else {
+
+            throw new \Exception('No existe el modelo');
         }
 
         return $this;
