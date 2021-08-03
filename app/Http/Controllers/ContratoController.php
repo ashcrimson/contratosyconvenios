@@ -8,8 +8,10 @@ use App\Http\Requests\CreateContratoRequest;
 use App\Http\Requests\UpdateContratoRequest;
 use App\Models\Contrato;
 use App\Models\ContratoEstado;
+use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class ContratoController extends AppBaseController
@@ -58,8 +60,30 @@ class ContratoController extends AppBaseController
             'estado_id' => ContratoEstado::INGRESADO,
         ]);
 
-        /** @var Contrato $contrato */
-        $contrato = Contrato::create($request->all());
+
+
+        try {
+            DB::beginTransaction();
+
+            /** @var Contrato $contrato */
+            $contrato = Contrato::create($request->all());
+
+
+
+            if ($request->hasFile('adjunto')){
+                $file = $request->file('adjunto');
+
+                $contrato->addDocumento($file);
+
+            }
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
 
         Flash::success('Contrato guardado exitosamente.');
 
@@ -131,8 +155,31 @@ class ContratoController extends AppBaseController
             'user_actualiza' => auth()->user()->id
         ]);
 
-        $contrato->fill($request->all());
-        $contrato->save();
+
+
+        try {
+            DB::beginTransaction();
+
+            /** @var Contrato $contrato */
+            $contrato->fill($request->all());
+            $contrato->save();
+
+
+
+            if ($request->hasFile('adjunto')){
+                $file = $request->file('adjunto');
+
+                $contrato->addDocumento($file);
+
+            }
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
 
         Flash::success('Contrato actualizado con éxito.');
 

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title_page',__('New Contrato'))
+@include('layouts.plugins.bootstrap_fileinput')
 
 @section('content')
 
@@ -28,7 +29,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    {!! Form::open(['route' => 'contratos.store','class' => 'wait-on-submit']) !!}
+                    {!! Form::open(['route' => 'contratos.store','class' => 'wait-on-submit',"enctype"=>"multipart/form-data"]) !!}
                         <div class="form-row">
 
                             @include('contratos.fields')

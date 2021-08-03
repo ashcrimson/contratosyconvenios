@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title_page',__('Edit Contrato'))
+@include('layouts.plugins.bootstrap_fileinput')
 
 @section('content')
 
@@ -30,7 +31,7 @@
             <div class="card">
                 <div class="card-body">
 
-                   {!! Form::model($contrato, ['route' => ['contratos.update', $contrato->id], 'method' => 'patch','class' => 'wait-on-submit']) !!}
+                   {!! Form::model($contrato, ['route' => ['contratos.update', $contrato->id], 'method' => 'patch','class' => 'wait-on-submit',"enctype"=>"multipart/form-data"]) !!}
                         <div class="form-row">
 
                             @include('contratos.fields')

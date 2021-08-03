@@ -8,6 +8,7 @@ use App\Http\Requests\CreateLicitacionRequest;
 use App\Http\Requests\UpdateLicitacionRequest;
 use App\Models\Documento;
 use App\Models\Licitacion;
+use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\DB;
@@ -153,8 +154,30 @@ class LicitacionController extends AppBaseController
             'user_actualiza' => auth()->user()->id
         ]);
 
-        $licitacion->fill($request->all());
-        $licitacion->save();
+        try {
+            DB::beginTransaction();
+
+            /** @var Licitacion $licitacion */
+            $licitacion->fill($request->all());
+            $licitacion->save();
+
+
+
+            if ($request->hasFile('adjunto')){
+                $file = $request->file('adjunto');
+
+                $licitacion->addDocumento($file);
+
+            }
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
+
 
         Flash::success('Licitacion actualizado con éxito.');
 

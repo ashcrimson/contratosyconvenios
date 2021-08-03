@@ -114,6 +114,11 @@
         {!! Form::date('alerta_vencimiento_boleta', onlyDate($contrato->alerta_vencimiento_boleta ?? null), ['class' => 'form-control','id'=>'alerta_vencimiento_boleta']) !!}
     </div>
 
+    <div class="form-group col-sm-6 ">
+        {!! Form::label('adjunto', 'Adjuntar licitación.:') !!}
+        {!! Form::file('adjunto', ['class' => 'form-control file']) !!}
+    </div>
+
 </div>
 @push('scripts')
 <script>
