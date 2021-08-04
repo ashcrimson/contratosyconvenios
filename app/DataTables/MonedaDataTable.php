@@ -3,11 +3,24 @@
 namespace App\DataTables;
 
 use App\Models\Moneda;
+use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
 class MonedaDataTable extends DataTable
 {
+
+
+    /**
+     * MonedaDataTable constructor.
+     * @param $dailyIndicators
+     */
+    public function __construct()
+    {
+//        setConfigDailyIndicators();
+    }
+
+
     /**
      * Build DataTable class.
      *
@@ -32,6 +45,7 @@ class MonedaDataTable extends DataTable
                  //return view('monedas.modal_detalles',compact('moneda'))->render();
 
              })
+
              ->rawColumns(['action','id']);
 
     }
@@ -96,10 +110,10 @@ class MonedaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'nombre',
-            'codigo',
-            'equivalencia'
+            Column::make('id'),
+            Column::make('nombre'),
+            Column::make('codigo'),
+            Column::make('equivalencia'),
         ];
     }
 

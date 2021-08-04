@@ -69,4 +69,55 @@ class Moneda extends Model
     {
         return $this->hasMany(\App\Models\Contrato::class, 'moneda_id');
     }
+
+    public function getValorDia()
+    {
+        $dailyIndicators = getDailyIndicators();
+
+        try{
+
+            switch ($this->codigo){
+
+                case "UF":
+                    $valor = $dailyIndicators->uf->valor;
+                    break;
+                case "USD":
+                    $valor = $dailyIndicators->dolar->valor;
+                    break;
+                case "USDI":
+                    $valor = $dailyIndicators->dolar_intercambio->valor;
+                    break;
+                case "EURO":
+                    $valor = $dailyIndicators->euro->valor;
+                    break;
+                case "IPC":
+                    $valor = $dailyIndicators->ipc->valor;
+                    break;
+                case "UTM":
+                    $valor = $dailyIndicators->utm->valor;
+                    break;
+                case "IVP":
+                    $valor = $dailyIndicators->ivp->valor;
+                    break;
+                case "IMACEC":
+                    $valor = $dailyIndicators->imacec->valor;
+                    break;
+                default :
+                    $valor = 1;
+            }
+
+
+        }catch (\Exception $exception){
+            return  $exception->getMessage();
+        }
+
+
+
+        return $valor;
+    }
+
+    public function getEquivalenciaAttribute($val)
+    {
+        return $this->attributes['equivalencia'] = $this->getValorDia();
+    }
 }

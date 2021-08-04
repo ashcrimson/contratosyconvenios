@@ -16,6 +16,7 @@ class MonedaController extends AppBaseController
 
     public function __construct()
     {
+        setConfigDailyIndicators();
         $this->middleware('permission:Ver Monedas')->only(['show']);
         $this->middleware('permission:Crear Monedas')->only(['create','store']);
         $this->middleware('permission:Editar Monedas')->only(['edit','update',]);
