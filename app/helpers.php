@@ -287,12 +287,16 @@ function setConfigDailyIndicators(){
 
         $apiUrl = 'https://mindicador.cl/api';
 
+        if (config('app.usar_proxy')){
 
-        $dailyIndicators = \Illuminate\Support\Facades\Http::withOptions([
-            'proxy' => config('app.proxy'),
-            'debug' => true
-        ])
-        ->get($apiUrl)->json();
+            $dailyIndicators = \Illuminate\Support\Facades\Http::withOptions([
+                'proxy' => config('app.proxy'),
+                'debug' => true
+            ])->get($apiUrl)->json();
+
+        }else{
+            $dailyIndicators = \Illuminate\Support\Facades\Http::get($apiUrl)->json();
+        }
 
 
         config(['app.daily_indicators' => $dailyIndicators]);

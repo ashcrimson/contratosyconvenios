@@ -15,13 +15,9 @@ class PruebaController extends Controller
         if (request()->api_monedas==1){
 
 
-            $res = Http::withOptions([
-                            'proxy' => 'http://fpinoo:VPv52mqEjpwGgL2@172.25.10.11:3128',
-                            'debug' => true
-                        ])
-                        ->get($apiUrl)->json();
+            setConfigDailyIndicators();
 
-            return $res;
+            return getDailyIndicators();
         }
 
         if (request()->api_monedas==2){
