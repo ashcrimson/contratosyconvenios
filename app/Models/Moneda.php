@@ -79,28 +79,28 @@ class Moneda extends Model
             switch ($this->codigo){
 
                 case "UF":
-                    $valor = $dailyIndicators->uf->valor;
+                    $valor = $dailyIndicators['uf']['valor'];
                     break;
                 case "USD":
-                    $valor = $dailyIndicators->dolar->valor;
+                    $valor = $dailyIndicators['dolar']['valor'];
                     break;
                 case "USDI":
-                    $valor = $dailyIndicators->dolar_intercambio->valor;
+                    $valor = $dailyIndicators['dolar_intercambio']['valor'];
                     break;
                 case "EURO":
-                    $valor = $dailyIndicators->euro->valor;
+                    $valor = $dailyIndicators['euro']['valor'];
                     break;
                 case "IPC":
-                    $valor = $dailyIndicators->ipc->valor;
+                    $valor = $dailyIndicators['ipc']['valor'];
                     break;
                 case "UTM":
-                    $valor = $dailyIndicators->utm->valor;
+                    $valor = $dailyIndicators['utm']['valor'];
                     break;
                 case "IVP":
-                    $valor = $dailyIndicators->ivp->valor;
+                    $valor = $dailyIndicators['ivp']['valor'];
                     break;
                 case "IMACEC":
-                    $valor = $dailyIndicators->imacec->valor;
+                    $valor = $dailyIndicators['imacec']['valor'];
                     break;
                 default :
                     $valor = 1;
