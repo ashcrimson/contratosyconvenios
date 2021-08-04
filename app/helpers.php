@@ -288,7 +288,11 @@ function setConfigDailyIndicators(){
         $apiUrl = 'https://mindicador.cl/api';
 
 
-        $dailyIndicators = \Illuminate\Support\Facades\Http::get($apiUrl)->json();
+        $dailyIndicators = \Illuminate\Support\Facades\Http::withOptions([
+            'proxy' => config('app.proxy'),
+            'debug' => true
+        ])
+        ->get($apiUrl)->json();
 
 
         config(['app.daily_indicators' => $dailyIndicators]);
