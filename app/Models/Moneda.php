@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;;
 use Illuminate\Database\Eloquent\SoftDeletes;
 /**
@@ -75,8 +76,8 @@ class Moneda extends Model
         $dailyIndicators = getDailyIndicators();
 
 
-        if (!is_array($dailyIndicators) && is_string($dailyIndicators))
-            return $dailyIndicators;
+//        if (!is_array($dailyIndicators) && is_string($dailyIndicators))
+//            return $dailyIndicators;
 
         try{
 
@@ -112,7 +113,7 @@ class Moneda extends Model
 
 
         }catch (\Exception $exception){
-            return  $exception->getMessage();
+            return  null;
         }
 
 
@@ -120,8 +121,30 @@ class Moneda extends Model
         return $valor;
     }
 
+    public function getEsValorDiaAttribute()
+    {
+        return $this->getValorDia() ? 'Sí' : 'No';
+    }
+
+    public function getUltimaActualizacionFecha()
+    {
+        $dailyIndicators = getDailyIndicators();
+
+        if (!is_array($dailyIndicators) && is_string($dailyIndicators)){
+            $fecha = $this->updated_at;
+
+        }else{
+            $fecha = Carbon::parse($dailyIndicators['fecha']);
+
+        }
+
+
+
+        return $fecha->format('d/m/Y H:m:i A');
+    }
+
     public function getEquivalenciaAttribute($val)
     {
-        return $this->attributes['equivalencia'] = $this->getValorDia();
+        return $this->attributes['equivalencia'] = $this->getValorDia() ?? $val;
     }
 }

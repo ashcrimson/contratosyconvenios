@@ -45,6 +45,18 @@ class MonedaDataTable extends DataTable
                  //return view('monedas.modal_detalles',compact('moneda'))->render();
 
              })
+           ->editColumn('ultima_actualizacion',function (Moneda $moneda){
+
+                 return $moneda->getUltimaActualizacionFecha();
+
+
+             })
+           ->editColumn('al_dia',function (Moneda $moneda){
+
+               return $moneda->es_valor_dia;
+
+
+           })
 
              ->rawColumns(['action','id']);
 
@@ -114,6 +126,8 @@ class MonedaDataTable extends DataTable
             Column::make('nombre'),
             Column::make('codigo'),
             Column::make('equivalencia'),
+            Column::make('al_dia')->searchable(false)->orderable(false),
+            Column::make('ultima_actualizacion')->searchable(false)->orderable(false),
         ];
     }
 
