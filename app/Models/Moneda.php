@@ -74,6 +74,10 @@ class Moneda extends Model
     {
         $dailyIndicators = getDailyIndicators();
 
+
+        if (!is_array($dailyIndicators) && is_string($dailyIndicators))
+            return $dailyIndicators;
+
         try{
 
             switch ($this->codigo){
