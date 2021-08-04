@@ -10,17 +10,22 @@ class PruebaController extends Controller
     public function index()
     {
 
+        $apiUrl = 'https://mindicador.cl/api';
+
         if (request()->api_monedas==1){
 
-            $uriApi = "https://mindicador.cl/api";
 
-            $res = Http::get($uriApi)->json();
+            $res = Http::withOptions([
+                            'proxy' => 'http://fpinoo:VPv52mqEjpwGgL2@172.25.10.11:3128',
+                            'debug' => true
+                        ])
+                        ->get($apiUrl)->json();
 
             return $res;
         }
 
         if (request()->api_monedas==2){
-            $apiUrl = 'https://mindicador.cl/api';
+
             //Es necesario tener habilitada la directiva allow_url_fopen para usar file_get_contents
             if ( ini_get('allow_url_fopen') ) {
                 $json = file_get_contents($apiUrl);
