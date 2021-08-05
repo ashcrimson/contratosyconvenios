@@ -291,7 +291,7 @@ function setConfigDailyIndicators(){
 
             $dailyIndicators = \Illuminate\Support\Facades\Http::withOptions([
                 'proxy' => config('app.proxy'),
-                'debug' => true
+                'debug' => false
             ])->get($apiUrl)->json();
 
         }else{
