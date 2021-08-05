@@ -140,7 +140,7 @@ class Moneda extends Model
 
 
 
-        return $fecha->format('d/m/Y H:m:i A');
+        return $fecha->format('d/m/Y h:i:s a');
     }
 
     public function getEquivalenciaAttribute($val)
