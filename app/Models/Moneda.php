@@ -134,7 +134,38 @@ class Moneda extends Model
             $fecha = $this->updated_at;
 
         }else{
-            $fecha = Carbon::parse($dailyIndicators['fecha']);
+
+            switch ($this->codigo){
+
+                case "UF":
+                    $fecha = $dailyIndicators['uf']['fecha'];
+                    break;
+                case "USD":
+                    $fecha = $dailyIndicators['dolar']['fecha'];
+                    break;
+                case "USDI":
+                    $fecha = $dailyIndicators['dolar_intercambio']['fecha'];
+                    break;
+                case "EURO":
+                    $fecha = $dailyIndicators['euro']['fecha'];
+                    break;
+                case "IPC":
+                    $fecha = $dailyIndicators['ipc']['fecha'];
+                    break;
+                case "UTM":
+                    $fecha = $dailyIndicators['utm']['fecha'];
+                    break;
+                case "IVP":
+                    $fecha = $dailyIndicators['ivp']['fecha'];
+                    break;
+                case "IMACEC":
+                    $fecha = $dailyIndicators['imacec']['fecha'];
+                    break;
+                default :
+                    $fecha = $this->updated_at;
+            }
+
+            $fecha = Carbon::parse($fecha);
 
         }
 
