@@ -4,7 +4,6 @@ return [
 
     'login_ldpa' => (bool) env('APP_LOGIN_LDAP', false),
 
-    'usar_proxy' => env('USAR_PROXY',false),
 
     'proxy' => env('APP_PROXY','http://fpinoo:VPv52mqEjpwGgL2@172.25.10.11:3128'),
 

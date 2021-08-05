@@ -287,7 +287,7 @@ function setConfigDailyIndicators(){
 
         $apiUrl = 'https://mindicador.cl/api';
 
-        if (config('app.usar_proxy')){
+        if (app()->environment()=='local'){
 
             $dailyIndicators = \Illuminate\Support\Facades\Http::withOptions([
                 'proxy' => config('app.proxy'),
