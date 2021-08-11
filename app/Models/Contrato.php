@@ -210,7 +210,7 @@ class Contrato extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function contratosItems()
+    public function items()
     {
         return $this->hasMany(\App\Models\ContratoItem::class, 'contrato_id');
     }
@@ -218,7 +218,7 @@ class Contrato extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function ordenesCompras()
+    public function compras()
     {
         return $this->hasMany(\App\Models\OrdenCompra::class, 'contrato_id');
     }

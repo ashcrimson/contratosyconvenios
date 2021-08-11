@@ -20,6 +20,7 @@ class CreateContratosItemsTable extends Migration
             $table->string('descripcion');
             $table->decimal('cantidad_total', 14);
             $table->decimal('precio', 14);
+            $table->string('grupo');
             $table->string('presentacion_prod_soli')->nullable();
             $table->string('f_f')->nullable();
             $table->string('desc_tec_prod_ofertado')->nullable();

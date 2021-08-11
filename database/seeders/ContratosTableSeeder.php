@@ -4,11 +4,13 @@ namespace Database\Seeders;
 
 use App\Models\Contrato;
 use App\Models\ContratoEstado;
+use App\Models\ContratoItem;
 use App\Models\ContratoTipo;
 use App\Models\Documento;
 use App\Models\Licitacion;
 use App\Models\Moneda;
 use App\Models\Proveedor;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -79,6 +81,8 @@ class ContratosTableSeeder extends Seeder
 
         $this->migrarBitacoras();
 
+        $this->migrarItems();
+
 
 
     }
@@ -111,7 +115,7 @@ class ContratosTableSeeder extends Seeder
 
     function migrarDocumentos(){
         /**
-         * se iterean la licitaciones del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
+         * se iterean los contratos del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
          * @var Contrato $contrato
          */
         foreach (Contrato::all() as  $contrato) {
@@ -157,7 +161,7 @@ class ContratosTableSeeder extends Seeder
     function migrarBitacoras(){
 
         /**
-         * se iterean la licitaciones del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
+         * se iterean los contratos del nuevo sistema para cosultar sus bitacoras en sistema anterior y guardar en nuevo sistema
          * @var Contrato $contrato
          */
         foreach (Contrato::all() as  $contrato) {
@@ -205,6 +209,46 @@ class ContratosTableSeeder extends Seeder
             }
         }
 
+    }
+
+
+    function migrarItems(){
+
+        /**
+         * se iterean los contratos del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
+         * @var Contrato $contrato
+         */
+        foreach (Contrato::all() as  $contrato) {
+
+
+            $items = DB::connection('old')->table('DETALLE_CONTRATO')
+                ->where('ID_CONTRATO',$contrato->id)
+                ->get();
+
+
+            if ($items->count()>0){
+
+                //iteracion de los documentos de la licitacion x
+                foreach ($items as  $old) {
+
+                    ContratoItem::create([
+                        'contrato_id'              => $old->id_contrato,
+                        'codigo'                   => $old->codigo,
+                        'descripcion'              => $old->desc_prod_soli,
+                        'cantidad_total'           => $old->cantidad_total,
+                        'precio'                   => $old->precio_u_bruto,
+                        'grupo'                    => $old->grupo,
+                        'presentacion_prod_soli'   => $old->presentacion_prod_soli,
+                        'f_f'                      => $old->f_f,
+                        'desc_tec_prod_ofertado'   => $old->desc_tec_prod_ofertado,
+                        'u_entrega_oferente'       => $old->u_entrega_oferente,
+                        'saldo'                    => $old->saldo
+                    ]);
+
+                }
+
+            }
+        }
     }
 }
 
