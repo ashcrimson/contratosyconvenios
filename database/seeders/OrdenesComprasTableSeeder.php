@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Contrato;
 use App\Models\ContratoEstado;
+use App\Models\ContratoItem;
 use App\Models\Documento;
 use App\Models\OrdenCompra;
+use App\Models\OrdenCompraDetalle;
 use App\Models\OrdenCompraEstado;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -49,15 +51,50 @@ class OrdenesComprasTableSeeder extends Seeder
 
         setStartValSequence('ORDENES_COMPRAS_ID_SEQ',$maxId);
 
+        $this->migrarDocumentos();
 
+        $this->migrarDetalles();
+
+
+
+    }
+
+    function getEstado($comras){
+        switch ($comras->estado){
+            case "Aceptada":
+                return OrdenCompraEstado::ACEPTADA;
+                break;
+            case "Enviada a Proveedor":
+                return OrdenCompraEstado::ENVIADA_PROVEEDOR;
+                break;
+            case "Recepcion Conforme":
+            case "Recepci—n Conforme":
+            case "Recepci?n Conforme":
+            case "Recepción Conforme":
+                return OrdenCompraEstado::RECEPCION_CONFORME;
+                break;
+            case "En Proceso":
+                return OrdenCompraEstado::EN_PROCESO;
+                break;
+            case "Anulada":
+                return OrdenCompraEstado::ANULADA;
+                break;
+            case "Cancelacion Requerida":
+                return OrdenCompraEstado::ANULACIÓN_REQUERIDA;
+                break;
+            default:
+                return OrdenCompraEstado::INGRESADA;
+        }
+    }
+
+    public function migrarDocumentos()
+    {
         /**
-         * se iterean la licitaciones del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
+         * se iterean la compras del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
          * @var OrdenCompra $compra
          */
         foreach (OrdenCompra::all() as $index => $compra) {
 
-
-//            dd($compra->id);
             $documentos = DB::connection('old')->table('DOCUMENTO_ORDEN_COMPRA')
                 ->join('DOCUMENTO','DOCUMENTO.NRO_DOCUMENTO','DOCUMENTO_ORDEN_COMPRA.NRO_DOCUMENTO')
                 ->where('DOCUMENTO_ORDEN_COMPRA.NRO_ORDEN_COMPRA',$compra->numero)
@@ -92,35 +129,43 @@ class OrdenesComprasTableSeeder extends Seeder
 
             }
         }
-
-
     }
 
-    function getEstado($comras){
-        switch ($comras->estado){
-            case "Aceptada":
-                return OrdenCompraEstado::ACEPTADA;
-                break;
-            case "Enviada a Proveedor":
-                return OrdenCompraEstado::ENVIADA_PROVEEDOR;
-                break;
-            case "Recepcion Conforme":
-            case "Recepci—n Conforme":
-            case "Recepci?n Conforme":
-            case "Recepción Conforme":
-                return OrdenCompraEstado::RECEPCION_CONFORME;
-                break;
-            case "En Proceso":
-                return OrdenCompraEstado::EN_PROCESO;
-                break;
-            case "Anulada":
-                return OrdenCompraEstado::ANULADA;
-                break;
-            case "Cancelacion Requerida":
-                return OrdenCompraEstado::ANULACIÓN_REQUERIDA;
-                break;
-            default:
-                return OrdenCompraEstado::INGRESADA;
+    public function migrarDetalles()
+    {
+
+        $items = ContratoItem::all();
+
+        /**
+         * se iterean la compras del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
+         * @var OrdenCompra $compra
+         */
+        foreach (OrdenCompra::all() as $index => $compra) {
+
+            $detalles = DB::connection('old')->table('ORDEN_COMPRA_DETALLES')
+                ->where('NRO_ORDEN_COMPRA',$compra->numero)
+                ->get();
+
+
+            if ($detalles->count()>0){
+
+
+
+                //iteracion de los detalles de la licitacion x
+                foreach ($detalles as $index => $det) {
+
+                    $item = $items->where('codigo',$det->codigo_detalle_contrato)->first();
+
+                    OrdenCompraDetalle::create([
+                        'compra_id' => $compra->id,
+                        'item_id' => $item->id,
+                        'precio' => $det->precio,
+                        'cantidad' => $det->cantidad
+                    ]);
+
+                }
+
+            }
         }
     }
 }
