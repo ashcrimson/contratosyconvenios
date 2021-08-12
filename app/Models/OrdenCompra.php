@@ -125,8 +125,8 @@ class OrdenCompra extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function ordenesComprasDetalles()
+    public function detalles()
     {
-        return $this->hasMany(\App\Models\OrdenesComprasDetalle::class, 'compra_id');
+        return $this->hasMany(\App\Models\OrdenCompraDetalle::class, 'compra_id');
     }
 }

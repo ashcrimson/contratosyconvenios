@@ -59,134 +59,124 @@
 
     <!--            Detalles
     ------------------------------------------------------------------------>
-    <div class="row" v-show="tiene_detalles" >
-        <div class="col-sm-12">
-            <div class="card card-outline card-success">
-                <div class="card-header pb-1">
-                    <h5 class="card-title">Detalles</h5>
-                    <!-- /.card-tools -->
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <?php
-                    if (isset($registroEdit) && $registroEdit['TIENE_DETALLES']){
-                    ?>
-                    <table class="table table-bordered table-striped table-sm table-hover">
-                        <thead>
-                        <tr>
-                            <th>CODIGO</th>
-                            <th>DESCRIPCION</th>
-                            <th>CANTIDAD</th>
-                            <th>PRECIO</th>
-                            <th>SUB TOTAL</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        foreach ($registroEdit['detalles_compra'] as $det) {
-                        ?>
-                        <tr>
-                            <td><?=$det['CODIGO']?></td>
-                            <td><?=$det['DESCRIPCION']?></td>
-                            <td><?=nfp($det['CANTIDAD'])?></td>
-                            <td><?=nfp($det['PRECIO'])?></td>
-                            <td><?=nfp($det['SUBTOTAL'])?></td>
-                        </tr>
-                        <?php
-                        }
-                        ?>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th colspan="4">Total</th>
-                            <th><?=nfp(array_sum(array_column($registroEdit['detalles_compra'], 'SUBTOTAL')) )?></th>
-                        </tr>
-                        </tfoot>
-                    </table>
-                    <?php
-                    }else{
-                    ?>
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                        <tr>
-                            <th>Descripción</th>
-                            <th>Cantidad</th>
-                            <th>Saldo</th>
-                            <th>Precio</th>
-                            <th>Sub Total</th>
-                            <th>Agregar</th>
-                        </tr>
-                        </thead>
-                        <tbody>
 
-                        <tr v-for="(det,index) in detalles">
-                            <td v-text="det.text"></td>
-                            <td v-text="det.cantidad"></td>
-                            <td v-text="det.saldo"></td>
-                            <td v-text="det.precio"></td>
-                            <td v-text="subTotalDet(det)"></td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" role="button" @click.prevent="removeDet(index,det)">Eliminar</button>
-                            </td>
-                        </tr>
-
-                        <tr v-if="detalles.length == 0">
-                            <td colspan="10" class="text-center text-warning">No hay ningún detalles agregado</td>
-                        </tr>
-
-
-                        <tr id="filaNuevoDetalle">
-                            <td width="45%">
-                                <multiselect
-                                    v-model="item"
-                                    :options="items"
-                                    :close-on-select="true"
-                                    :show-labels="false"
-                                    :placeholder="placeholderSelectItem"
-                                    track-by="id"
-                                    label="text"
-                                    @input="onSelectItem"
-                                >
-                                </multiselect>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" v-model="detalle.cantidad" id="cantidad" >
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" readonly :value="detalle.saldo">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control"  readonly :value="detalle.precio">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" readonly :value="subTotalDet(detalle)">
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success"  @click.prevent="addDet()">Agregar</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th colspan="4">Total</th>
-                            <th class="text-right" >
-                                <span v-text="total"></span>
-                            </th>
-                            <th></th>
-                        </tr>
-                        </tfoot>
-                    </table>
-                    <?php
-                    }
-                    ?>
-
-
-                </div>
-                <!-- /.card-body -->
+    <div class="form-group col-sm-12" v-show="tiene_detalles">
+        <div class="card card-outline card-success">
+            <div class="card-header pb-1">
+                <h5 class="card-title">Detalles</h5>
+                <!-- /.card-tools -->
             </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                @if(isset($ordenCompra) && $ordenCompra->tiene_detalles)
+                <table class="table table-bordered table-striped table-sm table-hover">
+                    <thead>
+                    <tr>
+                        <th>CODIGO</th>
+                        <th>DESCRIPCION</th>
+                        <th>CANTIDAD</th>
+                        <th>PRECIO</th>
+                        <th>SUB TOTAL</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach( $ordenCompra->detalles as $det)
+
+                    <tr>
+                        <td>{{$det->item->codigo}}</td>
+                        <td>{{$det->item->text}}</td>
+                        <td>{{nfp($det->cantidad)}}</td>
+                        <td>{{nfp($det->precio)}}</td>
+                        <td>{{nfp($det->subtotal)}}</td>
+                    </tr>
+                    @endforeach
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="4">Total</th>
+                        <th>{{nfp($ordenCompra->detalles->sum('subtotal'))}}</th>
+                    </tr>
+                    </tfoot>
+                </table>
+                @else
+                <table class="table table-bordered table-sm">
+                    <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Saldo</th>
+                        <th>Precio</th>
+                        <th>Sub Total</th>
+                        <th>Agregar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr v-for="(det,index) in detalles">
+                        <td v-text="det.text"></td>
+                        <td v-text="det.cantidad"></td>
+                        <td v-text="det.saldo"></td>
+                        <td v-text="det.precio"></td>
+                        <td v-text="subTotalDet(det)"></td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" role="button" @click.prevent="removeDet(index,det)">Eliminar</button>
+                        </td>
+                    </tr>
+
+                    <tr v-if="detalles.length == 0">
+                        <td colspan="10" class="text-center text-warning">No hay ningún detalles agregado</td>
+                    </tr>
 
 
+                    <tr id="filaNuevoDetalle">
+                        <td width="45%">
+                            <multiselect
+                                v-model="item"
+                                :options="items"
+                                :close-on-select="true"
+                                :show-labels="false"
+                                :placeholder="placeholderSelectItem"
+                                track-by="id"
+                                label="text"
+                                @input="onSelectItem"
+                            >
+                            </multiselect>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" v-model="detalle.cantidad" id="cantidad" >
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control" readonly :value="detalle.saldo">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control"  readonly :value="detalle.precio">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" readonly :value="subTotalDet(detalle)">
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success"  @click.prevent="addDet()">Agregar</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="4">Total</th>
+                        <th class="text-right" >
+                            <span v-text="total"></span>
+                        </th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                </table>
+                @endif
+
+
+            </div>
+            <!-- /.card-body -->
         </div>
     </div>
 

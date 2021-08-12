@@ -21,13 +21,14 @@ class OrdenCompraDetalle extends Model
     use SoftDeletes;
 
     public $table = 'ordenes_compras_detalles';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['subtotal'];
 
 
     public $fillable = [
@@ -70,7 +71,7 @@ class OrdenCompraDetalle extends Model
      **/
     public function item()
     {
-        return $this->belongsTo(\App\Models\ContratosItem::class, 'item_id');
+        return $this->belongsTo(\App\Models\ContratoItem::class, 'item_id');
     }
 
     /**
@@ -79,5 +80,10 @@ class OrdenCompraDetalle extends Model
     public function compra()
     {
         return $this->belongsTo(\App\Models\OrdenesCompra::class, 'compra_id');
+    }
+
+    public function getSubTotalAttribute()
+    {
+        return $this->precio * $this->cantidad;
     }
 }
