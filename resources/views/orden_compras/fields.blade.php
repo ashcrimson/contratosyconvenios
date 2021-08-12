@@ -51,7 +51,7 @@
     </div>
 
     <!-- Total Field -->
-    <div class="form-group col-sm-6">
+    <div class="form-group col-sm-6" v-if="!tiene_detalles">
         {!! Form::label('total', 'Monto:') !!}
         {!! Form::number('total', null, ['class' => 'form-control','step' => 'any']) !!}
     </div>
@@ -180,6 +180,8 @@
         </div>
     </div>
 
+    <input type="hidden" name="detalles" :value="JSON.stringify(detalles, null, 3)">
+    <input type="hidden" name="total" :value="total">
 
 
 </div>

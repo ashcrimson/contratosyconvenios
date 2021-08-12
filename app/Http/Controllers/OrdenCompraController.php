@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateOrdenCompraRequest;
 use App\Http\Requests\UpdateOrdenCompraRequest;
 use App\Models\OrdenCompra;
+use App\Models\OrdenCompraDetalle;
 use App\Models\OrdenCompraEstado;
 use Exception;
 use Flash;
@@ -61,11 +62,26 @@ class OrdenCompraController extends AppBaseController
             'estado_id' => OrdenCompraEstado::INGRESADA,
         ]);
 
+
+
+
         try {
             DB::beginTransaction();
 
             /** @var OrdenCompra $ordenCompra */
             $ordenCompra = OrdenCompra::create($request->all());
+
+
+            $detalles = collect(json_decode($request->detalles))->map(function ($item){
+
+                return new OrdenCompraDetalle([
+                    'item_id' => $item->id,
+                    'precio' => $item->precio,
+                    'cantidad' => $item->cantidad
+                ]);
+            });
+
+            $ordenCompra->detalles()->saveMany($detalles);
 
 
             if ($request->hasFile('adjunto')){
