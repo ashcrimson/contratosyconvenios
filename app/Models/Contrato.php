@@ -225,7 +225,11 @@ class Contrato extends Model
 
     public function getSaldoAttribute()
     {
-        return $this->monto;
+        return $this->monto - $this->compras->sum(function (OrdenCompra $compra){
+                    if ($compra->estado_id!=OrdenCompraEstado::ANULADA){
+                        return $compra->total;
+                    }
+            });
     }
 
     public function getMontoBoletaGarantiaFAttribute()
