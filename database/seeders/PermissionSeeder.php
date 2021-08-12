@@ -42,6 +42,48 @@ class PermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => 'Crear usuarios']);
             Permission::firstOrCreate(['name' => 'Editar usuarios']);
             Permission::firstOrCreate(['name' => 'Eliminar usuarios']);
+
+
+            Permission::firstOrCreate(['name' => 'Ver Areas']);
+            Permission::firstOrCreate(['name' => 'Crear Areas']);
+            Permission::firstOrCreate(['name' => 'Editar Areas']);
+            Permission::firstOrCreate(['name' => 'Eliminar Areas']);
+
+
+            Permission::firstOrCreate(['name' => 'Ver Cargos']);
+            Permission::firstOrCreate(['name' => 'Crear Cargos']);
+            Permission::firstOrCreate(['name' => 'Editar Cargos']);
+            Permission::firstOrCreate(['name' => 'Eliminar Cargos']);
+
+
+            Permission::firstOrCreate(['name' => 'Ver Contratos']);
+            Permission::firstOrCreate(['name' => 'Crear Contratos']);
+            Permission::firstOrCreate(['name' => 'Editar Contratos']);
+            Permission::firstOrCreate(['name' => 'Eliminar Contratos']);
+
+
+            Permission::firstOrCreate(['name' => 'Ver Licitaciones']);
+            Permission::firstOrCreate(['name' => 'Crear Licitaciones']);
+            Permission::firstOrCreate(['name' => 'Editar Licitaciones']);
+            Permission::firstOrCreate(['name' => 'Eliminar Licitaciones']);
+
+
+            Permission::firstOrCreate(['name' => 'Ver Monedas']);
+            Permission::firstOrCreate(['name' => 'Crear Monedas']);
+            Permission::firstOrCreate(['name' => 'Editar Monedas']);
+            Permission::firstOrCreate(['name' => 'Eliminar Monedas']);
+
+            Permission::firstOrCreate(['name' => 'Ver Orden Compras']);
+            Permission::firstOrCreate(['name' => 'Crear Orden Compras']);
+            Permission::firstOrCreate(['name' => 'Editar Orden Compras']);
+            Permission::firstOrCreate(['name' => 'Eliminar Orden Compras']);
+            Permission::firstOrCreate(['name' => 'Anular Orden Compras']);
+
+
+            Permission::firstOrCreate(['name' => 'Ver Proveedores']);
+            Permission::firstOrCreate(['name' => 'Crear Proveedores']);
+            Permission::firstOrCreate(['name' => 'Editar Proveedores']);
+            Permission::firstOrCreate(['name' => 'Eliminar Proveedores']);
         }
 
     }

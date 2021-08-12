@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @version August 11, 2021, 5:34 pm CST
  *
- * @property \App\Models\ContratosItem $item
+ * @property \App\Models\ContratoItem $item
  * @property \App\Models\OrdenesCompra $compra
  * @property integer $compra_id
  * @property integer $item_id

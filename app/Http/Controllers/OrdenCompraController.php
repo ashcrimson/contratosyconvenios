@@ -225,4 +225,26 @@ class OrdenCompraController extends AppBaseController
 
         return redirect(route('ordenCompras.index'));
     }
+
+    public function anular(OrdenCompra $compra)
+    {
+
+
+        try {
+            DB::beginTransaction();
+
+            $compra->anular();
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
+
+        Flash::success('Orden Compra anulada correctamente.');
+
+        return redirect(route('ordenCompras.index'));
+    }
 }

@@ -13,14 +13,16 @@
 </a>
 @endcan
 
-@can('Eliminar Orden Compras')
-<a href="#" onclick="deleteItemDt(this)" data-id="{{$id}}" data-toggle="tooltip" title="Eliminar" class='btn btn-outline-danger btn-sm'>
-    <i class="fa fa-trash-alt"></i>
-</a>
+@if($ordenCompra->puedeAnular())
+    @can('Anular Orden Compras')
+    <a href="#" onclick="deleteItemDt(this)" data-id="{{$id}}" data-toggle="tooltip" title="Anular" class='btn btn-outline-danger btn-sm'>
+        <i class="fa fa-undo"></i>
+    </a>
 
 
-<form action="{{ route('ordenCompras.destroy', $id)}}" method="POST" id="delete-form{{$id}}">
-    @method('DELETE')
-    @csrf
-</form>
-@endcan
+    <form action="{{ route('ordenCompras.anular', $id)}}" method="POST" id="delete-form{{$id}}">
+        @method('PATCH')
+        @csrf
+    </form>
+    @endcan
+@endif

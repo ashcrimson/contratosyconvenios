@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \App\Models\OrdenesComprasEstado $estado
  * @property \App\Models\User $userCrea
  * @property \App\Models\User $userActualiza
- * @property \Illuminate\Database\Eloquent\Collection $ordenesComprasDetalles
+ * @property \Illuminate\Database\Eloquent\Collection $detalles
  * @property integer $contrato_id
  * @property string $numero
  * @property Carbon $fecha_envio
@@ -128,5 +128,31 @@ class OrdenCompra extends Model
     public function detalles()
     {
         return $this->hasMany(\App\Models\OrdenCompraDetalle::class, 'compra_id');
+    }
+
+    public function puedeAnular()
+    {
+        return $this->estado_id!=OrdenCompraEstado::ANULADA;
+    }
+
+
+    public function anular()
+    {
+        $this->estado_id=OrdenCompraEstado::ANULADA;
+
+        if ($this->detalles->count()>0){
+
+            /**
+             * @var $detalle OrdenCompraDetalle
+             */
+            foreach ($this->detalles as $detalle){
+
+                $item = $detalle->item;
+                $item->saldo += $detalle->cantidad;
+                $item->save();
+            }
+        }
+
+        $this->save();
     }
 }

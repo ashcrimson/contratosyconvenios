@@ -71,4 +71,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('ordenCompraEstados', 'OrdenCompraEstadoController');
 
     Route::resource('ordenCompras', 'OrdenCompraController');
+
+    Route::patch('ordenCompras/anular/{compra}', 'OrdenCompraController@anular')->name('ordenCompras.anular');
 });
