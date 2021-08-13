@@ -136,6 +136,22 @@ class OrdenCompra extends Model
     }
 
 
+    public function egreso()
+    {
+        if ($this->detalles->count()>0){
+
+            /**
+             * @var $detalle OrdenCompraDetalle
+             */
+            foreach ($this->detalles as $detalle){
+
+                $detalle->descuentaSaldoItem();
+
+            }
+        }
+    }
+
+
     public function anular()
     {
         $this->estado_id=OrdenCompraEstado::ANULADA;
@@ -147,9 +163,7 @@ class OrdenCompra extends Model
              */
             foreach ($this->detalles as $detalle){
 
-                $item = $detalle->item;
-                $item->saldo += $detalle->cantidad;
-                $item->save();
+                $detalle->sumaSaldoItem();
             }
         }
 

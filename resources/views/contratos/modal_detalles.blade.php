@@ -22,33 +22,54 @@
 
                         <div class="card card-primary card-outline card-outline-tabs">
                             <div class="card-header p-0 border-bottom-0">
-                                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                                <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="tab-contrato" data-toggle="pill" href="#custom-tabs-two-home" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">
+                                        <a class="nav-link active"
+                                           data-toggle="pill"
+                                           href="#custom-tabs-info{{$contrato->id}}"
+                                           role="tab"
+                                           aria-selected="true">
                                             Contrato
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="tab-items" data-toggle="pill" href="#custom-tabs-two-profile" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">
+                                        <a class="nav-link"
+                                           data-toggle="pill"
+                                           href="#custom-tabs-items{{$contrato->id}}"
+                                           role="tab"
+                                           aria-selected="false">
                                             Items
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="tab-compras" data-toggle="pill" href="#custom-tabs-two-messages" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">
+                                        <a class="nav-link"
+                                           data-toggle="pill"
+                                           href="#custom-tabs-compras{{$contrato->id}}"
+                                           role="tab"
+                                           aria-selected="false">
                                             Compras
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="card-body">
-                                <div class="tab-content" id="custom-tabs-four-tabContent">
-                                    <div class="tab-pane fade show active" id="custom-tabs-two-home" role="tabpanel" aria-labelledby="tab-contrato">
+                                <div class="tab-content" >
+                                    <div class="tab-pane fade show active"
+                                         id="custom-tabs-info{{$contrato->id}}"
+                                         role="tabpanel"
+                                    >
                                         @include('contratos.show_fields')
                                     </div>
-                                    <div class="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="tab-items">
+                                    <div class="tab-pane fade"
+                                         id="custom-tabs-items{{$contrato->id}}"
+                                         role="tabpanel"
+                                    >
                                         @include('contratos.partials.items')
                                     </div>
-                                    <div class="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="tab-compras">
+                                    <div class="tab-pane fade"
+                                         id="custom-tabs-compras{{$contrato->id}}"
+                                         role="tabpanel"
+                                    >
                                         @include('contratos.partials.compras')
                                     </div>
                                 </div>

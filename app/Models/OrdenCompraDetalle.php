@@ -86,4 +86,17 @@ class OrdenCompraDetalle extends Model
     {
         return $this->precio * $this->cantidad;
     }
+
+    public function descuentaSaldoItem()
+    {
+        $this->item->saldo-=$this->cantidad;
+        $this->item->save();
+    }
+
+
+    public function sumaSaldoItem()
+    {
+        $this->item->saldo+=$this->cantidad;
+        $this->item->save();
+    }
 }

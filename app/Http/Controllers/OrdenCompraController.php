@@ -83,6 +83,7 @@ class OrdenCompraController extends AppBaseController
 
             $ordenCompra->detalles()->saveMany($detalles);
 
+            $ordenCompra->egreso();
 
             if ($request->hasFile('adjunto')){
                 $file = $request->file('adjunto');
