@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Contrato
  * @package App\Models
- * @version July 24, 2021, 7:30 pm CST
+ * @version August 17, 2021, 3:45 pm CST
  *
+ * @property \App\Models\Area $areaAsignado
  * @property \App\Models\Cargo $cargo
  * @property \App\Models\ContratoEstado $estado
  * @property \App\Models\Licitacion $licitacion
@@ -63,6 +64,7 @@ class Contrato extends Model
         'licitacion_id',
         'proveedor_id',
         'cargo_id',
+        'area_asignado',
         'moneda_id',
         'monto',
         'estado_alerta',
@@ -134,6 +136,14 @@ class Contrato extends Model
         'monto_boleta_garantia' => 'required|numeric',
         'id_mercado_publico' => 'required|string|max:255',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function areaAsignado()
+    {
+        return $this->belongsTo(\App\Models\Area::class, 'area_asignado');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
