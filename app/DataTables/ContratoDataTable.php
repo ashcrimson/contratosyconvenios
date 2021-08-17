@@ -70,7 +70,7 @@ class ContratoDataTable extends DataTable
      */
     public function query(Contrato $model)
     {
-        return $model->newQuery()->with(['tipo','userCrea','userActualiza','estado','licitacion','moneda','proveedor','compras']);
+        return $model->newQuery()->with(['tipo','userCrea','cargo.areas','userActualiza','estado','licitacion','moneda','proveedor','compras']);
     }
 
     /**

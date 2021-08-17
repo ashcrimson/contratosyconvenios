@@ -6,6 +6,7 @@ use App\DataTables\ContratoDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateContratoRequest;
 use App\Http\Requests\UpdateContratoRequest;
+use App\Models\Cargo;
 use App\Models\Contrato;
 use App\Models\ContratoEstado;
 use Exception;
@@ -217,19 +218,8 @@ class ContratoController extends AppBaseController
     public function asignar(Contrato $contrato,Request $request)
     {
 
-
-        try {
-            DB::beginTransaction();
-
-            $contrato->areas()->sync([$request->area_id]);
-
-        } catch (Exception $exception) {
-            DB::rollBack();
-
-            throw new Exception($exception);
-        }
-
-        DB::commit();
+        $contrato->area_asignado = $request->area_id;
+        $contrato->save();
 
         flash('Contrato asignado!')->success();
 

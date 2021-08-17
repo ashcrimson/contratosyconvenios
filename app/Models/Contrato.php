@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $proveedor_id
  * @property integer $cargo_id
  * @property integer $moneda_id
+ * @property integer $area_asignado
  * @property number $monto
  * @property number $saldo
  * @property boolean $estado_alerta
@@ -254,6 +255,6 @@ class Contrato extends Model
 
     public function estaAsignado()
     {
-        return $this->areas->count() > 0;
+        return !is_null($this->areaAsignado);
     }
 }

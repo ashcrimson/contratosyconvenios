@@ -20,7 +20,7 @@
 
                         <div class="modal-body">
                             <div class="table-responsive table-sm -md -lg -x">
-                                @foreach (\App\Models\Area::all() as $i => $area)
+                                @foreach ($contrato->cargo->areas as $i => $area)
                                     <input type="radio" id="radio{{$i}}" name="area_id" value="{{$area->id}}" required>
                                     <label for="radio{{$i}}">{{$area->nombre}}</label><br>
                                 @endforeach
@@ -41,6 +41,6 @@
             </div>
         </div>
     @else
-        Asignado a: {{$contrato->areas->first()->nombre}}
+        Asignado a: {{$contrato->areaAsignado->nombre}}
     @endif
 @endcan
