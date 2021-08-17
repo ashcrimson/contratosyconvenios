@@ -241,4 +241,9 @@ class Contrato extends Model
     {
         return $this->tipo->nombre_corto.$this->id." / ".$this->id_mercado_publico;
     }
+
+    public function estaAsignado()
+    {
+        return $this->areas->count() > 0;
+    }
 }

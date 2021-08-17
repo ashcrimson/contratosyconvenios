@@ -52,7 +52,13 @@ class ContratoDataTable extends DataTable
                    return "";
                }
            })
-             ->rawColumns(['adjunto','action','id']);
+           ->editColumn('asignar' ,function (Contrato  $contrato){
+
+               $id = $contrato->id;
+
+               return view('contratos.columna_asignar',compact('contrato','id'));
+           })
+             ->rawColumns(['asignar','adjunto','action','id']);
 
     }
 
@@ -124,6 +130,7 @@ class ContratoDataTable extends DataTable
             'monto',
             'saldo' => ['searchable' => false,'orderable' => false],
             'adjunto' => ['searchable' => false,'orderable' => false],
+            'asignar' => ['searchable' => false,'orderable' => false],
 //            'creado_por' => ['data' => 'user_crea.name','name' => 'userCrea.name','orderable' => false],
 //            'actualizado_por'  => ['data' => 'user_actualiza.name','name' => 'userActualiza.name','orderable' => false]
         ];

@@ -11,6 +11,7 @@ use App\Models\ContratoEstado;
 use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Response;
 
@@ -211,5 +212,28 @@ class ContratoController extends AppBaseController
         Flash::success('Contrato deleted successfully.');
 
         return redirect(route('contratos.index'));
+    }
+
+    public function asignar(Contrato $contrato,Request $request)
+    {
+
+
+        try {
+            DB::beginTransaction();
+
+            $contrato->areas()->sync([$request->area_id]);
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
+
+        flash('Contrato asignado!')->success();
+
+        return redirect(route('contratos.index'));
+
     }
 }
