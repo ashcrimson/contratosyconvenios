@@ -80,10 +80,16 @@ class PermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => 'Anular Orden Compras']);
 
 
-            Permission::firstOrCreate(['name' => 'Ver Proveedores']);
-            Permission::firstOrCreate(['name' => 'Crear Proveedores']);
-            Permission::firstOrCreate(['name' => 'Editar Proveedores']);
-            Permission::firstOrCreate(['name' => 'Eliminar Proveedores']);
+            Permission::firstOrCreate(['name' => 'Ver Bitacoras']);
+            Permission::firstOrCreate(['name' => 'Crear Bitacoras']);
+            Permission::firstOrCreate(['name' => 'Editar Bitacoras']);
+            Permission::firstOrCreate(['name' => 'Eliminar Bitacoras']);
+
+
+            Permission::firstOrCreate(['name' => 'Ver todos los contratos']);
+            Permission::firstOrCreate(['name' => 'Asignar Contratos']);
+
+
         }
 
     }
