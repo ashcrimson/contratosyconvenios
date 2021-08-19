@@ -18,47 +18,63 @@ class ContratoDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-       return $dataTable->addColumn('action', function(Contrato $contrato){
+        $dataTable->addColumn('action', function(Contrato $contrato){
 
-                 $id = $contrato->id;
+            $id = $contrato->id;
 
-                 return view('contratos.datatables_actions',compact('contrato','id'))->render();
-             })
-             ->editColumn('id',function (Contrato $contrato){
+            return view('contratos.datatables_actions',compact('contrato','id'))->render();
+        })
+            ->editColumn('id',function (Contrato $contrato){
 
-                 $id = $contrato->id;
+                $id = $contrato->id;
 
-                 //se debe crear la vista modal_detalles
-                 return view('contratos.modal_detalles',compact('contrato','id'))->render();
+                //se debe crear la vista modal_detalles
+                return view('contratos.modal_detalles',compact('contrato','id'))->render();
 
-             })
-           ->editColumn('licitacion.numero',function (Contrato $contrato){
-               return $contrato->licitacion->numero ?? null;
-           })
-           ->editColumn('monto' ,function (Contrato  $contrato){
-               return nfp($contrato->monto);
-           })
-           ->editColumn('saldo' ,function (Contrato  $contrato){
-               return nfp($contrato->saldo);
-           })
+            })
+            ->editColumn('licitacion.numero',function (Contrato $contrato){
+                return $contrato->licitacion->numero ?? null;
+            })
+            ->editColumn('monto' ,function (Contrato  $contrato){
+                return nfp($contrato->monto);
+            })
+            ->editColumn('saldo' ,function (Contrato  $contrato){
+                return nfp($contrato->saldo);
+            })
 
-           ->editColumn('adjunto' ,function (Contrato  $contrato){
+            ->editColumn('adjunto' ,function (Contrato  $contrato){
 
-               $doc = $contrato->getLastDocumento();
-               if ($doc){
-                   return "<a href='".route('documentos.descargar',$doc->id)."'>".$doc->file_name."</a>";
-               }
-               else{
-                   return "";
-               }
-           })
-           ->editColumn('asignar' ,function (Contrato  $contrato){
+                $doc = $contrato->getLastDocumento();
+                if ($doc){
+                    return "<a href='".route('documentos.descargar',$doc->id)."'>".$doc->file_name."</a>";
+                }
+                else{
+                    return "";
+                }
+            })
 
-               $id = $contrato->id;
 
-               return view('contratos.columna_asignar',compact('contrato','id'));
-           })
-             ->rawColumns(['asignar','adjunto','action','id']);
+            ->rawColumns(['asignar','adjunto','action','id']);
+
+        if (auth()->user()->can('Asignar Contratos a area')){
+            $dataTable->editColumn('asignar_area' ,function (Contrato  $contrato){
+
+                $id = $contrato->id;
+
+                return view('contratos.columna_asignar_area',compact('contrato','id'));
+            });
+        }
+
+        if (auth()->user()->can('Asignar Contratos a cargo')){
+            $dataTable->editColumn('asignar_cargo' ,function (Contrato  $contrato){
+
+                $id = $contrato->id;
+
+                return view('contratos.columna_asignar_cargo',compact('contrato','id'));
+            });
+        }
+
+       return $dataTable;
 
     }
 
@@ -70,7 +86,7 @@ class ContratoDataTable extends DataTable
      */
     public function query(Contrato $model)
     {
-        return $model->newQuery()->with(['tipo','userCrea','cargo.areas','userActualiza','estado','licitacion','moneda','proveedor','compras']);
+        return $model->newQuery()->with(['tipo','userCrea','cargoAsignado.areas','userActualiza','estado','licitacion','moneda','proveedor','compras']);
     }
 
     /**
@@ -121,19 +137,27 @@ class ContratoDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
+        $columns = [
             'id',
             'id_mercado_publico',
-//            'tipo' => ['data' => 'tipo.nombre','name' => 'tipo.nombre','orderable' => false],
             'proveedor' => ['data' => 'proveedor.razon_social','name' => 'proveedor.razon_social','orderable' => false],
             'licitacion' => ['data' => 'licitacion.numero','name' => 'licitacion.numero','orderable' => false],
             'monto',
             'saldo' => ['searchable' => false,'orderable' => false],
             'adjunto' => ['searchable' => false,'orderable' => false],
-            'asignar' => ['searchable' => false,'orderable' => false],
-//            'creado_por' => ['data' => 'user_crea.name','name' => 'userCrea.name','orderable' => false],
-//            'actualizado_por'  => ['data' => 'user_actualiza.name','name' => 'userActualiza.name','orderable' => false]
+
         ];
+
+        if (auth()->user()->can('Asignar Contratos a area')){
+            $columns['asignar_area'] = ['searchable' => false,'orderable' => false];
+        }
+
+        if (auth()->user()->can('Asignar Contratos a cargo')){
+            $columns['asignar_cargo'] = ['searchable' => false,'orderable' => false];
+        }
+
+
+        return  $columns;
     }
 
     /**

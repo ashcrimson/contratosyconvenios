@@ -50,7 +50,7 @@ class ContratosTableSeeder extends Seeder
                 'tipo_id' => $this->getTipo($contrato),
                 'moneda_id' => $this->getMoneda($contrato),
                 'proveedor_id' => $this->getProveedor($contrato),
-                'cargo_id' => $contrato->id_cargo,
+                'cargo_asigando' => $contrato->id_cargo,
                 'licitacion_id' => $this->getLicitacion($contrato),
                 'monto' => $contrato->monto,
                 'estado_alerta' => $contrato->estado_alerta,

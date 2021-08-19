@@ -22,13 +22,11 @@ class RoleSeeder extends Seeder
         $role->syncPermissions(Permission::pluck('name')->toArray());
 
         $role = Role::create(["name" => "ADMINISTRADOR CONTRATO"]);
-        $role->syncPermissions(Permission::pluck('name')->toArray());
-
-        $role = Role::create(["name" => "ADMINISTRADOR TÉCNICO"]);
-        $role->syncPermissions(Permission::pluck('name')->toArray());
 
         $role = Role::create(["name" => "COMPRADOR"]);
-        $role->syncPermissions(Permission::pluck('name')->toArray());
+
+        $role = Role::create(["name" => "ADMINISTRADOR TÉCNICO"]);
+
 
     }
 }

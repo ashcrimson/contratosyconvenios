@@ -87,7 +87,8 @@ class PermissionSeeder extends Seeder
 
 
             Permission::firstOrCreate(['name' => 'Ver todos los contratos']);
-            Permission::firstOrCreate(['name' => 'Asignar Contratos']);
+            Permission::firstOrCreate(['name' => 'Asignar Contratos a cargo']);
+            Permission::firstOrCreate(['name' => 'Asignar Contratos a area']);
 
 
         }

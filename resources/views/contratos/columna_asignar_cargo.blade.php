@@ -1,8 +1,7 @@
 
 @can("Asignar Contratos")
-    @if(!$contrato->estaAsignado() )
+    @if(is_null($contrato->cargoAsignado) )
 
-{{--        @if($contrato->cargo->areas->count() > 0)--}}
             <a href="#" class="btn btn-sm btn-warning btn-xs" data-target="#modalAsigna{{$id}}" data-toggle="modal">
                 <i class="fa fa-plus-square"></i> Asignar
             </a>
@@ -21,10 +20,10 @@
 
                             <div class="modal-body">
                                 <div class="table-responsive table-sm -md -lg -x">
-{{--                                    @foreach ($contrato->cargo->areas as $i => $area)--}}
-                                    @foreach (\App\Models\Area::all() as $i => $area)
-                                        <input type="radio" id="radio{{$i}}" name="area_id" value="{{$area->id}}" required>
-                                        <label for="radio{{$i}}">{{$area->nombre}}</label><br>
+{{--                                    @foreach ($contrato->cargo->cargos as $i => $cargo)--}}
+                                    @foreach (\App\Models\Cargo::all() as $i => $cargo)
+                                        <input type="radio" id="radio{{$i}}" name="cargo_id" value="{{$cargo->id}}" required>
+                                        <label for="radio{{$i}}">{{$cargo->nombre}}</label><br>
                                     @endforeach
                                 </div>
                             </div>
@@ -42,8 +41,7 @@
                     </div>
                 </div>
             </div>
-{{--        @endif--}}
     @else
-        Asignado a: {{$contrato->areaAsignado->nombre}}
+        {{$contrato->cargoAsignado->nombre}}
     @endif
 @endcan
