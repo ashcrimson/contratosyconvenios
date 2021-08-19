@@ -215,10 +215,22 @@ class ContratoController extends AppBaseController
         return redirect(route('contratos.index'));
     }
 
-    public function asignar(Contrato $contrato,Request $request)
+    public function asignarArea(Contrato $contrato,Request $request)
     {
 
         $contrato->area_asignado = $request->area_id;
+        $contrato->save();
+
+        flash('Contrato asignado!')->success();
+
+        return redirect(route('contratos.index'));
+
+    }
+
+    public function asignarCargo(Contrato $contrato,Request $request)
+    {
+
+        $contrato->cargo_asigando = $request->cargo_id;
         $contrato->save();
 
         flash('Contrato asignado!')->success();

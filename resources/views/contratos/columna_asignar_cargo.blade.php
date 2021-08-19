@@ -9,7 +9,7 @@
             <div class="modal fade" id="modalAsigna{{$id}}">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form method="post" action="{{route('contratos.asignar',$id)}}">
+                        <form method="post" action="{{route('contratos.asignar.cargo',$id)}}">
                             @csrf
                             <div class="modal-header">
                                 <h5 class="modal-title">

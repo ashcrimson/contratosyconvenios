@@ -67,7 +67,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('contratoTipos', 'ContratoTipoController');
 
     Route::resource('contratos', 'ContratoController');
-    Route::post('contratos/asignar/{contrato}', 'ContratoController@asignar')->name('contratos.asignar');
+
+    Route::post('contratos/asignar/area/{contrato}', 'ContratoController@asignarArea')->name('contratos.asignar.area');
+    Route::post('contratos/asignar/cargo/{contrato}', 'ContratoController@asignarCargo')->name('contratos.asignar.cargo');
 
     Route::resource('ordenCompraEstados', 'OrdenCompraEstadoController');
 
