@@ -18,8 +18,12 @@ class RoleSeeder extends Seeder
         Role::create(["name" => "Developer"]);
         Role::create(["name" => "Superadmin"]);
 
+        /**
+         * @var Role $role
+         */
         $role= Role::create(["name" => "ADMINISTRADOR SISTEMA"]);
         $role->syncPermissions(Permission::pluck('name')->toArray());
+        $role->revokePermissionTo(['Asignar Contratos a area']);
 
         $role = Role::create(["name" => "ADMINISTRADOR CONTRATO"]);
 
