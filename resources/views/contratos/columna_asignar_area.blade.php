@@ -1,5 +1,5 @@
 
-@can("Asignar Contratos")
+@can("Asignar Contratos a area")
     @if(is_null($contrato->areaAsignado) )
 
 {{--        @if($contrato->cargo->areas->count() > 0)--}}

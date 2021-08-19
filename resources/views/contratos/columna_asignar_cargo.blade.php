@@ -1,5 +1,5 @@
 
-@can("Asignar Contratos")
+@can("Asignar Contratos a cargo")
     @if(is_null($contrato->cargoAsignado) )
 
             <a href="#" class="btn btn-sm btn-warning btn-xs" data-target="#modalAsigna{{$id}}" data-toggle="modal">
