@@ -17,7 +17,7 @@ class AddForeignKeysToContratosTable extends Migration
             $table->foreign('tipo_id', 'fk_contratos_tipos1')->references('id')->on('contratos_tipos');
             $table->foreign('licitacion_id', 'fk_contratos_licitaciones1')->references('id')->on('licitaciones');
             $table->foreign('proveedor_id', 'fk_contratos_proveedores1')->references('id')->on('proveedores');
-            $table->foreign('cargo_asigando', 'fk_contratos_cargos1')->references('id')->on('cargos');
+            $table->foreign('cargo_id', 'fk_contratos_cargos1')->references('id')->on('cargos');
             $table->foreign('area_asignado', 'fk_contratos_areas1')->references('id')->on('areas');
             $table->foreign('moneda_id', 'fk_contratos_monedas1')->references('id')->on('monedas');
             $table->foreign('estado_id', 'fk_contratos_estados1')->references('id')->on('contratos_estados');

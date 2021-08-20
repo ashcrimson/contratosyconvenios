@@ -65,14 +65,6 @@ class ContratoDataTable extends DataTable
             });
         }
 
-        if (auth()->user()->can('Asignar Contratos a cargo')){
-            $dataTable->editColumn('asignar_cargo' ,function (Contrato  $contrato){
-
-                $id = $contrato->id;
-
-                return view('contratos.columna_asignar_cargo',compact('contrato','id'));
-            });
-        }
 
        return $dataTable;
 
@@ -86,7 +78,7 @@ class ContratoDataTable extends DataTable
      */
     public function query(Contrato $model)
     {
-        return $model->newQuery()->with(['tipo','userCrea','cargoAsignado.areas','userActualiza','estado','licitacion','moneda','proveedor','compras']);
+        return $model->newQuery()->with(['tipo','userCrea','cargo.areas','userActualiza','estado','licitacion','moneda','proveedor','compras']);
     }
 
     /**
@@ -152,9 +144,6 @@ class ContratoDataTable extends DataTable
             $columns['asignar_area'] = ['searchable' => false,'orderable' => false];
         }
 
-        if (auth()->user()->can('Asignar Contratos a cargo')){
-            $columns['asignar_cargo'] = ['searchable' => false,'orderable' => false];
-        }
 
 
         return  $columns;

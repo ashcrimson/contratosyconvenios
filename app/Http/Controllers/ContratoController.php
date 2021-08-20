@@ -230,7 +230,7 @@ class ContratoController extends AppBaseController
     public function asignarCargo(Contrato $contrato,Request $request)
     {
 
-        $contrato->cargo_asigando = $request->cargo_id;
+        $contrato->cargo_id = $request->cargo_id;
         $contrato->save();
 
         flash('Contrato asignado!')->success();

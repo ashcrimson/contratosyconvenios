@@ -15,7 +15,7 @@
 
 <!-- Cargo Id Field -->
 {!! Form::label('cargo_id', 'Cargo') !!}
-{!! $contrato->cargoAsignado->nombre !!}<br>
+{!! $contrato->cargo->nombre !!}<br>
 
 
 <!-- Monto Field -->

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version August 17, 2021, 3:45 pm CST
  *
  * @property \App\Models\Area $areaAsignado
- * @property \App\Models\Cargo $cargoAsignado
+ * @property \App\Models\Cargo $cargo
  * @property \App\Models\ContratoEstado $estado
  * @property \App\Models\Licitacion $licitacion
  * @property \App\Models\Moneda $moneda
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $tipo_id
  * @property integer $licitacion_id
  * @property integer $proveedor_id
- * @property integer $cargo_asigando
+ * @property integer $cargo_id
  * @property integer $moneda_id
  * @property integer $area_asignado
  * @property number $monto
@@ -64,7 +64,7 @@ class Contrato extends Model
         'tipo_id',
         'licitacion_id',
         'proveedor_id',
-        'cargo_asigando',
+        'cargo_id',
         'area_asignado',
         'moneda_id',
         'monto',
@@ -94,7 +94,7 @@ class Contrato extends Model
         'tipo_id' => 'integer',
         'licitacion_id' => 'integer',
         'proveedor_id' => 'integer',
-        'cargo_asigando' => 'integer',
+        'cargo_id' => 'integer',
         'moneda_id' => 'integer',
         'monto' => 'decimal:0',
         'estado_alerta' => 'boolean',
@@ -122,7 +122,7 @@ class Contrato extends Model
         'tipo_id' => 'required|integer',
         'licitacion_id' => 'nullable',
         'proveedor_id' => 'required|integer',
-        'cargo_asigando' => 'required',
+        'cargo_id' => 'required',
         'moneda_id' => 'required|integer',
         'monto' => 'required|numeric',
         'estado_alerta' => 'required|boolean',
@@ -149,9 +149,9 @@ class Contrato extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function cargoAsignado()
+    public function cargo()
     {
-        return $this->belongsTo(\App\Models\Cargo::class, 'cargo_asigando');
+        return $this->belongsTo(\App\Models\Cargo::class, 'cargo_id');
     }
 
     /**
