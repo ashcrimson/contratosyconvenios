@@ -26,6 +26,9 @@ class RoleSeeder extends Seeder
         $role->revokePermissionTo(['Asignar Contratos a area']);
 
         $role = Role::create(["name" => "ADMINISTRADOR CONTRATO"]);
+        $role->syncPermissions(Permission::pluck('name')->toArray());
+        $role->revokePermissionTo(['Ver todos los contratos']);
+
 
         $role = Role::create(["name" => "COMPRADOR"]);
 

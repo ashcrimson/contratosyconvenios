@@ -26,7 +26,8 @@ class Role extends \Spatie\Permission\Models\Role
     const SUPERADMIN =      2;
     const ADMIN =           3;
     const ADMIN_CONTRATO =  4;
-    const ADMIN_TÉCNICO =   5;
+    const COMPRADOR =       5;
+    const ADMIN_TÉCNICO =   6;
 
     protected $dates = ['deleted_at'];
 

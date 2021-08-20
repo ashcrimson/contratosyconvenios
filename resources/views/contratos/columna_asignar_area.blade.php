@@ -22,10 +22,14 @@
                             <div class="modal-body">
                                 <div class="table-responsive table-sm -md -lg -x">
 {{--                                    @foreach ($contrato->cargo->areas as $i => $area)--}}
-                                    @foreach (\App\Models\Area::all() as $i => $area)
+                                    @forelse ((Auth::user()->cargo->areas ?? []) as $i => $area)
                                         <input type="radio" id="radio{{$i}}" name="area_id" value="{{$area->id}}" required>
                                         <label for="radio{{$i}}">{{$area->nombre}}</label><br>
-                                    @endforeach
+                                    @empty
+                                        <h5 class="text-center text-info">
+                                            El cargo del usuario no tiene areas para asignar
+                                        </h5>
+                                    @endforelse
                                 </div>
                             </div>
 
@@ -33,10 +37,12 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                     Cancelar
                                 </button>
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fa fa-floppy-o"></i>
-                                    Guardar
-                                </button>
+                                @if((Auth::user()->cargo->areas ?? false))
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-floppy-o"></i>
+                                        Guardar
+                                    </button>
+                                @endif
                             </div>
                         </form>
                     </div>

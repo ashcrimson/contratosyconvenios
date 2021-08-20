@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ContratoDataTable;
+use App\DataTables\Scopes\ScopeContratoDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateContratoRequest;
 use App\Http\Requests\UpdateContratoRequest;
 use App\Models\Cargo;
 use App\Models\Contrato;
 use App\Models\ContratoEstado;
+use App\Models\User;
 use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -35,6 +37,20 @@ class ContratoController extends AppBaseController
      */
     public function index(ContratoDataTable $contratoDataTable)
     {
+        /**
+         * @var User $user
+         */
+        $user = auth()->user();
+        $scope = new ScopeContratoDataTable();
+
+//        return $user->getAllPermissions()->toArray() ;
+        //si el usuario no puede ver todos los contratos
+        if ($user->cannot('Ver todos los contratos')){
+            $scope->cargos = $user->cargo_id;
+        }
+
+        $contratoDataTable->addScope($scope);
+
         return $contratoDataTable->render('contratos.index');
     }
 

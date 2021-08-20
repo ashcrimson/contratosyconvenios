@@ -32,7 +32,10 @@ class UsersTableSeeder extends Seeder
 
             $username = (strstr($user->mail, '@', true) . "\n");
 
-            User::create([
+            /**
+             * @var User $newUser
+             */
+            $newUser = User::create([
                 'id' => $user->id_usuario,
                 'username' => $username,
                 'name' => $user->nombre,
@@ -41,6 +44,13 @@ class UsersTableSeeder extends Seeder
                 'area_id' => $user->id_area,
                 'cargo_id' => $user->id_cargo,
             ]);
+
+            $rol = $this->getRole($user->id_permiso);
+
+            if ($rol){
+                $newUser->syncRoles([$rol]);
+                $newUser->options()->sync(Option::pluck('id')->toArray());
+            }
         }
 
         $maxId = $usuarios->max('id_usuario');
@@ -85,4 +95,48 @@ class UsersTableSeeder extends Seeder
         });
 
     }
+
+    public function getRole($idPermiso)
+    {
+        switch ($idPermiso){
+            case 1:
+                return Role::ADMIN;
+                break;
+            case 2:
+                return Role::ADMIN_CONTRATO;
+                break;
+            case 3:
+                return Role::ADMIN_TÉCNICO;
+                break;
+            case 4:
+                return Role::COMPRADOR;
+                break;
+            default:
+                return null;
+        }
+
+    }
+
+    public function getOptions($idPermiso)
+    {
+        switch ($idPermiso){
+            case 1:
+                return [];
+                break;
+            case 2:
+                return [];
+                break;
+            case 3:
+                return [];
+                break;
+            case 4:
+                return [];
+                break;
+            default:
+                return [];
+        }
+
+    }
 }
+
+
