@@ -111,5 +111,9 @@ import SelectLicitacion from "./components/SelectLicitacion";
 
 Vue.component('select-licitacion',SelectLicitacion);
 
+import SelectArea from "./components/SelectArea";
+
+Vue.component('select-area',SelectArea);
+
 import ToggleButton from 'vue-js-toggle-button';
 Vue.use(ToggleButton);

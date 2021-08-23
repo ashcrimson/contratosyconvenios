@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\User;
+use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -25,6 +26,10 @@ class UserDataTable extends DataTable
 
             return "<img src='{$user->thumb}' alt='' width='50' height='50'>";
 
+        })->editColumn('area.nombre',function (User $user){
+
+            return $user->area->nombre ?? 'Si area';
+
         })->editColumn('roles',function (User $user){
 
             return view('admin.users.partials.roles',compact('user'));
@@ -41,7 +46,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->with(['roles','media']);
+        return $model->newQuery()->with(['roles','media','area']);
     }
 
     /**
@@ -79,13 +84,13 @@ class UserDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'avatar' => ['searchable' => false],
-            'id',
-            'username',
-            'name',
-            'email',
-            'provider',
-            'roles' => ['searchable' => false],
+            Column::make('avatar')->searchable(false),
+            Column::make('id'),
+            Column::make('username'),
+            Column::make('name'),
+            Column::make('email'),
+            Column::make('area')->name('area.nombre')->data('area.nombre'),
+            Column::make('roles')->searchable(false),
         ];
     }
 
