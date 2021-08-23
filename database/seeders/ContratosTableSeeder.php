@@ -83,6 +83,8 @@ class ContratosTableSeeder extends Seeder
 
         $this->migrarItems();
 
+        $this->asignarArea();
+
 
 
     }
@@ -211,7 +213,6 @@ class ContratosTableSeeder extends Seeder
 
     }
 
-
     function migrarItems(){
 
         /**
@@ -250,6 +251,30 @@ class ContratosTableSeeder extends Seeder
             }
         }
     }
+
+    function asignarArea(){
+
+        /**
+         * se iterean los contratos del nuevo sistema para cosultar sus documentos en sistema anterior y guardar en nuevo sistema
+         * @var Contrato $contrato
+         */
+        foreach (Contrato::all() as  $contrato) {
+
+
+            $area = DB::connection('old')->table('CONTRATOS_ASIGNACION')
+                ->where('ID_CONTRATO',$contrato->id)
+                ->first();
+
+            if ($area){
+                $contrato->area_asignado= $area->id_area;
+                $contrato->save();
+
+            }
+
+        }
+    }
+
+
 }
 
 
