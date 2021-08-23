@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateContratoRequest;
 use App\Models\Cargo;
 use App\Models\Contrato;
 use App\Models\ContratoEstado;
+use App\Models\Role;
 use App\Models\User;
 use Exception;
 use Flash;
@@ -43,11 +44,15 @@ class ContratoController extends AppBaseController
         $user = auth()->user();
         $scope = new ScopeContratoDataTable();
 
-//        return $user->getAllPermissions()->toArray() ;
-        //si el usuario no puede ver todos los contratos
-        if ($user->cannot('Ver todos los contratos')){
-            $scope->cargos = $user->cargo_id;
+        if ($user->hasRole(Role::ADMIN_CONTRATO)){
+            $scope->cargos = $user->cargo_id ?? 0;
         }
+
+
+        if ($user->hasRole(Role::ADMIN_TÉCNICO)){
+            $scope->areas = $user->area_id ?? 0;
+        }
+
 
         $contratoDataTable->addScope($scope);
 

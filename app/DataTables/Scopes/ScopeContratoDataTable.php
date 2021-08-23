@@ -18,7 +18,8 @@ class ScopeContratoDataTable implements DataTableScope
      */
     public function apply($query)
     {
-        if ($this->areas){
+        if (!is_null($this->areas)){
+
             if (is_array($this->areas)){
 
                 $query->whereIn('area_asignado',$this->areas);
@@ -26,9 +27,10 @@ class ScopeContratoDataTable implements DataTableScope
                 $query->where('area_asignado',$this->areas);
 
             }
+
         }
 
-        if ($this->cargos){
+        if (!is_null($this->cargos)){
             if (is_array($this->cargos)){
 
                 $query->whereIn('cargo_id',$this->cargos);
@@ -37,5 +39,6 @@ class ScopeContratoDataTable implements DataTableScope
 
             }
         }
+
     }
 }
