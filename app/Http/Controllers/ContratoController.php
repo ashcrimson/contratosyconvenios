@@ -297,4 +297,16 @@ class ContratoController extends AppBaseController
         return redirect(route('contratos.bitacora.vista',compact('contrato')));
     }
 
+    public function bitacoraDestroy(Contrato $contrato,Bitacora $bitacora,Request $request)
+    {
+
+
+        $bitacora->delete();
+
+
+        flash('Bitacora Eliminada!')->success();
+
+        return redirect(route('contratos.bitacora.vista',compact('contrato')));
+    }
+
 }

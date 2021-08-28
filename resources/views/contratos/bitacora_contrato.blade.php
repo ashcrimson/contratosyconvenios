@@ -118,20 +118,20 @@
                                 <td>
 
 
-                                    @can('Editar Bitacoras')
-                                        <a href="{{ route('contratos.bitacora.edit', $contrato->id) }}" data-toggle="tooltip" title="Editar" class='btn btn-outline-info btn-sm'>
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    @endcan
+{{--                                    @can('Editar Bitacoras')--}}
+{{--                                        <a href="{{ route('contratos.bitacora.edit', $contrato->id) }}" data-toggle="tooltip" title="Editar" class='btn btn-outline-info btn-sm'>--}}
+{{--                                            <i class="fa fa-edit"></i>--}}
+{{--                                        </a>--}}
+{{--                                    @endcan--}}
 
 
-                                    @can('Eliminar Bitacoras')
+                                    @can('Eliminar Bitacora Contratos')
                                         <a href="#" onclick="deleteItemDt(this)" data-id="{{$contrato->id}}" data-toggle="tooltip" title="Eliminar" class='btn btn-outline-danger btn-sm'>
                                             <i class="fa fa-trash-alt"></i>
                                         </a>
 
 
-                                        <form action="{{ route('contratos.bitacora.destroy', $contrato->id)}}" method="POST" id="delete-form{{$contrato->id }}">
+                                        <form action="{{ route('contratos.bitacora.destroy', ['contrato' => $contrato->id,'bitacora' => $bitacora->id])}}" method="POST" id="delete-form{{$contrato->id }}">
                                             @method('DELETE')
                                             @csrf
                                         </form>

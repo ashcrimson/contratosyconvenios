@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('contratos/bitacoras/{contrato}/store', 'ContratoController@bitacoraStore')->name('contratos.bitacora.store');
     Route::get('contratos/bitacoras/{contrato}/edit', 'ContratoController@bitacoraEdit')->name('contratos.bitacora.edit');
     Route::put('contratos/bitacoras/{contrato}/update', 'ContratoController@bitacoraUpdate')->name('contratos.bitacora.update');
-    Route::delete('contratos/bitacoras/{contrato}/destroy', 'ContratoController@bitacoraDestroy')->name('contratos.bitacora.destroy');
+    Route::delete('contratos/bitacoras/{contrato}/{bitacora}/destroy', 'ContratoController@bitacoraDestroy')->name('contratos.bitacora.destroy');
 
     Route::resource('ordenCompraEstados', 'OrdenCompraEstadoController');
 
