@@ -13,6 +13,12 @@
 </a>
 @endcan
 
+@can('Agregar Bitacora Contratos')
+    <a href="{{ route('contratos.bitacora.vista', $id) }}" data-toggle="tooltip" title="Editar" class='btn btn-outline-secondary btn-sm'>
+        <i class="fa fa-book-open"></i>
+    </a>
+@endcan
+
 @can('Eliminar Contratos')
 <a href="#" onclick="deleteItemDt(this)" data-id="{{$id}}" data-toggle="tooltip" title="Eliminar" class='btn btn-outline-danger btn-sm'>
     <i class="fa fa-trash-alt"></i>

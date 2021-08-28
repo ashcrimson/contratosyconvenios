@@ -46,7 +46,7 @@ class ContratoDataTable extends DataTable
 
                 $doc = $contrato->getLastDocumento();
                 if ($doc){
-                    return "<a href='".route('documentos.descargar',$doc->id)."'>".$doc->file_name."</a>";
+                    return "<a href='".route('documentos.descargar',$doc->id)."' data-togle='tooltip' title='".$doc->file_name."'>".str_limit($doc->file_name,'10')."</a>";
                 }
                 else{
                     return "";
@@ -109,8 +109,8 @@ class ContratoDataTable extends DataTable
                                     >',
                 'order'   => [[0, 'desc']],
                 'language' => ['url' => asset('js/SpanishDataTables.json')],
-                //'scrollX' => false,
-                'responsive' => true,
+//                'scrollX' => true,
+//                'responsive' => true,
                 'stateSave' => true,
                 'buttons' => [
                     //['extend' => 'create', 'text' => '<i class="fa fa-plus"></i> <span class="d-none d-sm-inline">Crear</span>'],
@@ -130,7 +130,7 @@ class ContratoDataTable extends DataTable
     protected function getColumns()
     {
         $columns = [
-            'id',
+//            'id',
             'id_mercado_publico',
             'proveedor' => ['data' => 'proveedor.razon_social','name' => 'proveedor.razon_social','orderable' => false],
             'licitacion' => ['data' => 'licitacion.numero','name' => 'licitacion.numero','orderable' => false],

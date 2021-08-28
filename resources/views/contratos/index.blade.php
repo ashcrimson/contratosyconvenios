@@ -35,11 +35,13 @@
             <div class="clearfix"></div>
             <div class="card card-primary">
                 <div class="card-body">
+                    <div class="table-responsive" >
                         @include('contratos.table')
+                    </div>
                 </div>
             </div>
             <div class="text-center">
-                
+
             </div>
         </div>
     </div>

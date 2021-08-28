@@ -7,6 +7,7 @@ use App\DataTables\Scopes\ScopeContratoDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateContratoRequest;
 use App\Http\Requests\UpdateContratoRequest;
+use App\Models\Bitacora;
 use App\Models\Cargo;
 use App\Models\Contrato;
 use App\Models\ContratoEstado;
@@ -259,4 +260,41 @@ class ContratoController extends AppBaseController
         return redirect(route('contratos.index'));
 
     }
+
+
+    public function bitacoraVista(Contrato $contrato)
+    {
+        return view('contratos.bitacora_contrato',compact('contrato'));
+
+    }
+
+    public function bitacoraStore(Contrato $contrato,Request $request)
+    {
+
+
+        try {
+            DB::beginTransaction();
+
+            /**
+             * @var Bitacora $bitacora
+             */
+            $bitacora = $contrato->addBitacora($request->titulo,$request->descripcion);
+
+            $bitacora->addDocumento($request->file('adjunto'));
+
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            throw new Exception($exception);
+        }
+
+        DB::commit();
+
+
+        flash('Bitacora agregada!')->success();
+
+        return redirect(route('contratos.bitacora.vista',compact('contrato')));
+    }
+
 }

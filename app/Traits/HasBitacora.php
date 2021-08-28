@@ -22,11 +22,7 @@ trait HasBitacora
 
 
     /**
-     * Assign the given role to the model.
-     *
-     * @param array|string|\Spatie\Permission\Contracts\Role ...$roles
-     *
-     * @return $this
+     * @return Bitacora|false|\Illuminate\Database\Eloquent\Model
      */
     public function addBitacora($titulo=null,$descripcion,$user=null)
     {
@@ -42,7 +38,7 @@ trait HasBitacora
         $model = $this->getModel();
 
         if ($model->exists) {
-            $this->bitacoras()->save($bitacora);
+            $new = $this->bitacoras()->save($bitacora);
             $model->load('bitacoras');
         } else {
             $class = \get_class($model);
@@ -59,7 +55,7 @@ trait HasBitacora
                 });
         }
 
-        return $this;
+        return $new;
     }
 
 
