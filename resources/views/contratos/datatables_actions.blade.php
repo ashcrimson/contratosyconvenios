@@ -14,7 +14,7 @@
 @endcan
 
 @can('Agregar Bitacora Contratos')
-    <a href="{{ route('contratos.bitacora.vista', $id) }}" data-toggle="tooltip" title="Editar" class='btn btn-outline-secondary btn-sm'>
+    <a href="{{ route('contratos.bitacora.vista', $id) }}" data-toggle="tooltip" title="Bitacora" class='btn btn-outline-secondary btn-sm'>
         <i class="fa fa-book-open"></i>
     </a>
 @endcan

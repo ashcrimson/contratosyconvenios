@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{__('Users')}}</h1>
+                    <h1>{{__('Usuarios')}}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-right">
@@ -17,7 +17,7 @@
                             <a class="btn btn-outline-success"
                                 href="{!! route('users.create') !!}">
                                 <i class="fa fa-plus"></i>
-                                <span class="d-none d-sm-inline">{{__('New')}}</span>
+                                <span class="d-none d-sm-inline">{{__('Nuevo')}}</span>
                             </a>
                         </li>
                     </ol>
