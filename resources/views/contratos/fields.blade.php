@@ -8,7 +8,7 @@
 
     <!-- Tipo Id Field -->
     <div class="form-group col-sm-4">
-        {!! Form::label('tipo_id', 'Tipo Contrato') !!}
+        {!! Form::label('estado_id', 'Estado') !!}
 
         <multiselect v-model="tipo" :options="tipos" label="nombre" placeholder="Seleccione uno...">
         </multiselect>

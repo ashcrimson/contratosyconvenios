@@ -39,9 +39,18 @@
 
 
     <!-- Descripcion Field -->
-    <div class="form-group col-sm-12">
+    <div class="form-group col-sm-6">
         {!! Form::label('descripcion', 'Descripcion:') !!}
         {!! Form::textarea('descripcion', null, ['class' => 'form-control','maxlength' => 255,'rows' => 2]) !!}
+    </div>
+
+    <!-- Estado Field -->
+    <div class="form-group col-sm-4"> 
+        {!! Form::label('estado', 'Estado') !!}
+
+        <multiselect v-model="estado" :options="estados" label="nombre" placeholder="Seleccione uno...">
+        </multiselect>
+        <input type="hidden" name="estado_id" :value="estado ? estado.id : null">
     </div>
 
 
@@ -211,6 +220,8 @@
         data: {
             contratos : @json(\App\Models\Contrato::with('items')->get() ?? []),
             contrato: @json($ordenCompra->contrato ?? null),
+            estados : @json(\App\Models\OrdenCompraEstado::all() ?? []),
+            estado: @json($ordenCompra->estado ?? null),
 
             tiene_detalles: @json($ordenCompra->tiene_detalles ?? null),
 
