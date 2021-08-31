@@ -8,7 +8,7 @@
 
     <!-- Tipo Id Field -->
     <div class="form-group col-sm-4">
-        {!! Form::label('tipo_id', 'Tipo') !!}
+        {!! Form::label('tipo_id', 'Tipo Contrato') !!}
 
         <multiselect v-model="tipo" :options="tipos" label="nombre" placeholder="Seleccione uno...">
         </multiselect>
@@ -55,14 +55,14 @@
 
     <!-- Fecha Inicio Field -->
     <div class="form-group col-sm-4">
-        {!! Form::label('fecha_inicio', 'Fecha Inicio:') !!}
+        {!! Form::label('fecha_inicio', 'Fecha Inicio Contrato:') !!}
         {!! Form::date('fecha_inicio', onlyDate($contrato->fecha_inicio ?? null), ['class' => 'form-control','id'=>'fecha_inicio']) !!}
     </div>
 
 
     <!-- Fecha Termino Field -->
     <div class="form-group col-sm-4">
-        {!! Form::label('fecha_termino', 'Fecha Termino:') !!}
+        {!! Form::label('fecha_termino', 'Fecha Término Contrato:') !!}
         {!! Form::date('fecha_termino', onlyDate($contrato->fecha_termino ?? null), ['class' => 'form-control','id'=>'fecha_termino']) !!}
     </div>
 
@@ -70,27 +70,27 @@
 
     <!-- Fecha Aprobacion Field -->
     <div class="form-group col-sm-4">
-        {!! Form::label('fecha_aprobacion', 'Fecha Aprobacion:') !!}
+        {!! Form::label('fecha_aprobacion', 'Fecha Resolución Aprueba:') !!}
         {!! Form::date('fecha_aprobacion', onlyDate($contrato->fecha_aprobacion ?? null), ['class' => 'form-control','id'=>'fecha_aprobacion']) !!}
     </div>
 
 
     <!-- Fecha Alerta Vencimiento Field -->
     <div class="form-group col-sm-4">
-        {!! Form::label('fecha_alerta_vencimiento', 'Fecha Alerta Vencimiento:') !!}
+        {!! Form::label('fecha_alerta_vencimiento', 'Fecha Alerta Término Contrato:') !!}
         {!! Form::date('fecha_alerta_vencimiento', onlyDate($contrato->fecha_alerta_vencimiento ?? null), ['class' => 'form-control','id'=>'fecha_alerta_vencimiento']) !!}
     </div>
 
 
     <!-- Objeto Field -->
     <div class="form-group col-sm-12 col-lg-12">
-        {!! Form::label('objeto', 'Objeto:') !!}
+        {!! Form::label('objeto', 'Objeto del Contrato:') !!}
         {!! Form::textarea('objeto', null, ['class' => 'form-control','rows' => 2]) !!}
     </div>
 
     <!-- Numero Boleta Garantia Field -->
     <div class="form-group col-sm-4">
-        {!! Form::label('numero_boleta_garantia', 'Numero Boleta Garantia:') !!}
+        {!! Form::label('numero_boleta_garantia', 'Número Boleta Garantia:') !!}
         {!! Form::text('numero_boleta_garantia', null, ['class' => 'form-control','maxlength' => 45,'maxlength' => 45]) !!}
     </div>
 
@@ -115,7 +115,7 @@
     </div>
 
     <div class="form-group col-sm-6 ">
-        {!! Form::label('adjunto', 'Adjuntar licitación.:') !!}
+        {!! Form::label('adjunto', 'Adjuntar contrato.:') !!}
         {!! Form::file('adjunto', ['class' => 'form-control file']) !!}
     </div>
 

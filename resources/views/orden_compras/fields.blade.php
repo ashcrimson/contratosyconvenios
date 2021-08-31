@@ -1,7 +1,7 @@
 <div class="form-row" id="ordenCompraFields">
     <!-- Contrato Id Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('contrato_id', 'ID Mercado Público:') !!}
+        {!! Form::label('contrato_id', 'ID Mercado Público Contrato:') !!}
         <multiselect v-model="contrato" :options="contratos" label="text" placeholder="Seleccione uno...">
         </multiselect>
         <input type="hidden" name="contrato_id" :value="contrato ? contrato.id : null">
