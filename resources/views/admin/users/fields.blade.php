@@ -72,6 +72,23 @@
     !!}
 </div>
 
+@isset($user)
+    @if($user->hasRole(\App\Models\Role::SUB_DIRECTOR))
+        <div class="form-group col-sm-12">
+            {!! Form::label('name', 'Cargos:') !!}
+            <a class="success" data-toggle="modal" href="#modal-form-cargos" tabindex="1000">nuevo</a>
+            {!!
+                Form::select(
+                    'cargos[]',
+                    select(\App\Models\Cargo::class,'nombre','id',null)
+                    , null
+                    , ['class' => 'form-control duallistbox','multiple']
+                )
+            !!}
+        </div>
+    @endif
+@endisset
+
 @push('scripts')
 <script>
     new Vue({

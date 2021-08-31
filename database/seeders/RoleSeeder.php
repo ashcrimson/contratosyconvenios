@@ -34,6 +34,10 @@ class RoleSeeder extends Seeder
 
         $role = Role::create(["name" => "ADMINISTRADOR TÉCNICO"]);
 
+        $role = Role::create(["name" => "SUB DIRECTOR"]);
+        $role->syncPermissions(Permission::pluck('name')->toArray());
+        $role->revokePermissionTo(['Ver todos los contratos']);
+
 
     }
 }

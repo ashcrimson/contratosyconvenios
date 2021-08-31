@@ -80,6 +80,8 @@ class UserController extends AppBaseController
             $user->syncRoles($roles);
             $user->syncPermissions($permissions);
 
+            $user->cargos()->sync($request->cargos ?? []);
+
 
         } catch (Exception $exception) {
             DB::rollBack();
@@ -196,6 +198,9 @@ class UserController extends AppBaseController
 
             $user->syncRoles($roles);
             $user->syncPermissions($permissions);
+
+            $user->cargos()->sync($request->cargos ?? []);
+
 
         } catch (Exception $exception) {
             DB::rollBack();

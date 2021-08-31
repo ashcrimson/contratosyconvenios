@@ -22,6 +22,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property \App\Models\Cargo $cargo
  * @property \Illuminate\Database\Eloquent\Collection $bitacoras
  * @property \Illuminate\Database\Eloquent\Collection $options
+ * @property \Illuminate\Database\Eloquent\Collection $cargos
  * @property string $username
  * @property string $name
  * @property string $email
@@ -117,6 +118,11 @@ class User extends Authenticatable implements  MustVerifyEmail,HasMedia
     public function cargo()
     {
         return $this->belongsTo(\App\Models\Cargo::class, 'cargo_id');
+    }
+
+    public function cargos()
+    {
+        return $this->belongsToMany(\App\Models\Cargo::class, 'cargo_user');
     }
 
     /**

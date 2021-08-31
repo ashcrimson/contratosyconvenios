@@ -45,13 +45,20 @@ class ContratoController extends AppBaseController
         $user = auth()->user();
         $scope = new ScopeContratoDataTable();
 
+
         if ($user->hasRole(Role::ADMIN_CONTRATO)){
-            $scope->cargos = $user->cargo_id ?? 0;
+            $scope->cargos = $user->cargo_id ?? null;
         }
 
 
         if ($user->hasRole(Role::ADMIN_TÉCNICO)){
-            $scope->areas = $user->area_id ?? 0;
+            $scope->areas = $user->area_id ?? null;
+        }
+
+        if ($user->hasRole(Role::SUB_DIRECTOR)){
+            if ($user->cargos->count() > 0){
+                $scope->cargos = $user->cargos->pluck('id')->toArray();
+            }
         }
 
 
@@ -280,7 +287,9 @@ class ContratoController extends AppBaseController
              */
             $bitacora = $contrato->addBitacora($request->titulo,$request->descripcion);
 
-            $bitacora->addDocumento($request->file('adjunto'));
+            if ($request->hasFile('adjunto')){
+                $bitacora->addDocumento($request->file('adjunto'));
+            }
 
 
         } catch (Exception $exception) {
