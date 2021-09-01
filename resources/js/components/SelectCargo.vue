@@ -5,7 +5,7 @@
             editar
         </a>
 
-        <multiselect v-model="item" :options="items" label="nombre" placeholder="Seleccione uno...">
+        <multiselect v-model="item" :options="items" label="nombre" :disabled="disabled" placeholder="Seleccione uno...">
             <template  slot="noResult">
                 <a class="btn btn-sm btn-block btn-success" href="#" @click.prevent="newItem()">
                     <i class="fa fa-plus"></i> Nuevo
@@ -81,6 +81,10 @@
             id:{
                 type: String,
                 default: 'modalSelectCargo'
+            },
+            disabled:{
+                type: Boolean,
+                default: false
             }
         },
 

@@ -33,7 +33,7 @@ class AreaController extends AppBaseController
     {
         $scope = new ScopeAreaDataTable();
 
-        if (auth()->user()->cannot('ver todas las areas')){
+        if (auth()->user()->cannot('Ver todas las areas')){
             $scope->cargos = auth()->user()->cargo_id;
         }
 

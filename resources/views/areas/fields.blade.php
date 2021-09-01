@@ -2,7 +2,7 @@
 
     <!-- Cargo Id Field -->
     <div class="form-group col-sm-6">
-        <select-cargo :items="cargos" v-model="cargo" label="Cargo"></select-cargo>
+        <select-cargo :items="cargos" v-model="cargo" label="Cargo" :disabled="disabled"></select-cargo>
     </div>
 
     <!-- Nombre Field -->
@@ -23,11 +23,12 @@
         },
         data: {
             cargos : @json(\App\Models\Cargo::all() ?? []),
-            cargo: @json($area->cargo ?? null)
+            cargo: @json($area->cargo ?? auth()->user()->cargo ?? null),
+            disabled: @json(auth()->user()->cannot('Ver todas las areas'))
         },
         methods: {
 
-        }
+        },
     });
 </script>
 @endpush
