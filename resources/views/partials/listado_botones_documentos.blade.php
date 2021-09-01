@@ -40,11 +40,6 @@
         	</div>
         </div>
 
-
-        <form action="{{ route('documentos.eliminar',$documento->id)}}" method="POST" id="delete-form{{$documento->id}}">
-            @method('DELETE')
-            @csrf
-        </form>
     </span>
     &nbsp;
 @empty
