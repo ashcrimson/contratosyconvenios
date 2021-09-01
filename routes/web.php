@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('options',"OptionController");
 
     Route::get('documentos/descargar/{documento}',"DocumentoController@descargar")->name('documentos.descargar');
+    Route::get('documentos/eliminar/{documento}',"DocumentoController@eliminar")->name('documentos.eliminar');
 
     Route::resource('roles', 'RoleController');
 

@@ -32,4 +32,13 @@ class DocumentoController extends Controller
             print $documento->data;
         }
     }
+
+    public function eliminar(Documento $documento)
+    {
+        $documento->delete();
+
+        flash('Documento eliminado')->success();
+
+        return redirect()->back();
+    }
 }

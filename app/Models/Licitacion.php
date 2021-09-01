@@ -90,4 +90,18 @@ class Licitacion extends Model
     {
         return $this->hasMany(\App\Models\Contrato::class, 'licitacion_id');
     }
+
+    public function getInitialPreviewAttribute()
+    {
+        $res = [];
+
+        /**
+         * @var Documento $documento
+         */
+        foreach ($this->documentos as $documento){
+            $res[] = route('documentos.descargar',$documento->id);
+        }
+
+        return $res;
+    }
 }

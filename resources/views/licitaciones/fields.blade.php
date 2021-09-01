@@ -12,7 +12,10 @@
 
 <div class="form-group col-sm-6 ">
     {!! Form::label('adjunto', 'Adjuntar licitación.:') !!}
-    {!! Form::file('adjunto', ['class' => 'form-control file']) !!}
+    <br>
+    @include('partials.listado_botones_documentos',['documentos' => $licitacion->documentos ?? []])
+
+    {!! Form::file('adjuntos[]', ['id' => 'adjuntos','class' => 'form-control file','multiple']) !!}
 </div>
 
 <!-- Descripcion Field -->
@@ -22,22 +25,26 @@
 </div>
 
 
-
-
-
-
-
-
-
 @push('scripts')
 <script>
     $(function () {
-        $("#ojt").select2({
-            placeholder: 'Seleccione uno...',
+        $("#adjuntos").fileinput({
             language: "es",
-            maximumSelectionLength: 1,
-            allowClear: true
+            initialPreview: @json($licitacion->initial_preview),
+            dropZoneEnabled: true,
+            // maxFileCount: 1,
+            // maxFileSize: 2000,
+            // allowedFileExtensions: ["pdf"],
+            showUpload: false,
+            initialPreviewAsData: true,
+            initialPreviewFileType: 'pdf',
+            showBrowse: false,
+            showRemove: false,
         });
     })
 </script>
 @endpush
+
+
+
+

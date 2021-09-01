@@ -11,6 +11,7 @@ use App\Models\Licitacion;
 use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Response;
 
@@ -59,20 +60,15 @@ class LicitacionController extends AppBaseController
             'user_crea' => auth()->user()->id
         ]);
 
+
+
         try {
             DB::beginTransaction();
 
             /** @var Licitacion $licitacion */
             $licitacion = Licitacion::create($request->all());
 
-
-
-            if ($request->hasFile('adjunto')){
-                $file = $request->file('adjunto');
-
-                $licitacion->addDocumento($file);
-
-            }
+            $this->guardarDocumentos($request,$licitacion);
 
         } catch (Exception $exception) {
             DB::rollBack();
@@ -154,6 +150,8 @@ class LicitacionController extends AppBaseController
             'user_actualiza' => auth()->user()->id
         ]);
 
+
+
         try {
             DB::beginTransaction();
 
@@ -161,14 +159,8 @@ class LicitacionController extends AppBaseController
             $licitacion->fill($request->all());
             $licitacion->save();
 
+            $this->guardarDocumentos($request,$licitacion);
 
-
-            if ($request->hasFile('adjunto')){
-                $file = $request->file('adjunto');
-
-                $licitacion->addDocumento($file);
-
-            }
 
         } catch (Exception $exception) {
             DB::rollBack();
@@ -209,5 +201,19 @@ class LicitacionController extends AppBaseController
         Flash::success('Licitacion deleted successfully.');
 
         return redirect(route('licitaciones.index'));
+    }
+
+    public function guardarDocumentos(Request $request,Licitacion $licitacion)
+    {
+        if ($request->hasFile('adjuntos')){
+
+            foreach ($request->file('adjuntos') as $file){
+
+                $licitacion->addDocumento($file);
+
+            }
+
+
+        }
     }
 }

@@ -43,13 +43,9 @@ class LicitacionDataTable extends DataTable
            })
            ->editColumn('adjunto' ,function (Licitacion  $licitacion){
 
-               $doc = $licitacion->getLastDocumento();
-               if ($doc){
-                   return "<a href='".route('documentos.descargar',$doc->id)."'>".$doc->file_name."</a>";
-               }
-               else{
-                   return "";
-               }
+               $documentos = $licitacion->documentos;
+
+               return view('partials.listado_simple_documentos',compact('documentos'));
            })
            ->rawColumns(['adjunto','action','id']);
 
