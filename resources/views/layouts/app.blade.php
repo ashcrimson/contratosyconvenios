@@ -52,12 +52,12 @@
 
     <footer class="main-footer">
         <strong>
-            Copyright &copy; 2014-{{anioActual()}}
-            <a href="#">Empresa XX</a>.
+            Copyright &copy; 2020-{{anioActual()}}
+            <a href="#">Hospital Naval</a>.
         </strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.0.0
+            <b>Version</b> 20.0.0
         </div>
     </footer>
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title_page',__('New Moneda'))
+@section('title_page',__('Nueva Moneda'))
 
 @section('content')
 
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{__('New Moneda')}}</h1>
+                    <h1>{{__('Nueva Moneda')}}</h1>
                 </div>
                 <div class="col ">
                     <a class="btn btn-outline-info float-right"
                        href="{{route('monedas.index')}}">
-                        <i class="fa fa-list" aria-hidden="true"></i>&nbsp;<span class="d-none d-sm-inline">{{__('List')}}</span>
+                        <i class="fa fa-list" aria-hidden="true"></i>&nbsp;<span class="d-none d-sm-inline">{{__('Listado')}}</span>
                     </a>
                 </div>
             </div>

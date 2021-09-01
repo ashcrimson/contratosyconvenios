@@ -59,7 +59,7 @@ class OrdenCompraController extends AppBaseController
 
         $request->merge([
             'user_crea' => auth()->user()->id,
-            'estado_id' => OrdenCompraEstado::INGRESADA,
+            
         ]);
 
 
