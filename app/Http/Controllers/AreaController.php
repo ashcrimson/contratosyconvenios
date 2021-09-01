@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AreaDataTable;
+use App\DataTables\Scopes\ScopeAreaDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateAreaRequest;
 use App\Http\Requests\UpdateAreaRequest;
@@ -30,6 +31,14 @@ class AreaController extends AppBaseController
      */
     public function index(AreaDataTable $areaDataTable)
     {
+        $scope = new ScopeAreaDataTable();
+
+        if (auth()->user()->cannot('ver todas las areas')){
+            $scope->cargos = auth()->user()->cargo_id;
+        }
+
+        $areaDataTable->addScope($scope);
+
         return $areaDataTable->render('areas.index');
     }
 

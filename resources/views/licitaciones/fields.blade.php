@@ -25,25 +25,6 @@
 </div>
 
 
-@push('scripts')
-<script>
-    $(function () {
-        $("#adjuntos").fileinput({
-            language: "es",
-            initialPreview: @json($licitacion->initial_preview),
-            dropZoneEnabled: true,
-            // maxFileCount: 1,
-            // maxFileSize: 2000,
-            // allowedFileExtensions: ["pdf"],
-            showUpload: false,
-            initialPreviewAsData: true,
-            initialPreviewFileType: 'pdf',
-            showBrowse: false,
-            showRemove: false,
-        });
-    })
-</script>
-@endpush
 
 
 
