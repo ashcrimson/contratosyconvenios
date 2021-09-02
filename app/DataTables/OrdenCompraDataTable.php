@@ -109,7 +109,7 @@ class OrdenCompraDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
+        $columns = [
             'id',
             'contrato' => ['data' => 'contrato.id_mercado_publico','name' => 'contrato.id_mercado_publico'],
             'numero',
@@ -118,6 +118,8 @@ class OrdenCompraDataTable extends DataTable
             'adjunto' => ['searchable' => false,'orderable' => false],
             'estado' => ['data' => 'estado.nombre','name' => 'estado.nombre'],
         ];
+
+        return  $columns;
     }
 
     /**
