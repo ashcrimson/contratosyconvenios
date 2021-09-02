@@ -11,19 +11,34 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{route('contact')}}" class="nav-link">Contact</a>
         </li>
+
+        @foreach(\App\Models\Moneda::all() as $moneda)
+            <li class="nav-item d-none d-sm-inline-block border ">
+
+                <a href="{{route('monedas.show',$moneda->id)}}" class="nav-link">
+                    @if($moneda->es_valor_dia)
+                    <span class="badge badge-success navbar-badge mb-3 mt-0" style="top: 0;right: 0">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    @endif
+                    {{$moneda->codigo."= ".dvs().$moneda->equivalencia}}
+
+                </a>
+            </li>
+        @endforeach
     </ul>
 
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3 d-none d-sm-inline-block">
-        <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form>
+{{--    <!-- SEARCH FORM -->--}}
+{{--    <form class="form-inline ml-3 d-none d-sm-inline-block">--}}
+{{--        <div class="input-group input-group-sm">--}}
+{{--            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">--}}
+{{--            <div class="input-group-append">--}}
+{{--                <button class="btn btn-navbar" type="submit">--}}
+{{--                    <i class="fas fa-search"></i>--}}
+{{--                </button>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </form>--}}
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">

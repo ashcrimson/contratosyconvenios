@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $codigo
  * @property string $simbolo
  * @property number $equivalencia
+ * @property boolean $es_valor_dia
  */
 class Moneda extends Model
 {
