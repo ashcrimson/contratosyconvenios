@@ -20,76 +20,8 @@
     </section>
 
     <div class="content">
-        <div class="card card-outline card-success">
-            <div class="card-header">
-                <h3 class="card-title">Info Contrato</h3>
 
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                </div>
-                <!-- /.card-tools -->
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                @include('contratos.show_fields')
-
-            </div>
-            <!-- /.card-body -->
-        </div>
-
-        <div class="card card-outline card-success">
-            <div class="card-header">
-                <h3 class="card-title">Bitacora</h3>
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                </div>
-                <!-- /.card-tools -->
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-
-                <form action="{{route('contratos.bitacora.store',$contrato->id)}}" method="post" enctype="multipart/form-data">
-                    @csrf
-
-                    <div class="form-row">
-
-{{--                        <div class="form-group col-sm-6">--}}
-{{--                            {!! Form::label('titulo', 'Titulo:') !!}--}}
-{{--                            {!! Form::text('titulo', null, ['class' => 'form-control']) !!}--}}
-{{--                        </div>--}}
-
-                        <div class="form-group col-sm-12" style="padding: 0px; margin: 0px"></div>
-
-                        <div class="form-group col-sm-6">
-                            {!! Form::label('descripcion', 'Glosa:') !!}
-                            {!! Form::textarea('descripcion', null, ['class' => 'form-control','row' => 2]) !!}
-                        </div>
-
-                        <div class="form-group col-sm-6 ">
-                            {!! Form::label('adjunto', 'Adjuntar archivo bitácora.:') !!}
-                            {!! Form::file('adjunto', ['class' => 'form-control file']) !!}
-                        </div>
-
-                        <div class="form-group text-center col-sm-12">
-                            <button type="submit" class="btn btn-success">
-                                {{__('Guardar')}} <i class="fa fa-arrow-down"></i>
-                            </button>
-                        </div>
-
-
-
-                    </div>
-
-                </form>
-
-                <div class="form-group col-sm-12">
+                        <div class="form-group col-sm-12">
                     <table class="table table-striped table-bordered table-sm">
                         <thead>
                         <tr>
@@ -149,6 +81,58 @@
                         </tbody>
                     </table>
                 </div>
+        
+
+        <div class="card card-outline card-success">
+            <div class="card-header">
+                <h3 class="card-title">Bitacora</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+                <form action="{{route('contratos.bitacora.store',$contrato->id)}}" method="post" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="form-row">
+
+{{--                        <div class="form-group col-sm-6">--}}
+{{--                            {!! Form::label('titulo', 'Titulo:') !!}--}}
+{{--                            {!! Form::text('titulo', null, ['class' => 'form-control']) !!}--}}
+{{--                        </div>--}}
+
+                        <div class="form-group col-sm-12" style="padding: 0px; margin: 0px"></div>
+
+                        <div class="form-group col-sm-6">
+                            {!! Form::label('descripcion', 'Glosa:') !!}
+                            {!! Form::textarea('descripcion', null, ['class' => 'form-control','row' => 2]) !!}
+                        </div>
+
+                        <div class="form-group col-sm-6 ">
+                            {!! Form::label('adjunto', 'Adjuntar archivo bitácora.:') !!}
+                            {!! Form::file('adjunto', ['class' => 'form-control file']) !!}
+                        </div>
+
+                        <div class="form-group text-center col-sm-12">
+                            <button type="submit" class="btn btn-success">
+                                {{__('Guardar')}} <i class="fa fa-arrow-down"></i>
+                            </button>
+                        </div>
+
+
+
+                    </div>
+
+                </form>
+
+
             </div>
             <!-- /.card-body -->
         </div>
