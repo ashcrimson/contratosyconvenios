@@ -24,12 +24,10 @@ class OrdenCompraDataTable extends DataTable
 
                  return view('orden_compras.datatables_actions',compact('ordenCompra','id'))->render();
              })
-             ->editColumn('id',function (OrdenCompra $ordenCompra){
 
-                 $id = $ordenCompra->id;
-                 return view('orden_compras.modal_detalles',compact('ordenCompra','id'))->render();
-
-             })
+           ->editColumn('contrato.id_mercado_publico' ,function (OrdenCompra  $compra){
+               return $compra->contrato->id_mercado_publico ?? '';
+           })
            ->editColumn('total' ,function (OrdenCompra  $compra){
                return dvs().nfp($compra->total);
            })
@@ -46,7 +44,7 @@ class OrdenCompraDataTable extends DataTable
                    return "";
                }
            })
-           ->rawColumns(['adjunto','action','id']);
+           ->rawColumns(['adjunto','action']);
 
     }
 
@@ -87,11 +85,11 @@ class OrdenCompraDataTable extends DataTable
                                         <"col-sm-6 order-1 order-sm-2 text-right" l>
 
                                     >',
-                'order'   => [[0, 'desc']],
+                'order'   => [],
                 'language' => ['url' => asset('js/SpanishDataTables.json')],
                 //'scrollX' => false,
                 'responsive' => true,
-                'stateSave' => true,
+//                'stateSave' => true,
                 'buttons' => [
                     //['extend' => 'create', 'text' => '<i class="fa fa-plus"></i> <span class="d-none d-sm-inline">Crear</span>'],
                     ['extend' => 'print', 'text' => '<i class="fa fa-print"></i> <span class="d-none d-sm-inline">Imprimir</span>'],
@@ -110,7 +108,7 @@ class OrdenCompraDataTable extends DataTable
     protected function getColumns()
     {
         $columns = [
-            'id',
+            'id' => ['visible' => false],
             'contrato' => ['data' => 'contrato.id_mercado_publico','name' => 'contrato.id_mercado_publico'],
             'numero',
             'fecha_envio',
