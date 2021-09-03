@@ -1,7 +1,36 @@
 @can('Ver Licitacions')
-<a href="{{ route('licitaciones.show', $id) }}" data-toggle="tooltip" title="Ver" class='btn btn-default btn-sm'>
-    <i class="fa fa-eye"></i>
-</a>
+<span data-toggle="tooltip" title="Ver">
+
+        <a href="#"  data-toggle="modal" data-target="#modalDetalleLicitacion{{$id}}" class='btn btn-default btn-sm'>
+            <i class="fa fa-eye"></i>
+        </a>
+    </span>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalDetalleLicitacion{{$id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modelTitleId">
+                        Detalle licitacion
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="form-group col-sm-12">
+                            @include('licitaciones.show_fields')
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endcan
 
 @can('Editar Licitacions')
