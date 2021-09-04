@@ -98,9 +98,9 @@
                     <tr>
                         <td>{{$det->item->codigo}}</td>
                         <td>{{$det->item->text}}</td>
-                        <td>{{nfp($det->cantidad)}}</td>
-                        <td>{{nfp($det->precio)}}</td>
-                        <td>{{nfp($det->subtotal)}}</td>
+                        <td>{{dvs().nfp($det->cantidad)}}</td>
+                        <td>{{dvs().nfp($det->precio)}}</td>
+                        <td>{{dvs().nfp($det->subtotal)}}</td>
                     </tr>
                     @endforeach
 
@@ -108,7 +108,7 @@
                     <tfoot>
                     <tr>
                         <th colspan="4">Total</th>
-                        <th>{{nfp($ordenCompra->detalles->sum('subtotal'))}}</th>
+                        <th>{{dvs().nfp($ordenCompra->detalles->sum('subtotal'))}}</th>
                     </tr>
                     </tfoot>
                 </table>

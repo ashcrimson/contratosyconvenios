@@ -59,7 +59,7 @@ class OrdenCompraController extends AppBaseController
 
         $request->merge([
             'user_crea' => auth()->user()->id,
-            
+
         ]);
 
 
@@ -137,7 +137,9 @@ class OrdenCompraController extends AppBaseController
     public function edit($id)
     {
         /** @var OrdenCompra $ordenCompra */
-        $ordenCompra = OrdenCompra::find($id);
+        $ordenCompra = OrdenCompra::with('detalles')->find($id);
+
+//        dd($ordenCompra->toArray());
 
         if (empty($ordenCompra)) {
             Flash::error('Orden Compra no encontrado');
