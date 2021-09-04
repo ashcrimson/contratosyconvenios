@@ -116,6 +116,7 @@
 
     <div class="form-group col-sm-6 ">
         {!! Form::label('adjunto', 'Adjuntar contrato.:') !!}
+        @include('contratos.partials.documento',['documento' => $contrato->getLastDocumento() ])
         {!! Form::file('adjunto', ['class' => 'form-control file']) !!}
     </div>
 

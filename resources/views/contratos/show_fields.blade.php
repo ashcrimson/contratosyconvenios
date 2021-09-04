@@ -38,17 +38,17 @@
 
         <!-- Fecha Inicio Field -->
         {!! Form::label('fecha_inicio', 'Fecha Inicio:') !!}
-        {!! $contrato->fecha_inicio !!}<br>
+        {!! fechaLtn($contrato->fecha_inicio) !!}<br>
 
 
         <!-- Fecha Termino Field -->
         {!! Form::label('fecha_termino', 'Fecha Termino:') !!}
-        {!! $contrato->fecha_termino !!}<br>
+        {!! fechaLtn($contrato->fecha_termino) !!}<br>
 
 
         <!-- Fecha Aprobacion Field -->
         {!! Form::label('fecha_aprobacion', 'Fecha Aprobacion:') !!}
-        {!! $contrato->fecha_aprobacion !!}<br>
+        {!! fechaLtn($contrato->fecha_aprobacion) !!}<br>
 
 
     </div>
@@ -56,7 +56,7 @@
     <div class="form-group col-sm-6">
         <!-- Fecha Alerta Vencimiento Field -->
         {!! Form::label('fecha_alerta_vencimiento', 'Fecha Alerta Vencimiento:') !!}
-        {!! $contrato->fecha_alerta_vencimiento !!}<br>
+        {!! fechaLtn($contrato->fecha_alerta_vencimiento) !!}<br>
 
 
         <!-- Objeto Field -->
@@ -71,12 +71,12 @@
 
        <!-- Fecha Vencimiento Boleta Field -->
         {!! Form::label('fecha_vencimiento_boleta', 'Fecha Vencimiento Boleta:') !!}
-        {!! $contrato->fecha_vencimiento_boleta !!}<br>
+        {!! fechaLtn($contrato->fecha_vencimiento_boleta) !!}<br>
 
 
        <!-- Alerta Vencimiento Boleta Field -->
         {!! Form::label('alerta_vencimiento_boleta', 'Alerta Vencimiento Boleta:') !!}
-        {!! $contrato->alerta_vencimiento_boleta !!}<br>
+        {!! fechaLtn($contrato->alerta_vencimiento_boleta) !!}<br>
 
 
       <!-- Monto Boleta Garantia Field -->
