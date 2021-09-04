@@ -117,3 +117,5 @@ Vue.component('select-area',SelectArea);
 
 import ToggleButton from 'vue-js-toggle-button';
 Vue.use(ToggleButton);
+
+window.number_format = require("number_format-php");

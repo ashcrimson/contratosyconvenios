@@ -50,6 +50,11 @@
  */
 
 /*!
+ * Ported PHP function "number_format" in JavsScript
+ * Homepage: https://github.com/tasofen/number_format-node
+*/
+
+/*!
  * Sizzle CSS Selector Engine v2.3.6
  * https://sizzlejs.com/
  *

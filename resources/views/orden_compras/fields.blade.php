@@ -45,7 +45,7 @@
     </div>
 
     <!-- Estado Field -->
-    <div class="form-group col-sm-4"> 
+    <div class="form-group col-sm-4">
         {!! Form::label('estado', 'Estado') !!}
 
         <multiselect v-model="estado" :options="estados" label="nombre" placeholder="Seleccione uno...">
@@ -130,8 +130,8 @@
                         <td v-text="det.text"></td>
                         <td v-text="det.cantidad"></td>
                         <td v-text="det.saldo"></td>
-                        <td v-text="det.precio"></td>
-                        <td v-text="subTotalDet(det)"></td>
+                        <td v-text="dvs()+nfp(det.precio)"></td>
+                        <td v-text="dvs()+nfp(subTotalDet(det))"></td>
                         <td>
                             <button class="btn btn-danger btn-sm" role="button" @click.prevent="removeDet(index,det)">Eliminar</button>
                         </td>
@@ -178,7 +178,7 @@
                     <tr>
                         <th colspan="4">Total</th>
                         <th class="text-right" >
-                            <span v-text="total"></span>
+                            <span v-text="dvs()+nfp(total)"></span>
                         </th>
                         <th></th>
                     </tr>
@@ -237,6 +237,12 @@
             buscandoDetalles: false
         },
         methods: {
+            dvs(){
+                return "{{dvs()}}";
+            },
+            nfp(val){
+                return number_format(val,'2',',','.');
+            },
             onSelectItem(){
                 this.item.cantidad = this.detalle.cantidad;
                 this.detalle = Object.assign({}, this.item);
