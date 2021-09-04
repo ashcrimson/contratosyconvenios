@@ -10,6 +10,15 @@
 
 <!-- Presupuesto Field -->
 {!! Form::label('presupuesto', 'Presupuesto:') !!}
-{!! $licitacion->presupuesto !!}<br>
+{!! dvs().nfp($licitacion->presupuesto) !!}<br>
 
 
+<!-- Presupuesto Field -->
+{!! Form::label('creado_por', 'Creado Por:') !!}
+{!! $licitacion->userCrea->name !!}<br>
+<!-- Presupuesto Field -->
+{!! Form::label('creado_por', 'Actualizado Por:') !!}
+{!! $licitacion->userActualiza->name ?? '' !!}<br>
+
+{!! Form::label('presupuesto', 'Adjuntos:') !!}
+@include('partials.listado_botones_documentos',['documentos' => $licitacion->documentos ?? []])
