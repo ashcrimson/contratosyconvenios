@@ -118,7 +118,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                <button type="button" class="btn btn-secondary" @click="close()">
                                                     Cancelar
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
@@ -168,7 +168,7 @@
                                         <td v-text="item.desc_tec_prod_ofertado"></td>
                                         <td v-text="item.u_entrega_oferente"></td>
                                         <td  class="text-nowrap">
-                                            <button type="button" class="btn btn-sm btn-outline-info" data-toggle="tooltip" title="Editar" >
+                                            <button type="button" @click="editItem(item)" class="btn btn-sm btn-outline-info" data-toggle="tooltip" title="Editar" >
                                                 <i class="fa fa-edit"></i>
                                             </button>
 
