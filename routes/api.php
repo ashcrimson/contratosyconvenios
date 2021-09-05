@@ -29,10 +29,10 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
         Route::resource('contrato_estados', 'ContratoEstadoAPIController');
 
         Route::resource('contrato_tipos', 'ContratoTipoAPIController');
+
+        Route::resource('contrato_items', 'ContratoItemAPIController');
     });
 
 
 });
-
-
 

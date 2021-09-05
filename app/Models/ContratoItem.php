@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class ContratoItem
  * @package App\Models
- * @version August 11, 2021, 3:05 pm CST
+ * @version September 4, 2021, 7:29 pm CST
  *
  * @property \App\Models\Contrato $contrato
  * @property \Illuminate\Database\Eloquent\Collection $ordenesComprasDetalles
@@ -16,8 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $descripcion
  * @property number $cantidad_total
  * @property number $precio
- * @property string $presentacion_prod_soli
  * @property string $grupo
+ * @property string $presentacion_prod_soli
  * @property string $f_f
  * @property string $desc_tec_prod_ofertado
  * @property string $u_entrega_oferente
@@ -83,6 +83,7 @@ class ContratoItem extends Model
         'descripcion' => 'required|string|max:255',
         'cantidad_total' => 'required|numeric',
         'precio' => 'required|numeric',
+        'grupo' => 'required|string|max:255',
         'presentacion_prod_soli' => 'nullable|string|max:255',
         'f_f' => 'nullable|string|max:255',
         'desc_tec_prod_ofertado' => 'nullable|string|max:255',
