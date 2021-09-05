@@ -34,16 +34,16 @@
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-success" data-toggle="modal"
-                                    data-target="#modalNuevoItem">
+                                    data-target="#modalFormContratoItem">
                                 <i class="fa fa-plus"></i> Nuevo Detalle
                             </button>
 
                             <br>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="modalNuevoItem" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="modalFormContratoItem" tabindex="-1" role="dialog"
                                  aria-labelledby="modelTitleId" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" v-text="modalFormTitle"></h4>
@@ -52,15 +52,82 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            Body
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                Close
-                                            </button>
-                                            <button type="button" class="btn btn-primary">Save</button>
-                                        </div>
+                                        <form @submit.prevent="save()">
+                                            <div class="modal-body">
+                                                <div class="form-row">
+                                                    <!-- Codigo Field -->
+                                                    <div class="form-group col-sm-4">
+                                                        <label for="">Codigo:</label>
+                                                        <input class="form-control" type="text" v-model="editedItem.codigo" maxlength="45">
+                                                    </div>
+
+                                                    <!-- Descripcion Field -->
+                                                    <div class="form-group col-sm-4">
+                                                        <label for="">Descripcion:</label>
+                                                        <input class="form-control" type="text" v-model="editedItem.descripcion" maxlength="255">
+                                                    </div>
+
+                                                    <!-- Cantidad Total Field -->
+                                                    <div class="form-group col-sm-4">
+                                                        <label for="">Cantidad Total:</label>
+                                                        <input class="form-control" type="number" v-model="editedItem.cantidad_total" step="any">
+                                                    </div>
+
+                                                    <!-- Precio Field -->
+                                                    <div class="form-group col-sm-4">
+                                                        <label for="">Precio:</label>
+                                                        <input class="form-control" type="number" v-model="editedItem.precio" step="any">
+                                                    </div>
+
+                                                    <!-- Grupo Field -->
+                                                    <div class="form-group col-sm-4">
+                                                        <label for="">Grupo:</label>
+                                                        <input class="form-control" type="text" v-model="editedItem.grupo" maxlength="255">
+                                                    </div>
+
+                                                    <!-- Presentacion Prod Soli Field -->
+                                                    <div class="form-group col-sm-4">
+                                                        <label for="">Presentacion Prod Soli:</label>
+                                                        <input class="form-control" type="text" v-model="editedItem.presentacion_prod_soli">
+                                                    </div>
+
+                                                    <!-- F F Field -->
+                                                    <div class="form-group col-sm-4">
+                                                        <label for="">F F:</label>
+                                                        <input class="form-control" type="text" v-model="editedItem.f_f">
+                                                    </div>
+
+                                                    <!-- Desc Tec Prod Ofertado Field -->
+                                                    <div class="form-group col-sm-4">
+                                                        <label for="">Desc Tec Prod Ofertado:</label>
+                                                        <input class="form-control" type="text" v-model="editedItem.desc_tec_prod_ofertado">
+                                                    </div>
+
+                                                    <!-- U Entrega Oferente Field -->
+                                                    <div class="form-group col-sm-4">
+                                                        <label for="">U Entrega Oferente:</label>
+                                                        <input class="form-control" type="text" v-model="editedItem.u_entrega_oferente">
+                                                    </div>
+
+                                                    <!-- Saldo Field -->
+                                                    <div class="form-group col-sm-4">
+                                                        <label for="">Saldo:</label>
+                                                        <input class="form-control" type="text" v-model="editedItem.saldo">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Cancelar
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fa fa-save"></i>
+                                                    <span v-text="textButtonSubmint"></span>
+                                                </button>
+                                            </div>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -137,17 +204,18 @@
                 this.getItems();
             },
             mounted() {
-                $('[data-toggle="tooltip"]').tooltip();
             },
             data: {
 
                 items: [],
                 editedItem: {
                     id : 0,
+                    contrato_id: @json($contrato->id),
                 },
                 defaultItem: {
                     id : 0,
-                    nombre: '',
+                    contrato_id: @json($contrato->id),
+
                 },
                 itemElimina: {
 
@@ -155,7 +223,7 @@
 
                 loading: false,
 
-                contrato_id: @json($contrato->id ?? null),
+                contrato_id: @json($contrato->id),
 
             },
             methods: {
@@ -171,17 +239,13 @@
 
                     return null
                 },
-                newItem () {
-                    $("#"+this.id).modal('show');
-                    this.editedItem = Object.assign({}, this.defaultItem);
-                },
                 editItem (item) {
-                    $("#"+this.id).modal('show');
+                    $("#modalFormContratoItem").modal('show');
                     this.editedItem = Object.assign({}, item);
 
                 },
                 close () {
-                    $("#"+this.id).modal('hide');
+                    $("#modalFormContratoItem").modal('hide');
                     this.loading = false;
                     setTimeout(() => {
                         this.editedItem = Object.assign({}, this.defaultItem);
@@ -192,27 +256,27 @@
                     this.loading = true;
 
 
+
                     try {
 
                         const data = this.editedItem;
 
+                        console.log(data);
+
                         if(this.editedItem.id === 0){
 
-                            var res = await axios.post(route('api.cargos.store'),data);
+                            var res = await axios.post(route('api.contrato_items.store'),data);
 
                         }else {
 
-                            var res = await axios.patch(route('api.cargos.update',this.editedItem.id),data);
+                            var res = await axios.patch(route('api.contrato_items.update',this.editedItem.id),data);
 
                         }
 
                         logI(res.data);
 
-                        const item  = res.data.data;
-
-                        this.actualizaSelect(item);
-
                         iziTs(res.data.message);
+                        this.getItems();
 
                         this.close();
 
@@ -233,6 +297,9 @@
             computed: {
                 modalFormTitle () {
                     return this.editedItem.id === 0 ? 'Nuevo Detalle' : 'Editar Detalle'
+                },
+                textButtonSubmint () {
+                    return this.editedItem.id === 0 ? 'Guardar' : 'Actualizar'
                 }
             },
         });
