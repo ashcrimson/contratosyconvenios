@@ -22,6 +22,7 @@ class CreateContratosTable extends Migration
             $table->unsignedBigInteger('cargo_id')->nullable()->index('fk_ctr_cargos1_idx');
             $table->unsignedBigInteger('area_asignado')->nullable()->index('fk_ctr_areas1_idx');
             $table->decimal('monto',14,0);
+            $table->boolean('tiene_detalles');
             $table->integer('estado_alerta')->nullable();
             $table->date('fecha_inicio');
             $table->date('fecha_termino')->nullable();

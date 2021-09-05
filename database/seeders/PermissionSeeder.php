@@ -94,6 +94,8 @@ class PermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => 'Agregar Bitacora Contratos']);
             Permission::firstOrCreate(['name' => 'Eliminar Bitacora Contratos']);
 
+            Permission::firstOrCreate(['name' => 'Admin detalles contrato']);
+
 
         }
 

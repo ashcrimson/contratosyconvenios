@@ -69,14 +69,20 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('contratos', 'ContratoController');
 
-    Route::post('contratos/asignar/area/{contrato}', 'ContratoController@asignarArea')->name('contratos.asignar.area');
-    Route::post('contratos/asignar/cargo/{contrato}', 'ContratoController@asignarCargo')->name('contratos.asignar.cargo');
+    Route::group(['prefix' => 'contratos','as' => 'contratos.'],function (){
+        Route::post('asignar/area/{contrato}', 'ContratoController@asignarArea')->name('asignar.area');
+        Route::post('asignar/cargo/{contrato}', 'ContratoController@asignarCargo')->name('asignar.cargo');
 
-    Route::get('contratos/bitacoras/{contrato}', 'ContratoController@bitacoraVista')->name('contratos.bitacora.vista');
-    Route::post('contratos/bitacoras/{contrato}/store', 'ContratoController@bitacoraStore')->name('contratos.bitacora.store');
-    Route::get('contratos/bitacoras/{contrato}/edit', 'ContratoController@bitacoraEdit')->name('contratos.bitacora.edit');
-    Route::put('contratos/bitacoras/{contrato}/update', 'ContratoController@bitacoraUpdate')->name('contratos.bitacora.update');
-    Route::delete('contratos/bitacoras/{contrato}/{bitacora}/destroy', 'ContratoController@bitacoraDestroy')->name('contratos.bitacora.destroy');
+        Route::get('bitacoras/{contrato}', 'ContratoController@bitacoraVista')->name('bitacora.vista');
+        Route::post('bitacoras/{contrato}/store', 'ContratoController@bitacoraStore')->name('bitacora.store');
+        Route::get('bitacoras/{contrato}/edit', 'ContratoController@bitacoraEdit')->name('bitacora.edit');
+        Route::put('bitacoras/{contrato}/update', 'ContratoController@bitacoraUpdate')->name('bitacora.update');
+        Route::delete('bitacoras/{contrato}/{bitacora}/destroy', 'ContratoController@bitacoraDestroy')->name('bitacora.destroy');
+
+        Route::get('detalles/{contrato}', 'ContratoController@adminItems')->name('admin.items');
+
+    });
+
 
     Route::resource('ordenCompraEstados', 'OrdenCompraEstadoController');
 

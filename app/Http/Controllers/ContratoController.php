@@ -318,4 +318,9 @@ class ContratoController extends AppBaseController
         return redirect(route('contratos.bitacora.vista',compact('contrato')));
     }
 
+
+    public function adminItems(Contrato $contrato)
+    {
+        return view('contratos.admin_items',compact('contrato'));
+    }
 }

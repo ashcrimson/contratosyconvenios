@@ -1,6 +1,6 @@
 @can('Ver Contratos')
-    <span data-toggle="tooltip" title="Ver"> 
-    
+    <span data-toggle="tooltip" title="Ver">
+
         <a href="#"  data-toggle="modal" data-target="#modalDetalleContrato{{$id}}" class='btn btn-default btn-sm'>
             <i class="fa fa-eye"></i>
         </a>
@@ -95,10 +95,16 @@
     <i class="fa fa-edit"></i>
 </a>
 @endcan
- 
+
 @can('Agregar Bitacora Contratos')
     <a href="{{ route('contratos.bitacora.vista', $id) }}" data-toggle="tooltip" title="Bitacora" class='btn btn-outline-secondary btn-sm'>
         <i class="fa fa-book-open"></i>
+    </a>
+@endcan
+
+@can('Admin detalles contrato')
+    <a href="{{ route('contratos.admin.items', $id) }}" data-toggle="tooltip" title="Bitacora" class='btn btn-outline-info btn-sm'>
+        <i class="fa fa-list"></i>
     </a>
 @endcan
 
