@@ -174,11 +174,11 @@
                 this.item = item;
             }
         },
-        computed: {
-            formTitle () {
-                return this.editedItem.id === 0 ? 'Nuevo '+ this.label : 'Editar '+ this.label
-            }
-        },
+            computed: {
+                formTitle () {
+                    return this.editedItem.id === 0 ? 'Nuevo '+ this.label : 'Editar '+ this.label
+                }
+            },
         watch: {
             item (val) {
                 this.$emit('input', val);

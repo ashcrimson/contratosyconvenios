@@ -34,6 +34,10 @@ class ContratoItemAPIController extends AppBaseController
             $query->limit($request->get('limit'));
         }
 
+        if ($request->contrato_id){
+            $query->where('contrato_id',$request->contrato_id);
+        }
+
         $contratoItems = $query->get();
 
         return $this->sendResponse($contratoItems->toArray(), 'Contrato Items retrieved successfully');

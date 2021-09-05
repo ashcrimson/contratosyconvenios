@@ -103,7 +103,7 @@
 @endcan
 
 @can('Admin detalles contrato')
-    <a href="{{ route('contratos.admin.items', $id) }}" data-toggle="tooltip" title="Bitacora" class='btn btn-outline-info btn-sm'>
+    <a href="{{ route('contratos.admin.items', $id) }}" data-toggle="tooltip" title="Detalles" class='btn btn-outline-info btn-sm'>
         <i class="fa fa-list"></i>
     </a>
 @endcan
