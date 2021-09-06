@@ -6,13 +6,17 @@ use App\DataTables\OrdenCompraDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateOrdenCompraRequest;
 use App\Http\Requests\UpdateOrdenCompraRequest;
+use App\Models\Contrato;
 use App\Models\OrdenCompra;
 use App\Models\OrdenCompraDetalle;
 use App\Models\OrdenCompraEstado;
 use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Response;
 
 class OrdenCompraController extends AppBaseController
@@ -63,6 +67,18 @@ class OrdenCompraController extends AppBaseController
         ]);
 
 
+        $detalles = collect(json_decode($request->detalles))->map(function ($item){
+
+            return new OrdenCompraDetalle([
+                'item_id' => $item->id,
+                'precio' => $item->precio,
+                'cantidad' => $item->cantidad
+            ]);
+        });
+
+        if ($this->totalMayorSaldoContrato($request,$detalles)){
+            return redirect()->back()->withInput()->withErrors(['monto' => 'El total de la compra no puede se mayor al saldo del contrato']);
+        }
 
 
         try {
@@ -72,14 +88,7 @@ class OrdenCompraController extends AppBaseController
             $ordenCompra = OrdenCompra::create($request->all());
 
 
-            $detalles = collect(json_decode($request->detalles))->map(function ($item){
 
-                return new OrdenCompraDetalle([
-                    'item_id' => $item->id,
-                    'precio' => $item->precio,
-                    'cantidad' => $item->cantidad
-                ]);
-            });
 
             $ordenCompra->detalles()->saveMany($detalles);
 
@@ -249,5 +258,22 @@ class OrdenCompraController extends AppBaseController
         Flash::success('Orden Compra anulada correctamente.');
 
         return redirect(route('ordenCompras.index'));
+    }
+
+    public function totalMayorSaldoContrato(Request $request,$detalles)
+    {
+        /**
+         * @var Contrato $contrato
+         */
+        $contrato = Contrato::find($request->contrato_id);
+
+        if ($request->tiene_detalles){
+            $total = $detalles->sum('subtotal');
+        }else{
+            $total = $request->monto;
+        }
+
+
+        return $total > $contrato->saldo;
     }
 }

@@ -5,6 +5,8 @@
         <multiselect v-model="contrato" :options="contratos" label="text" placeholder="Seleccione uno...">
         </multiselect>
         <input type="hidden" name="contrato_id" :value="contrato ? contrato.id : null">
+
+        <span v-show="contrato" v-text="'Saldo: '+ dvs()+nfp(saldoContrato)" class="text-success"></span>
     </div>
 
     <!-- Numero Field -->
@@ -62,7 +64,7 @@
     <!-- Total Field -->
     <div class="form-group col-sm-6" v-if="!tiene_detalles">
         {!! Form::label('total', 'Monto:') !!}
-        {!! Form::number('total', null, ['class' => 'form-control','step' => 'any']) !!}
+        <input type="number" class="form-control" name="monto" v-model="monto" @keyup="totalMayorSaldo">
 
     </div>
 
@@ -219,11 +221,11 @@
         },
         data: {
             contratos : @json(\App\Models\Contrato::with('items')->get() ?? []),
-            contrato: @json($ordenCompra->contrato ?? null),
+            contrato: @json($ordenCompra->contrato ?? \App\Models\Contrato::with('items')->find(old('contrato_id')) ?? null),
             estados : @json(\App\Models\OrdenCompraEstado::all() ?? []),
-            estado: @json($ordenCompra->estado ?? null),
+            estado: @json($ordenCompra->estado  ?? \App\Models\OrdenCompraEstado::find(old('estado_id')) ?? null),
 
-            tiene_detalles: @json($ordenCompra->tiene_detalles ?? null),
+            tiene_detalles: @json($ordenCompra->tiene_detalles ?? old('tiene_detalles') ?? null),
 
             item: null,
             detalle: {
@@ -234,6 +236,7 @@
             items : [],
 
             detalles: [],
+            monto: 0,
             buscandoDetalles: false
         },
         methods: {
@@ -255,16 +258,23 @@
 
                 if(cantidad <= 0){
 
-                    alert('La cantidad debe ser mayor a 0');
+                    alertError('La cantidad debe ser mayor a 0');
+
                     $("#cantidad").focus().select();
                     return
                 }
 
                 if(cantidad > saldo){
 
-                    alert('La cantidad no  puede ser mayor al saldo');
+                    alertError('La cantidad no  puede ser mayor al saldo');
                     $("#cantidad").focus().select();
                     return
+                }
+
+                if (this.totalMayorSaldo()){
+                    alertError('El total de la compra no puede se mayor al saldo del contrato!');
+                    $("#cantidad").focus().select();
+                    return;
                 }
 
 
@@ -291,6 +301,34 @@
                 }
 
                 return sub;
+            },
+            totalMayorSaldo(){
+                console.log(this.monto);
+
+                if (this.contrato){
+
+                    if (this.tiene_detalles){
+
+                        var total = this.total + (toFloat(this.detalle.cantidad) * toFloat(this.detalle.precio))
+
+                        if (total > this.saldoContrato){
+
+                            return true;
+                        }
+                    }else {
+                        if (this.monto > this.saldoContrato){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'El total de la compra no puede se mayor al saldo del contrato!',
+                            })
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+
             }
 
         },
@@ -319,6 +357,15 @@
 
                 return total;
             },
+            saldoContrato(){
+                if (this.contrato){
+                    return this.contrato.saldo
+                }
+                else{
+
+                    return 0;
+                }
+            }
         },
         watch:{
             contrato(val){

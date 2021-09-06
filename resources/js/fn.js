@@ -188,7 +188,8 @@ window.confirmRestore = (data) =>{
     });
 }
 
-$('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+// oculta los alertas de request error
+// $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 
 window.errorToList = (errors) => {
     var res ="<ul style='list-style-type: none; padding:0px;'>";
