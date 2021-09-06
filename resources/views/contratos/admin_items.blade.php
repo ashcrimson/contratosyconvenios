@@ -32,7 +32,10 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <!-- Button trigger modal -->
+                            @include('contratos.partials.show_field_min')
+
+
+                        <!-- Button trigger modal -->
                             <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#modalFormContratoItem">
                                 <i class="fa fa-plus"></i> Nuevo Detalle
@@ -168,13 +171,17 @@
                                         <td v-text="item.desc_tec_prod_ofertado"></td>
                                         <td v-text="item.u_entrega_oferente"></td>
                                         <td  class="text-nowrap">
-                                            <button type="button" @click="editItem(item)" class="btn btn-sm btn-outline-info" data-toggle="tooltip" title="Editar" >
+                                            @can('Editar detalle contrato')
+                                            <button type="button" @click="editItem(item)" class="btn btn-sm btn-outline-info" v-tooltip="'Editar'"  >
                                                 <i class="fa fa-edit"></i>
                                             </button>
+                                            @endcan
 
-                                            <button type="button"  class='btn btn-outline-danger btn-sm' data-toggle="tooltip" title="Eliminar" >
+                                            @can('Eliminar detalle contrato')
+                                            <button type="button"  class='btn btn-outline-danger btn-sm' v-tooltip="'Eliminar'" >
                                                 <i class="fa fa-trash-alt"></i>
                                             </button>
+                                            @endcan
                                         </td>
                                     </tr>
                                     </tbody>

@@ -119,3 +119,11 @@ import ToggleButton from 'vue-js-toggle-button';
 Vue.use(ToggleButton);
 
 window.number_format = require("number_format-php");
+
+
+import { VTooltip, VPopover, VClosePopover } from 'v-tooltip';
+
+Vue.directive('tooltip', VTooltip);
+Vue.directive('close-popover', VClosePopover);
+Vue.component('v-popover', VPopover);
+
