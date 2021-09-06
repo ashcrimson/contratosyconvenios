@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\LicitacionDataTable;
+use App\DataTables\Scopes\ScopeLicitacionDatatable;
 use App\Http\Requests;
 use App\Http\Requests\CreateLicitacionRequest;
 use App\Http\Requests\UpdateLicitacionRequest;
 use App\Models\Documento;
 use App\Models\Licitacion;
+use App\Models\User;
 use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -34,6 +36,18 @@ class LicitacionController extends AppBaseController
      */
     public function index(LicitacionDataTable $licitacionDataTable)
     {
+        /**
+         * @var User $user
+         */
+        $user = auth()->user();
+        $scope = new ScopeLicitacionDatatable();
+
+        if ($user->cannot('Ver todas las licitaciones')){
+            $scope->cargos = $user->cargo_id ?? 0;
+        }
+
+        $licitacionDataTable->addScope($scope);
+
         return $licitacionDataTable->render('licitaciones.index');
     }
 

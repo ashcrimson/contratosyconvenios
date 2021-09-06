@@ -46,10 +46,11 @@ class UsersTableSeeder extends Seeder
             ]);
 
             $rol = $this->getRole($user->id_permiso);
+            $opciones = $this->getOptions($user->id_permiso);
 
             if ($rol){
                 $newUser->syncRoles([$rol]);
-                $newUser->options()->sync(Option::pluck('id')->toArray());
+                $newUser->options()->sync($opciones);
             }
         }
 
@@ -120,20 +121,20 @@ class UsersTableSeeder extends Seeder
     public function getOptions($idPermiso)
     {
         switch ($idPermiso){
-            case 1:
-                return [];
+            case 1://ADMIN
+                return [19,17,18];
                 break;
-            case 2:
-                return [];
+            case 2://ADMIN_CONTRATO
+                return [19,17,18];
                 break;
-            case 3:
-                return [];
+            case 3://COMPRADOR
+                return [19,17,18];
                 break;
-            case 4:
-                return [];
+            case 4://ADMIN_TÉCNICO
+                return [19,17,18];
                 break;
-            default:
-                return [];
+            default://SUB_DIRECTOR
+                return [19,17,18];
         }
 
     }
