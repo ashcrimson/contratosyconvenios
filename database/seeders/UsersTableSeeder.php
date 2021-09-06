@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
 
         foreach ($usuarios as $index => $user) {
 
-            $username = (strstr($user->mail, '@', true) . "\n");
+            $username = (strstr($user->mail, '@', true) . "");
 
             /**
              * @var User $newUser
