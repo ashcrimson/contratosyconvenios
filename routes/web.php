@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('permissions', 'PermissionController');
 
     Route::resource('areas', 'AreaController');
+    Route::post('areas/{area}/restore', 'AreaController@restore')->name('areas.restore');
 
     Route::resource('cargos', 'CargoController');
 

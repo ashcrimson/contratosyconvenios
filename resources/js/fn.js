@@ -171,6 +171,23 @@ window.deleteItemDt = (data) =>{
     });
 }
 
+window.confirmRestore = (data) =>{
+    var id = $(data).data('id');
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, restaurar\n!'
+    }).then((result) => {
+        if (result.value) {
+            $("#restore-form"+id).submit();
+        }
+    });
+}
+
 $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 
 window.errorToList = (errors) => {

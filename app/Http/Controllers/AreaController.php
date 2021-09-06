@@ -8,9 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateAreaRequest;
 use App\Http\Requests\UpdateAreaRequest;
 use App\Models\Area;
-use Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class AreaController extends AppBaseController
 {
@@ -36,6 +34,8 @@ class AreaController extends AppBaseController
         if (auth()->user()->cannot('Ver todas las areas')){
             $scope->cargos = auth()->user()->cargo_id;
         }
+
+        $scope->eliminadas =1 ;
 
         $areaDataTable->addScope($scope);
 
@@ -66,7 +66,7 @@ class AreaController extends AppBaseController
         /** @var Area $area */
         $area = Area::create($input);
 
-        Flash::success('Area guardado exitosamente.');
+        flash()->success('Area guardado exitosamente.');
 
         return redirect(route('areas.index'));
     }
@@ -84,7 +84,7 @@ class AreaController extends AppBaseController
         $area = Area::find($id);
 
         if (empty($area)) {
-            Flash::error('Area no encontrado');
+            flash()->error('Area no encontrada');
 
             return redirect(route('areas.index'));
         }
@@ -105,7 +105,7 @@ class AreaController extends AppBaseController
         $area = Area::find($id);
 
         if (empty($area)) {
-            Flash::error('Area no encontrado');
+            flash()->error('Area no encontrada');
 
             return redirect(route('areas.index'));
         }
@@ -127,7 +127,7 @@ class AreaController extends AppBaseController
         $area = Area::find($id);
 
         if (empty($area)) {
-            Flash::error('Area no encontrado');
+            flash()->error('Area no encontrada');
 
             return redirect(route('areas.index'));
         }
@@ -135,7 +135,7 @@ class AreaController extends AppBaseController
         $area->fill($request->all());
         $area->save();
 
-        Flash::success('Area actualizado con éxito.');
+        flash()->success('Area actualizado con éxito.');
 
         return redirect(route('areas.index'));
     }
@@ -155,14 +155,33 @@ class AreaController extends AppBaseController
         $area = Area::find($id);
 
         if (empty($area)) {
-            Flash::error('Area no encontrado');
+            flash()->error('Area no encontrada');
 
             return redirect(route('areas.index'));
         }
 
         $area->delete();
 
-        Flash::success('Area deleted successfully.');
+        flash()->success('Area deleted successfully.');
+
+        return redirect(route('areas.index'));
+    }
+
+    public function restore($id)
+    {
+
+        /** @var Area $area */
+        $area = Area::onlyTrashed()->find($id);
+
+        if (empty($area)) {
+            flash()->error('Area no encontrada');
+
+            return redirect(route('areas.index'));
+        }
+
+        $area->restore();
+
+        flash()->success('Area restaurada!');
 
         return redirect(route('areas.index'));
     }

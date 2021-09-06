@@ -8,6 +8,8 @@ class ScopeAreaDataTable implements DataTableScope
 {
     public $cargos;
 
+    public $eliminadas;
+
     /**
      * Apply a query scope.
      *
@@ -28,5 +30,14 @@ class ScopeAreaDataTable implements DataTableScope
             }
 
         }
+
+        if (!is_null($this->eliminadas)){
+
+
+                $query->withTrashed();
+
+        }
+
+
     }
 }
