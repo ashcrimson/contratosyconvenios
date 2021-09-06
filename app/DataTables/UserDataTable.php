@@ -28,7 +28,7 @@ class UserDataTable extends DataTable
 
         })->editColumn('area.nombre',function (User $user){
 
-            return $user->area->nombre ?? 'Si area';
+            return $user->area->nombre ?? 'sin area';
 
         })->editColumn('roles',function (User $user){
 

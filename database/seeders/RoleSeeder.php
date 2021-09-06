@@ -84,13 +84,13 @@ class RoleSeeder extends Seeder
         $role = Role::create(["name" => "SUB DIRECTOR"]);
 
         $role->syncPermissions([
-            'Asignar Contratos a cargo',
-            'Asignar Contratos a area',
+//            'Asignar Contratos a cargo',
+//            'Asignar Contratos a area',
             'Agregar Bitacora Contratos',
             'Eliminar Bitacora Contratos',
-            'Admin detalles contrato',
-            'Editar detalle contrato',
-            'Eliminar detalle contrato',
+//            'Admin detalles contrato',
+//            'Editar detalle contrato',
+//            'Eliminar detalle contrato',
 
             'Ver opcion menu',
             'Ver Contratos',
