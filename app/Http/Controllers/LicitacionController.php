@@ -22,10 +22,10 @@ class LicitacionController extends AppBaseController
 
     public function __construct()
     {
-        $this->middleware('permission:Ver Licitacions')->only(['show']);
-        $this->middleware('permission:Crear Licitacions')->only(['create','store']);
-        $this->middleware('permission:Editar Licitacions')->only(['edit','update',]);
-        $this->middleware('permission:Eliminar Licitacions')->only(['destroy']);
+        $this->middleware('permission:Ver Licitaciones')->only(['show']);
+        $this->middleware('permission:Crear Licitaciones')->only(['create','store']);
+        $this->middleware('permission:Editar Licitaciones')->only(['edit','update',]);
+        $this->middleware('permission:Eliminar Licitaciones')->only(['destroy']);
     }
 
     /**
