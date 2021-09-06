@@ -178,7 +178,7 @@
                                             @endcan
 
                                             @can('Eliminar detalle contrato')
-                                            <button type="button"  class='btn btn-outline-danger btn-sm' v-tooltip="'Eliminar'" >
+                                            <button type="button" @click="deleteItem(item)"  class='btn btn-outline-danger btn-sm' v-tooltip="'Eliminar'" >
                                                 <i class="fa fa-trash-alt"></i>
                                             </button>
                                             @endcan
@@ -293,12 +293,34 @@
                     }
 
                 },
-                confirmDelete: function(item) {
-                    this.itemElimina = item;
-                    $('#modalDeleteItem').modal('show');
-                },
-                deleteItem: function(item) {
+                async deleteItem(item) {
 
+                    let confirm = await Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: "¡No podrás revertir esto!",
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si, elimínalo\n!'
+                    });
+
+                    if (confirm.isConfirmed){
+                        try{
+                            let res = await  axios.delete(route('api.contrato_items.destroy',item.id))
+                            logI(res.data);
+
+                            iziTs(res.data.message);
+                            this.getItems();
+
+
+                        }catch (e){
+                            notifyErrorApi(e);
+                            this.itemElimina = {};
+                        }
+
+                    }
+
+                    console.log("Confirmacion",confirm);
                 }
             },
             computed: {
