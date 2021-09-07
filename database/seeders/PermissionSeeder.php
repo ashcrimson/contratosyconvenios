@@ -47,6 +47,7 @@ class PermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => 'Ver Areas']);
             Permission::firstOrCreate(['name' => 'Crear Areas']);
             Permission::firstOrCreate(['name' => 'Editar Areas']);
+            Permission::firstOrCreate(['name' => 'Restaurar Areas']);
             Permission::firstOrCreate(['name' => 'Eliminar Areas']);
 
 

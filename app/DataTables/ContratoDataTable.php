@@ -137,11 +137,14 @@ class ContratoDataTable extends DataTable
             'monto',
             'saldo' => ['searchable' => false,'orderable' => false],
             'adjunto' => ['searchable' => false,'orderable' => false],
+           
 
-        ];
+        ];  
 
         if (auth()->user()->can('Asignar Contratos a area')){
             $columns['asignar_area'] = ['searchable' => false,'orderable' => false];
+        } else {
+            $columns['cargo.nombre'] = ['searchable' => false,'orderable' => false];
         }
 
 
