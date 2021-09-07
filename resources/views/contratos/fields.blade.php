@@ -113,13 +113,13 @@
         {!! Form::label('alerta_vencimiento_boleta', 'Alerta Vencimiento Boleta:') !!}
         {!! Form::date('alerta_vencimiento_boleta', onlyDate($contrato->alerta_vencimiento_boleta ?? null), ['class' => 'form-control','id'=>'alerta_vencimiento_boleta']) !!}
     </div>
-
+  
     <div class="form-group col-sm-6 ">
         {!! Form::label('adjunto', 'Adjuntar contrato.:') !!}
         @isset($contrato)
             @include('contratos.partials.documento',['documento' => $contrato->getLastDocumento() ])
         @endisset
-        {!! Form::file('adjunto', ['class' => 'form-control file']) !!}
+        {!! Form::file('adjuntos[]', ['id' => 'adjuntos','class' => 'form-control file','multiple']) !!}
     </div>
 
 </div>
