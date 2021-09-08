@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Contrato
  * @package App\Models
- * @version August 17, 2021, 3:45 pm CST
+ * @version September 7, 2021, 7:53 pm CST
  *
  * @property \App\Models\Area $areaAsignado
  * @property \App\Models\Cargo $cargo
@@ -26,11 +26,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $tipo_id
  * @property integer $licitacion_id
  * @property integer $proveedor_id
- * @property integer $cargo_id
  * @property integer $moneda_id
+ * @property integer $cargo_id
  * @property integer $area_asignado
  * @property number $monto
  * @property number $saldo
+ * @property boolean $tiene_detalles
  * @property boolean $estado_alerta
  * @property string $fecha_inicio
  * @property string $fecha_termino
@@ -64,10 +65,11 @@ class Contrato extends Model
         'tipo_id',
         'licitacion_id',
         'proveedor_id',
+        'moneda_id',
         'cargo_id',
         'area_asignado',
-        'moneda_id',
         'monto',
+        'tiene_detalles',
         'estado_alerta',
         'fecha_inicio',
         'fecha_termino',
@@ -94,9 +96,11 @@ class Contrato extends Model
         'tipo_id' => 'integer',
         'licitacion_id' => 'integer',
         'proveedor_id' => 'integer',
-        'cargo_id' => 'integer',
         'moneda_id' => 'integer',
+        'cargo_id' => 'integer',
+        'area_asignado' => 'integer',
         'monto' => 'decimal:0',
+        'tiene_detalles' => 'boolean',
         'estado_alerta' => 'boolean',
         'fecha_inicio' => 'date',
         'fecha_termino' => 'date',
@@ -125,7 +129,8 @@ class Contrato extends Model
         'cargo_id' => 'required',
         'moneda_id' => 'required|integer',
         'monto' => 'required|numeric',
-        'estado_alerta' => 'required|boolean',
+        'tiene_detalles' => 'nullable|boolean',
+        'estado_alerta' => 'nullable|boolean',
         'fecha_inicio' => 'required',
         'fecha_termino' => 'required',
         'fecha_aprobacion' => 'required',

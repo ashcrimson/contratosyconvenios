@@ -114,6 +114,25 @@
         {!! Form::date('alerta_vencimiento_boleta', onlyDate($contrato->alerta_vencimiento_boleta ?? null), ['class' => 'form-control','id'=>'alerta_vencimiento_boleta']) !!}
     </div>
 
+
+    <!-- Tiene Detalles Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('tiene_detalles', '¿Tiene detalles?') !!}
+        <div>
+
+            <toggle-button v-model="tiene_detalles"
+                           :sync="true"
+                           :labels="{checked: 'SI', unchecked: 'NO'}"
+                           :height="30"
+                           :width="60"
+                           :value="false"
+            />
+
+        </div>
+        <input type="hidden" name="tiene_detalles" :value="tiene_detalles ? 1 : 0">
+
+    </div>
+
     <div class="form-group col-sm-6 ">
         {!! Form::label('adjunto', 'Adjuntar contrato.:') !!}
         @isset($contrato)
@@ -146,6 +165,8 @@
 
             monedas : @json(\App\Models\Moneda::all() ?? []),
             moneda: @json($contrato->moneda ?? null),
+            tiene_detalles: @json($contrato->tiene_detalles ?? old('tiene_detalles') ?? null),
+
 
         },
         methods: {
