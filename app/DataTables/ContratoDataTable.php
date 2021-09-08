@@ -41,6 +41,16 @@ class ContratoDataTable extends DataTable
             ->editColumn('saldo' ,function (Contrato  $contrato){
                 return nfp($contrato->saldo);
             })
+//            ->editColumn('tiene_detalles' ,function (Contrato  $contrato){
+//                return $contrato->items->count() > 0 ? "Sí" : 'NO';
+//            })
+            ->editColumn('tiene_detalles' ,function (Contrato  $contrato){
+                if (is_null($contrato->tiene_detalles)){
+                    return '';
+                }else{
+                    return $contrato->tiene_detalles ? "Sí" : 'NO';
+                }
+            })
 
             ->editColumn('adjunto' ,function (Contrato  $contrato){
 
@@ -135,11 +145,12 @@ class ContratoDataTable extends DataTable
             'proveedor' => ['data' => 'proveedor.razon_social','name' => 'proveedor.razon_social','orderable' => false],
             'licitacion' => ['data' => 'licitacion.numero','name' => 'licitacion.numero','orderable' => false],
             'monto',
+            'tiene_detalles',
             'saldo' => ['searchable' => false,'orderable' => false],
             'adjunto' => ['searchable' => false,'orderable' => false],
-           
 
-        ];  
+
+        ];
 
         if (auth()->user()->can('Asignar Contratos a area')){
             $columns['asignar_area'] = ['searchable' => false,'orderable' => false];
