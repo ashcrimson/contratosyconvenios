@@ -138,8 +138,10 @@ class UsersTableSeeder extends Seeder
                 break;
             case 4://ADMIN_TÉCNICO
                 return [19,17,18];
+            case 5://SUB_DIRECTOR
+                return [19,17,18];
                 break;
-            default://SUB_DIRECTOR
+            default: // los que no tienen rol o tienen uno mayor a 5
                 return [19,17,18];
         }
 
