@@ -46,12 +46,18 @@ class UsersTableSeeder extends Seeder
             ]);
 
             $rol = $this->getRole($user->id_permiso);
-            $opciones = $this->getOptions($user->id_permiso);
+
 
             if ($rol){
                 $newUser->syncRoles([$rol]);
+            }
+
+            $opciones = $this->getOptions($user->id_permiso);
+
+            if ($opciones){
                 $newUser->options()->sync($opciones);
             }
+
         }
 
         $maxId = $usuarios->max('id_usuario');
