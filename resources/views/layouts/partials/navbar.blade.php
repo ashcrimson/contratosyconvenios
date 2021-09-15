@@ -120,7 +120,7 @@
                             <div class="row border-top ">
                                 <div class="col border-right ">
                                     <div class="description-block">
-                                        <a class="btn btn-outline-info" href="{{ route('profile') }}">
+                                        <a class="btn btn-outline-info" href="#">
                                             {{ __('Profile') }}
                                         </a>
                                     </div>

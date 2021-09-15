@@ -44,11 +44,11 @@ class ContratoDataTable extends DataTable
 //            ->editColumn('tiene_detalles' ,function (Contrato  $contrato){
 //                return $contrato->items->count() > 0 ? "Sí" : 'NO';
 //            })
-            ->editColumn('tiene_detalles' ,function (Contrato  $contrato){
-                if (is_null($contrato->tiene_detalles)){
+            ->editColumn('fecha_termino' ,function (Contrato  $contrato){
+                if (is_null($contrato->fecha_termino)){  
                     return '';
                 }else{
-                    return $contrato->tiene_detalles ? "Sí" : 'NO';
+                    return $contrato->fecha_termino;
                 }
             })
 
@@ -145,7 +145,7 @@ class ContratoDataTable extends DataTable
             'proveedor' => ['data' => 'proveedor.razon_social','name' => 'proveedor.razon_social','orderable' => false],
             'licitacion' => ['data' => 'licitacion.numero','name' => 'licitacion.numero','orderable' => false],
             'monto',
-            'tiene_detalles',
+            'fecha_termino',
             'saldo' => ['searchable' => false,'orderable' => false],
             'adjunto' => ['searchable' => false,'orderable' => false],
 
