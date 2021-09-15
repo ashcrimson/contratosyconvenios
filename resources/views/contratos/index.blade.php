@@ -14,11 +14,13 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item">
+                            @can('Crear Contratos')
                             <a class="btn btn-outline-success"
                                 href="{!! route('contratos.create') !!}">
                                 <i class="fa fa-plus"></i>
                                 <span class="d-none d-sm-inline">{{__('Nuevo')}}</span>
                             </a>
+                            @endcan
                         </li>
                     </ol>
                 </div>
