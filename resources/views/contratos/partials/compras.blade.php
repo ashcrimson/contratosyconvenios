@@ -9,7 +9,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($contrato->compras->sortByDesc('id') as $compra)
+    @foreach($contrato->compras->sortByDesc('fecha_envio') as $compra)
     <tr>
        <!--  <td>{{$compra->id}}</td> -->
         <td>{{$compra->numero}}</td>
