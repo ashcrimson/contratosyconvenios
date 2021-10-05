@@ -9,6 +9,7 @@ use App\Http\Requests\CreateLicitacionRequest;
 use App\Http\Requests\UpdateLicitacionRequest;
 use App\Models\Documento;
 use App\Models\Licitacion;
+use App\Models\Role;
 use App\Models\User;
 use Exception;
 use Flash;
@@ -44,6 +45,10 @@ class LicitacionController extends AppBaseController
 
         if ($user->cannot('Ver todas las licitaciones')){
             $scope->cargos = $user->cargo_id ?? 0;
+        }
+
+        if ($user->hasRole(Role::ADMIN_TÉCNICO)){
+            $scope->areas = $user->area_id ?? null;
         }
 
         $licitacionDataTable->addScope($scope);

@@ -8,6 +8,8 @@ class ScopeLicitacionDatatable implements DataTableScope
 {
 
     public $cargos;
+    public $areas;
+
     /**
      * Apply a query scope.
      *
@@ -26,6 +28,21 @@ class ScopeLicitacionDatatable implements DataTableScope
 
                 $query->whereHas('contratos',function ($queryContrato){
                     $queryContrato->where('cargo_id',$this->cargos);
+                });
+
+            }
+        }
+
+        if (!is_null($this->areas)){
+            if (is_array($this->areas)){
+
+                $query->whereHas('contratos',function ($queryContrato){
+                    $queryContrato->whereIn('area_id',$this->areas);
+                });
+            }else{
+
+                $query->whereHas('contratos',function ($queryContrato){
+                    $queryContrato->where('area_id',$this->areas);
                 });
 
             }
