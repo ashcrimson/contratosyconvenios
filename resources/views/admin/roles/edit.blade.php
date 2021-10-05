@@ -2,6 +2,8 @@
 
 @section('title_page',__('Edit Role'))
 
+@include('partials.plugins.gijgo')
+
 @section('content')
 
     <!-- Content Header (Page header) -->

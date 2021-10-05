@@ -51,6 +51,7 @@ class MonedaDataTable extends DataTable
 
 
              })
+           
            ->editColumn('al_dia',function (Moneda $moneda){
 
                return $moneda->es_valor_dia;

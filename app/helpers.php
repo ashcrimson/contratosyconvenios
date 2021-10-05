@@ -193,10 +193,11 @@ function rutaOpcion($opcion){
 }
 
 
-function optionsParentAuthUser(){
-    $authUser = Auth::user();
+function optionsParentAuthUser($user = null){
+    $authUser = $user ?? Auth::user();
 
-    $allOptions = $authUser->options;
+    //    $allOptions = $authUser->options;
+    $allOptions = $authUser->getAllOptions();
 
     $optionParent = $allOptions->filter(function ($op){
         return is_null($op->option_id);
@@ -210,7 +211,9 @@ function optionsParentAuthUser(){
 
     $options = Option::padresDe($childres)->with('children')->get();
 
-    return $optionParent->merge($options)->sortBy('orden');
+    $options = $optionParent->merge($options)->sortBy('orden');
+
+    return $options;
 
 }
 
@@ -311,4 +314,27 @@ function setConfigDailyIndicators(){
 
 function getDailyIndicators(){
     return config('app.daily_indicators');
+}
+
+/**
+ * @param \Illuminate\Database\Eloquent\Collection $items
+ * @param $id
+ * @return null
+ */
+function validaCheched($items = null,$id){
+    if (!$items){
+        return null;
+    }
+
+
+    if ($items->contains('id',$id)){
+        return 'checked';
+    }else{
+        return null;
+    }
+
+}
+
+function prefijoCeros($numero,$cantidadCeros){
+    return str_pad($numero,$cantidadCeros,"0",STR_PAD_LEFT);
 }
