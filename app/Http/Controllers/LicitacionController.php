@@ -43,12 +43,14 @@ class LicitacionController extends AppBaseController
         $user = auth()->user();
         $scope = new ScopeLicitacionDatatable();
 
-        if ($user->cannot('Ver todas las licitaciones')){
-            $scope->cargos = $user->cargo_id ?? 0;
-        }
 
         if ($user->hasRole(Role::ADMIN_TÉCNICO)){
+
             $scope->areas = $user->area_id ?? null;
+        }else{
+            if ($user->cannot('Ver todas las licitaciones')){
+                $scope->cargos = $user->cargo_id ?? 0;
+            }
         }
 
         $licitacionDataTable->addScope($scope);

@@ -37,12 +37,12 @@ class ScopeLicitacionDatatable implements DataTableScope
             if (is_array($this->areas)){
 
                 $query->whereHas('contratos',function ($queryContrato){
-                    $queryContrato->whereIn('area_id',$this->areas);
+                    $queryContrato->whereIn('area_asignado',$this->areas);
                 });
             }else{
 
                 $query->whereHas('contratos',function ($queryContrato){
-                    $queryContrato->where('area_id',$this->areas);
+                    $queryContrato->where('area_asignado',$this->areas);
                 });
 
             }
