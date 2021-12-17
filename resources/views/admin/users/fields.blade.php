@@ -53,13 +53,13 @@
             'roles[]',
             select(\App\Models\Role::class,'name','id',null)
             , null
-            , ['id'=>'roless','class' => 'form-control duallistbox','multiple']
+            , ['id'=>'roless','class' => 'form-control duallistbox','single']
         )
     !!}
 </div>
 
 
-<div class="form-group col-sm-12">
+<!-- <div class="form-group col-sm-12">
     {!! Form::label('name', 'Permisos:') !!}
     <a class="success" data-toggle="modal" href="#modal-form-permissions" tabindex="1000">nuevo</a>
     {!!
@@ -70,10 +70,10 @@
             , ['class' => 'form-control duallistbox','multiple']
         )
     !!}
-</div>
+</div> -->
 
-@isset($user)
-    @if($user->hasRole(\App\Models\Role::SUB_DIRECTOR))
+<!-- @isset($user) -->
+  
         <div class="form-group col-sm-12">
             {!! Form::label('name', 'Cargos:') !!}
             <a class="success" data-toggle="modal" href="#modal-form-cargos" tabindex="1000">nuevo</a>
@@ -82,12 +82,12 @@
                     'cargos[]',
                     select(\App\Models\Cargo::class,'nombre','id',null)
                     , null
-                    , ['class' => 'form-control duallistbox','multiple']
+                    , ['class' => 'form-control duallistbox','single']
                 )
             !!}
         </div>
-    @endif
-@endisset
+   
+<!-- @endisset -->
 
 @push('scripts')
 <script>

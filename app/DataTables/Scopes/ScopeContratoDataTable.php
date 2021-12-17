@@ -40,5 +40,7 @@ class ScopeContratoDataTable implements DataTableScope
             }
         }
 
+        
+
     }
 }

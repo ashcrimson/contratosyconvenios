@@ -127,7 +127,9 @@ class ContratoDataTable extends DataTable
                     ['extend' => 'print', 'text' => '<i class="fa fa-print"></i> <span class="d-none d-sm-inline">Imprimir</span>'],
                     //['extend' => 'reload', 'text' => '<i class="fa fa-sync-alt"></i> <span class="d-none d-sm-inline">Recargar</span>'],
                     ['extend' => 'reset', 'text' => '<i class="fa fa-undo"></i> <span class="d-none d-sm-inline">Reiniciar</span>'],
-                    ['extend' => 'export', 'text' => '<i class="fa fa-download"></i> <span class="d-none d-sm-inline">Exportar</span>'],
+                    ['extend' => 'export',
+
+                     'text' => '<i class="fa fa-download"></i> <span class="d-none d-sm-inline">Exportar</span>'],
                 ],
             ]);
     }
@@ -145,12 +147,17 @@ class ContratoDataTable extends DataTable
             'proveedor' => ['data' => 'proveedor.razon_social','name' => 'proveedor.razon_social','orderable' => false],
             'licitacion' => ['data' => 'licitacion.numero','name' => 'licitacion.numero','orderable' => false],
             'monto',
+            'fecha_inicio',
             'fecha_termino',
+            'numero_boleta_garantia',
             'saldo' => ['searchable' => false,'orderable' => false],
-            'adjunto' => ['searchable' => false,'orderable' => false],
-
+            'adjunto' => ['searchable' => false,'orderable' => false,'exportable' => false],
+            'cargo' => ['data' => 'cargo.nombre','name' => 'cargo.nombre','orderable' => false],
+            'objeto' => ['searchable' => false,'orderable' => false],
 
         ];
+
+        
 
         if (auth()->user()->can('Asignar Contratos a area')){
             $columns['asignar_area'] = ['searchable' => false,'orderable' => false];

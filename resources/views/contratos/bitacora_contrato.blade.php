@@ -10,13 +10,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{__('Bitacora de contrato')}}</h1>
+                    <h1>{{__('Bitácora de contrato')}}</h1>
                 </div>
                 <div class="col ">
                     <a class="btn btn-outline-info float-right"
                        href="{{route('contratos.index')}}">
                         <i class="fa fa-backward" aria-hidden="true"></i>&nbsp;
-                        <span class="d-none d-sm-inline">{{__('Volver Atraz')}}</span>
+                        <span class="d-none d-sm-inline">{{__('Volver Atrás')}}</span>
                     </a>
                 </div>
             </div>
