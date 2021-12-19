@@ -39,6 +39,9 @@
         <select-area :items="areas" v-model="area" label="Area"></select-area>
     </div>
 
+    <div class="form-group col-sm-6">
+        <select-cargo :items="cargos" v-model="cargo" label="Cargo del usuario"></select-cargo>
+    </div>
 
 
 </div>
@@ -73,9 +76,9 @@
 </div> -->
 
 <!-- @isset($user) -->
-  
+
         <div class="form-group col-sm-12">
-            {!! Form::label('name', 'Cargos:') !!}
+            {!! Form::label('name', 'Cargos que puede gestionar:') !!}
             <a class="success" data-toggle="modal" href="#modal-form-cargos" tabindex="1000">nuevo</a>
             {!!
                 Form::select(
@@ -86,7 +89,7 @@
                 )
             !!}
         </div>
-   
+
 <!-- @endisset -->
 
 @push('scripts')
@@ -99,7 +102,12 @@
         },
         data: {
             areas: @json(\App\Models\Area::all() ?? []),
-            area: @json($user->area ?? \App\Models\Area::find(old('area_id')) ?? null)
+            area: @json($user->area ?? \App\Models\Area::find(old('area_id')) ?? null),
+
+            cargos: @json(\App\Models\Cargo::all() ?? []),
+            cargo: @json($user->cargo ?? \App\Models\Cargo::find(old('cargo_id')) ?? null),
+
+
         },
         methods: {
 
