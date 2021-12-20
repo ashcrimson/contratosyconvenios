@@ -85,7 +85,7 @@
                     'cargos[]',
                     select(\App\Models\Cargo::class,'nombre','id',null)
                     , null
-                    , ['class' => 'form-control duallistbox','single']
+                    , ['class' => 'form-control duallistbox','multiple']
                 )
             !!}
         </div>

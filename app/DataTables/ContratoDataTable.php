@@ -44,11 +44,20 @@ class ContratoDataTable extends DataTable
 //            ->editColumn('tiene_detalles' ,function (Contrato  $contrato){
 //                return $contrato->items->count() > 0 ? "Sí" : 'NO';
 //            })
+
             ->editColumn('fecha_termino' ,function (Contrato  $contrato){
                 if (is_null($contrato->fecha_termino)){  
                     return '';
                 }else{
-                    return $contrato->fecha_termino;
+                    return $contrato->fecha_termino->format('d/m/Y');;
+                }
+            })
+
+            ->editColumn('fecha_inicio' ,function (Contrato  $contrato){
+                if (is_null($contrato->fecha_inicio)){  
+                    return '';
+                }else{
+                    return $contrato->fecha_inicio->format('d/m/Y');;
                 }
             })
 

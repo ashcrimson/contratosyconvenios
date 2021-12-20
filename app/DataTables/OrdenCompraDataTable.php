@@ -34,6 +34,7 @@ class OrdenCompraDataTable extends DataTable
            ->editColumn('fecha_envio' ,function (OrdenCompra  $compra){
                return $compra->fecha_envio->format('d/m/Y');
            })
+           
            ->editColumn('adjunto' ,function (OrdenCompra $compra){
 
                $doc = $compra->getLastDocumento();
