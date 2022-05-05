@@ -33,6 +33,8 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
         Route::resource('contrato_items', 'ContratoItemAPIController');
 
         Route::resource('orden_compra_tipos', 'OrdenCompraTipoAPIController');
+
+        Route::resource('unidad_monetarias', 'UnidadMonetariaAPIController');
     });
 
 

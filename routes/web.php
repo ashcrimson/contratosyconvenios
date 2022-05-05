@@ -92,4 +92,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('ordenCompras/anular/{compra}', 'OrdenCompraController@anular')->name('ordenCompras.anular');
 
     Route::resource('ordenCompraTipos', 'OrdenCompraTipoController');
+
+    Route::resource('unidadMonetarias', 'UnidadMonetariaController');
 });
