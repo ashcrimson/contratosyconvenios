@@ -36,5 +36,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OrdenCompraTiposTableSeeder::class);
         $this->call(UnidadesMonetariasTableSeeder::class);
         $this->call(DespachosTiposTableSeeder::class);
+        $this->call(FormasPagosTableSeeder::class);
     }
 }

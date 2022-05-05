@@ -96,4 +96,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('unidadMonetarias', 'UnidadMonetariaController');
 
     Route::resource('despachoTipos', 'DespachoTipoController');
+
+    Route::resource('formaPagos', 'FormaPagoController');
 });

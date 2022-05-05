@@ -37,6 +37,8 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
         Route::resource('unidad_monetarias', 'UnidadMonetariaAPIController');
 
         Route::resource('despacho_tipos', 'DespachoTipoAPIController');
+
+        Route::resource('forma_pagos', 'FormaPagoAPIController');
     });
 
 
