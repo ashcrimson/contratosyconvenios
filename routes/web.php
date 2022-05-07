@@ -98,4 +98,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('despachoTipos', 'DespachoTipoController');
 
     Route::resource('formaPagos', 'FormaPagoController');
+
+    Route::resource('ocMercadoPublicos', 'OcMercadoPublicoController');
 });
