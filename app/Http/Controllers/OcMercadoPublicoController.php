@@ -7,8 +7,10 @@ use App\Http\Requests;
 use App\Http\Requests\CreateOcMercadoPublicoRequest;
 use App\Http\Requests\UpdateOcMercadoPublicoRequest;
 use App\Models\OcMercadoPublico;
+use App\Models\OcMercadoPublicoFechas;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class OcMercadoPublicoController extends AppBaseController
@@ -54,8 +56,34 @@ class OcMercadoPublicoController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var OcMercadoPublico $ocMercadoPublico */
-        $ocMercadoPublico = OcMercadoPublico::create($input);
+        try {
+            DB::beginTransaction();
+
+            /** @var OcMercadoPublico $ocMercadoPublico */
+            $ocMercadoPublico = OcMercadoPublico::create($input);
+
+            /**
+             * @var OcMercadoPublicoFechas $ocMercadoPublicoFechas
+             */
+            $ocMercadoPublicoFechas = OcMercadoPublicoFechas::create([
+                'oc_mercado_publico_id' => $ocMercadoPublico->id,
+                'fecha_creacion' => $request->get('fecha_creacion'),
+                'fecha_envio' => $request->get('fecha_envio'),
+                'fecha_aceptacion' => $request->get('fecha_aceptacion'),
+                'fecha_cancelacion' => $request->get('fecha_cancelacion'),
+                'fecha_ultima_modificacion' => $request->get('fecha_ultima_modificacion'),
+            ]);
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            if (auth()->user()->can('puede depurar')) {
+                throw $exception;
+            }
+            flash()->error($exception->getMessage());
+            return back()->withInput();
+        }
+        DB::commit();
 
         Flash::success('Oc Mercado Publico guardado exitosamente.');
 
@@ -72,7 +100,7 @@ class OcMercadoPublicoController extends AppBaseController
     public function show($id)
     {
         /** @var OcMercadoPublico $ocMercadoPublico */
-        $ocMercadoPublico = OcMercadoPublico::find($id);
+        $ocMercadoPublico = OcMercadoPublico::with(['ocMercadoPublicoFechas'])->find($id);
 
         if (empty($ocMercadoPublico)) {
             Flash::error('Oc Mercado Publico no encontrado');
@@ -93,7 +121,7 @@ class OcMercadoPublicoController extends AppBaseController
     public function edit($id)
     {
         /** @var OcMercadoPublico $ocMercadoPublico */
-        $ocMercadoPublico = OcMercadoPublico::find($id);
+        $ocMercadoPublico = OcMercadoPublico::with(['ocMercadoPublicoFechas'])->find($id);
 
         if (empty($ocMercadoPublico)) {
             Flash::error('Oc Mercado Publico no encontrado');

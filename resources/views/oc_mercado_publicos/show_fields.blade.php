@@ -97,4 +97,4 @@
 {!! Form::label('forma_pago', 'Forma Pago:') !!}
 {!! $ocMercadoPublico->formaPago->descripcion !!}<br>
 
-
+@include('oc_mercado_publicos.partials.fechas_fields')

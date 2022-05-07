@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class OcMercadoPublico
  * @package App\Models
- * @version May 6, 2022, 10:07 pm CST
+ * @version May 7, 2022, 9:52 am CST
  *
  * @property \App\Models\OrdenCompraTipo $codigoTipo
  * @property \App\Models\FormaPago $formaPago
@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \App\Models\UnidadMonetaria $tipoMoneda
  * @property \App\Models\OrdenCompraEstado $estado
  * @property \App\Models\Licitacion $licitacion
+ * @property \Illuminate\Database\Eloquent\Collection $ocMercadoPublicoFechas
  * @property string $codigo
  * @property string $nombre
  * @property integer $codigo_estado
@@ -176,5 +177,13 @@ class OcMercadoPublico extends Model
     public function licitacion()
     {
         return $this->belongsTo(\App\Models\Licitacion::class, 'codigo_licitacion');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function ocMercadoPublicoFechas()
+    {
+        return $this->hasOne(\App\Models\OcMercadoPublicoFechas::class, 'oc_mercado_publico_id');
     }
 }

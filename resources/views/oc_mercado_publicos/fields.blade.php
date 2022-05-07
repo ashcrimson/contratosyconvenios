@@ -138,6 +138,8 @@
     </div>
 </div>
 
+@include('oc_mercado_publicos.partials.fechas_fields')
+
 @push('scripts')
     <script>
         new Vue({
