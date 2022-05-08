@@ -41,6 +41,8 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
         Route::resource('forma_pagos', 'FormaPagoAPIController');
 
         Route::resource('oc_mercado_publicos', 'OcMercadoPublicoAPIController');
+
+        Route::resource('oc_mercado_publico_items', 'OcMercadoPublicoItemAPIController');
     });
 
 

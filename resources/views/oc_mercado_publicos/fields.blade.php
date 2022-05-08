@@ -139,6 +139,9 @@
 </div>
 
 @include('oc_mercado_publicos.partials.fechas_fields')
+@if(Route::is('ocMercadoPublicos.edit') )
+    @include('oc_mercado_publicos.partials.items')
+@endif
 
 @push('scripts')
     <script>
