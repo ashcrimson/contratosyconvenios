@@ -14,6 +14,11 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item">
+                            <a class="btn btn-outline-primary"
+                                href="{!! route('ocMercadoPublicos.create') !!}">
+                                <i class="fa fa-plus"></i>
+                                <span class="d-none d-sm-inline">{{__('Realizar Carga')}}</span>
+                            </a>
                             <a class="btn btn-outline-success"
                                 href="{!! route('ocMercadoPublicos.create') !!}">
                                 <i class="fa fa-plus"></i>

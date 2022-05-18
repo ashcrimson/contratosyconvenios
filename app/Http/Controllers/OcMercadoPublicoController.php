@@ -11,6 +11,7 @@ use App\Models\OcMercadoPublicoFechas;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Response;
 
 class OcMercadoPublicoController extends AppBaseController
@@ -42,7 +43,19 @@ class OcMercadoPublicoController extends AppBaseController
      */
     public function create()
     {
-        return view('oc_mercado_publicos.create');
+
+        $response = Http::get('http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json',
+            [
+                'codigo' => '3191-4726-SE21',
+                'ticket' => 'B5E38DC9-CE33-43A4-A364-F5F6DAE82328'
+            ]
+        );
+
+        dd($response->json());
+
+//        http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json?codigo=3191-4726-SE21&ticket=B5E38DC9-CE33-43A4-A364-F5F6DAE82328
+
+//        return view('oc_mercado_publicos.create');
     }
 
     /**
@@ -184,5 +197,10 @@ class OcMercadoPublicoController extends AppBaseController
         Flash::success('Oc Mercado Publico deleted successfully.');
 
         return redirect(route('ocMercadoPublicos.index'));
+    }
+
+    public function carga()
+    {
+
     }
 }
