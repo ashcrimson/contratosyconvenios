@@ -100,4 +100,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('formaPagos', 'FormaPagoController');
 
     Route::resource('ocMercadoPublicos', 'OcMercadoPublicoController');
+    Route::get('ocMercadoPublicos/cargar/show', 'OcMercadoPublicoController@carga')->name('ocMercadoPublicos.carga');
+    Route::post('ocMercadoPublicos/cargar/store', 'OcMercadoPublicoController@cargaStore')->name('ocMercadoPublicos.carga.store');
 });

@@ -6,10 +6,12 @@ use App\DataTables\OcMercadoPublicoDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateOcMercadoPublicoRequest;
 use App\Http\Requests\UpdateOcMercadoPublicoRequest;
+use App\Imports\OcMercadoPublicoImport;
 use App\Models\OcMercadoPublico;
 use App\Models\OcMercadoPublicoFechas;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Response;
@@ -44,18 +46,26 @@ class OcMercadoPublicoController extends AppBaseController
     public function create()
     {
 
-        $response = Http::get('http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json',
-            [
-                'codigo' => '3191-4726-SE21',
-                'ticket' => 'B5E38DC9-CE33-43A4-A364-F5F6DAE82328'
-            ]
-        );
+//        $response = Http::get('http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json',
+//            [
+//                'codigo' => '3191-4726-ZZ21',
+//                'ticket' => 'B5E38DC9-CE33-43A4-A364-F5F6DAE82328'
+//            ]
+//        );
 
-        dd($response->json());
+//        dd($response['Listado'][0]['CodigoTipo']);
+//        dd($response->json());
+
+//        $obj = $response['Listado'][0]['Items']['Listado'];
+
+//        if (!$response['Listado']) {
+//            dd('entor if');
+//        }
+
 
 //        http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json?codigo=3191-4726-SE21&ticket=B5E38DC9-CE33-43A4-A364-F5F6DAE82328
 
-//        return view('oc_mercado_publicos.create');
+        return view('oc_mercado_publicos.create');
     }
 
     /**
@@ -201,6 +211,21 @@ class OcMercadoPublicoController extends AppBaseController
 
     public function carga()
     {
+        return view('oc_mercado_publicos.carga.import');
+    }
+
+    public function cargaStore(Request $request)
+    {
+
+        $archivo = $request->file('file');
+
+        $import = new OcMercadoPublicoImport();
+
+        $import->import($archivo);
+
+        flash('Listo! datos importados.')->success();
+
+        return redirect(route('ocMercadoPublicos.index'));
 
     }
 }

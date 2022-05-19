@@ -29,8 +29,6 @@
         <div class="container-fluid">
             <div class="clearfix"></div>
 
-
-
             <div class="clearfix"></div>
             <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
                 <li class="nav-item">
@@ -38,19 +36,18 @@
                        href="#custom-content-below-importArchivo" role="tab" aria-controls="custom-content-below-importArchivo"
                        aria-selected="true">Importar Archivo</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="custom-content-below-historialCarga-tab" data-toggle="pill"
-                       href="#custom-content-below-historialCarga" role="tab" aria-controls="custom-content-below-historialCarga"
-                       aria-selected="false">Historial</a>
-                </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" id="custom-content-below-historialCarga-tab" data-toggle="pill"--}}
+{{--                       href="#custom-content-below-historialCarga" role="tab" aria-controls="custom-content-below-historialCarga"--}}
+{{--                       aria-selected="false">Historial</a>--}}
+{{--                </li>--}}
             </ul>
             <div class="card card-primary">
                 <div class="card-body">
                     <div class="tab-content" id="custom-content-below-tabContent">
                         <div class="tab-pane fade active show" id="custom-content-below-importArchivo" role="tabpanel" aria-labelledby="custom-content-below-importArchivo-tab">
-{{--                            'url' => route('clientes.import.store'),--}}
                             {!! Form::open([
-
+                                'url' => route('ocMercadoPublicos.carga.store'),
                                 'files' => true,
                                 'role' => 'form',
                                 'class' => 'form-loading-button',
@@ -119,9 +116,7 @@
 
     <script >
 
-
         $(function () {
-
 
             $("#file").fileinput({
                 language: "es",
@@ -143,7 +138,6 @@
                 });
                 Swal.showLoading();
             });
-
 
         });
 
