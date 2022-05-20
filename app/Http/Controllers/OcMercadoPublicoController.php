@@ -250,67 +250,80 @@ class OcMercadoPublicoController extends AppBaseController
          */
         $formaPago = FormaPago::where('valor', $obj['FormaPago'])->first();
 
-        /**
-         * @var OcMercadoPublico $ocMercadoPublico
-         */
-        $ocMercadoPublico = OcMercadoPublico::create([
-            'codigo' => $obj['Codigo'],
-            'nombre' => $obj['Nombre'],
-            'codigo_estado' => intval($obj['CodigoEstado']),
-            'codigo_licitacion' => intval($obj['CodigoLicitacion']),
-            'descripcion' => $obj['Descripcion'],
-            'codigo_tipo' => $compraTipo->id,
-            'tipo_moneda' => $moneda->id ?? 1,
-            'codigo_estado_proveedor' => intval($obj['CodigoEstadoProveedor']),
-            'promedio_calificacion' => intval($obj['PromedioCalificacion']),
-            'cantidad_evaluacion' => intval($obj['CantidadEvaluacion']),
-            'descuentos' => floatval($obj['Descuentos']),
-            'cargos' => floatval($obj['Cargos']),
-            'total_neto' => floatval($obj['TotalNeto']),
-            'porcentaje_iva' => floatval($obj['PorcentajeIva']),
-            'impuestos' => floatval($obj['Impuestos']),
-            'total' => floatval($obj['Total']),
-            'financiamiento' => floatval($obj['Financiamiento']),
-            'pais' => $obj['Pais'],
-            'tipo_despacho' => $despachoTipo->id,
-            'forma_pago' => $formaPago->id
-        ]);
+        try {
+            DB::beginTransaction();
 
-        /**
-         * @var OcMercadoPublicoFechas $ocMercadoPublicoFechas
-         */
-        $ocMercadoPublicoFechas = OcMercadoPublicoFechas::create([
-            'oc_mercado_publico_id' => $ocMercadoPublico->id,
-            'fecha_creacion' => $obj['Fechas']['FechaCreacion'],
-            'fecha_envio' => $obj['Fechas']['FechaEnvio'],
-            'fecha_aceptacion' => $obj['Fechas']['FechaAceptacion'],
-            'fecha_cancelacion' => $obj['Fechas']['FechaCancelacion'],
-            'fecha_ultima_modificacion' => $obj['Fechas']['FechaUltimaModificacion'],
-        ]);
-
-        foreach ($obj['Items']['Listado'] as $item) {
             /**
-             * @var OcMercadoPublicoItem $ocMercadoPublicoItem
+             * @var OcMercadoPublico $ocMercadoPublico
              */
-            $ocMercadoPublicoItem = OcMercadoPublicoItem::create([
-                'oc_mercado_publico_id' => $ocMercadoPublico->id,
-                'correlativo' => $item['Correlativo'],
-                'codigo_categoria' => $item['CodigoCategoria'],
-                'categoria' => $item['Categoria'],
-                'codigo_producto' => $item['CodigoProducto'],
-                'producto' => $item['Producto'],
-                'especificacion_comprador' => $item['EspecificacionComprador'],
-                'especificacion_proveedor' => $item['EspecificacionProveedor'],
-                'cantidad' => $item['Cantidad'],
-                'unidad' => $item['Unidad'],
-                'moneda' => $item['Moneda'],
-                'precio_neto' => $item['PrecioNeto'],
-                'total_cargos' => $item['TotalCargos'],
-                'total_descuentos' => $item['TotalDescuentos'],
-                'total_impuestos' => $item['TotalImpuestos'],
-                'total' => $item['Total'],
+            $ocMercadoPublico = OcMercadoPublico::create([
+                'codigo' => $obj['Codigo'],
+                'nombre' => $obj['Nombre'],
+                'codigo_estado' => intval($obj['CodigoEstado']),
+                'codigo_licitacion' => intval($obj['CodigoLicitacion']),
+                'descripcion' => $obj['Descripcion'],
+                'codigo_tipo' => $compraTipo->id,
+                'tipo_moneda' => $moneda->id ?? 1,
+                'codigo_estado_proveedor' => intval($obj['CodigoEstadoProveedor']),
+                'promedio_calificacion' => intval($obj['PromedioCalificacion']),
+                'cantidad_evaluacion' => intval($obj['CantidadEvaluacion']),
+                'descuentos' => floatval($obj['Descuentos']),
+                'cargos' => floatval($obj['Cargos']),
+                'total_neto' => floatval($obj['TotalNeto']),
+                'porcentaje_iva' => floatval($obj['PorcentajeIva']),
+                'impuestos' => floatval($obj['Impuestos']),
+                'total' => floatval($obj['Total']),
+                'financiamiento' => floatval($obj['Financiamiento']),
+                'pais' => $obj['Pais'],
+                'tipo_despacho' => $despachoTipo->id,
+                'forma_pago' => $formaPago->id ?? 5
             ]);
+
+            /**
+             * @var OcMercadoPublicoFechas $ocMercadoPublicoFechas
+             */
+            $ocMercadoPublicoFechas = OcMercadoPublicoFechas::create([
+                'oc_mercado_publico_id' => $ocMercadoPublico->id,
+                'fecha_creacion' => $obj['Fechas']['FechaCreacion'],
+                'fecha_envio' => $obj['Fechas']['FechaEnvio'],
+                'fecha_aceptacion' => $obj['Fechas']['FechaAceptacion'],
+                'fecha_cancelacion' => $obj['Fechas']['FechaCancelacion'],
+                'fecha_ultima_modificacion' => $obj['Fechas']['FechaUltimaModificacion'],
+            ]);
+
+            foreach ($obj['Items']['Listado'] as $item) {
+                /**
+                 * @var OcMercadoPublicoItem $ocMercadoPublicoItem
+                 */
+                $ocMercadoPublicoItem = OcMercadoPublicoItem::create([
+                    'oc_mercado_publico_id' => $ocMercadoPublico->id,
+                    'correlativo' => $item['Correlativo'],
+                    'codigo_categoria' => $item['CodigoCategoria'],
+                    'categoria' => $item['Categoria'],
+                    'codigo_producto' => $item['CodigoProducto'],
+                    'producto' => $item['Producto'],
+                    'especificacion_comprador' => $item['EspecificacionComprador'],
+                    'especificacion_proveedor' => $item['EspecificacionProveedor'],
+                    'cantidad' => $item['Cantidad'],
+                    'unidad' => $item['Unidad'],
+                    'moneda' => $item['Moneda'],
+                    'precio_neto' => $item['PrecioNeto'],
+                    'total_cargos' => $item['TotalCargos'],
+                    'total_descuentos' => $item['TotalDescuentos'],
+                    'total_impuestos' => $item['TotalImpuestos'],
+                    'total' => $item['Total'],
+                ]);
+            }
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            if (auth()->user()->can('puede depurar')) {
+                throw $exception;
+            }
+            flash()->error($exception->getMessage());
+            return back()->withInput();
         }
+        DB::commit();
 
         flash('Listo! datos importados.')->success();
 
