@@ -221,14 +221,41 @@ class OcMercadoPublicoController extends AppBaseController
 
     public function cargaStore2(Request $request)
     {
-        $response = Http::get('http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json',
-            [
-                'codigo' => $request->get('no_oc'),
-                'ticket' => 'B5E38DC9-CE33-43A4-A364-F5F6DAE82328'
-            ]
-        );
 
-        $obj = $response['Listado'][0];
+        try {
+            $urlApi = 'http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json';
+
+            if (app()->environment()=='production'){
+                $oc = \Illuminate\Support\Facades\Http::withOptions([
+                    'proxy' => config('app.proxy'),
+                    'debug' => false
+                ])->get($urlApi,
+                    [
+                        'codigo' => $request->get('no_oc'),
+                        'ticket' => 'B5E38DC9-CE33-43A4-A364-F5F6DAE82328'
+                    ]
+                )->json();
+            } else {
+                $oc = \Illuminate\Support\Facades\Http::get($urlApi,
+                    [
+                        'codigo' => $request->get('no_oc'),
+                        'ticket' => 'B5E38DC9-CE33-43A4-A364-F5F6DAE82328'
+                    ]
+                )->json();
+            }
+        } catch (\Exception $exception) {
+            flash()->error($exception->getMessage());
+            return back()->withInput();
+        }
+
+//        $response = Http::get('http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json',
+//            [
+//                'codigo' => $request->get('no_oc'),
+//                'ticket' => 'B5E38DC9-CE33-43A4-A364-F5F6DAE82328'
+//            ]
+//        );
+
+        $obj = $oc['Listado'][0];
 
         /**
          * @var Moneda $moneda

@@ -68,7 +68,8 @@ class OcMercadoPublico extends Model
         'financiamiento',
         'pais',
         'tipo_despacho',
-        'forma_pago'
+        'forma_pago',
+        'descripcion2',
     ];
 
     /**
@@ -110,7 +111,7 @@ class OcMercadoPublico extends Model
         'nombre' => 'required|string|max:255',
         'codigo_estado' => 'nullable',
         'codigo_licitacion' => 'nullable',
-        'descripcion' => 'required|string',
+        'descripcion' => 'nullable|string',
         'codigo_tipo' => 'required|integer',
         'tipo_moneda' => 'required|integer',
         'codigo_estado_proveedor' => 'required|integer',
