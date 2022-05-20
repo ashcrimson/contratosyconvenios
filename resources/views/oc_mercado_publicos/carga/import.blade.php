@@ -121,7 +121,7 @@
             $("#file").fileinput({
                 language: "es",
                 maxFileCount: 1,
-                maxFileSize: 2000,
+                maxFileSize: 4000,
                 allowedFileExtensions: ["XLSX"],
                 showUpload: false, // hide upload button
                 showRemove: true, // hide remove button

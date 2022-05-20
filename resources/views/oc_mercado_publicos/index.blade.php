@@ -15,6 +15,11 @@
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item">
                             <a class="btn btn-outline-primary"
+                                href="{!! route('ocMercadoPublicos.carga2') !!}">
+                                <i class="fa fa-plus"></i>
+                                <span class="d-none d-sm-inline">{{__('Obtener OC Mercado Publico')}}</span>
+                            </a>
+                            <a class="btn btn-outline-primary"
                                 href="{!! route('ocMercadoPublicos.carga') !!}">
                                 <i class="fa fa-plus"></i>
                                 <span class="d-none d-sm-inline">{{__('Realizar Carga')}}</span>

@@ -56,6 +56,8 @@ class OcMercadoPublicoImport implements ToModel
 
                 $obj = $response['Listado'][0];
 
+                dd($obj);
+
                 /**
                  * @var Moneda $moneda
                  */

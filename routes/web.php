@@ -84,7 +84,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
-
     Route::resource('ordenCompraEstados', 'OrdenCompraEstadoController');
 
     Route::resource('ordenCompras', 'OrdenCompraController');
@@ -102,4 +101,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('ocMercadoPublicos', 'OcMercadoPublicoController');
     Route::get('ocMercadoPublicos/cargar/show', 'OcMercadoPublicoController@carga')->name('ocMercadoPublicos.carga');
     Route::post('ocMercadoPublicos/cargar/store', 'OcMercadoPublicoController@cargaStore')->name('ocMercadoPublicos.carga.store');
+
+    Route::get('ocMercadoPublicos/cargar/show2', 'OcMercadoPublicoController@carga2')->name('ocMercadoPublicos.carga2');
+    Route::post('ocMercadoPublicos/cargar/store2', 'OcMercadoPublicoController@cargaStore2')->name('ocMercadoPublicos.carga.store2');
 });
