@@ -13,11 +13,14 @@
 
     <!-- Codigo Estado Field -->
     <div class="form-group col-sm-4">
-        {!! Form::label('codigo_estado', 'Estado:') !!}
-        <multiselect v-model="ordenCompraEstado" :options="ordenCompraEstados" label="nombre" placeholder="Seleccione uno...">
-        </multiselect>
-        <input type="hidden" name="codigo_estado" :value="ordenCompraEstado ? ordenCompraEstado.id : null">
-{{--        {!! Form::number('codigo_estado', null, ['class' => 'form-control']) !!}--}}
+        {!! Form::label('codigo_estado', 'Codigo Estado:') !!}
+        {!! Form::number('codigo_estado', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Nombre Field -->
+    <div class="form-group col-sm-4">
+        {!! Form::label('nombre_estado', 'Nombre Estado:') !!}
+        {!! Form::text('nombre_estado', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
     </div>
 
     <!-- Codigo Licitacion Field -->

@@ -49,77 +49,77 @@
 
                             <div class="form-group col-sm-3">
                                 <label>Correlativo:</label>
-                                <input class="form-control" type="number" name="correlativo" :disabled="showItem" v-model="item.correlativo" >
+                                <input class="form-control" type="number" :disabled="showItem" v-model="item.correlativo" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Codigo Categoria:</label>
-                                <input class="form-control" type="number" name="codigo_categoria" :disabled="showItem" v-model="item.codigo_categoria" >
+                                <input class="form-control" type="number" :disabled="showItem" v-model="item.codigo_categoria" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Categoria:</label>
-                                <input class="form-control" type="text" name="categoria" :disabled="showItem" v-model="item.categoria" >
+                                <input class="form-control" type="text" :disabled="showItem" v-model="item.categoria" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Codigo Producto:</label>
-                                <input class="form-control" type="number" name="codigo_producto" :disabled="showItem" v-model="item.codigo_producto" >
+                                <input class="form-control" type="number" :disabled="showItem" v-model="item.codigo_producto" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Producto:</label>
-                                <input class="form-control" type="text" name="producto" :disabled="showItem" v-model="item.producto" >
+                                <input class="form-control" type="text" :disabled="showItem" v-model="item.producto" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Cantidad:</label>
-                                <input class="form-control" type="number" name="cantidad" :disabled="showItem" v-model="item.cantidad" >
+                                <input class="form-control" type="number" :disabled="showItem" v-model="item.cantidad" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Unidad:</label>
-                                <input class="form-control" type="number" name="unidad" :disabled="showItem" v-model="item.unidad" >
+                                <input class="form-control" type="number" :disabled="showItem" v-model="item.unidad" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Moneda:</label>
-                                <input class="form-control" type="text" name="moneda" :disabled="showItem" v-model="item.moneda" >
+                                <input class="form-control" type="text" :disabled="showItem" v-model="item.moneda" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Precio Neto:</label>
-                                <input class="form-control" type="number" name="precio_neto" :disabled="showItem" v-model="item.precio_neto" >
+                                <input class="form-control" type="number" :disabled="showItem" v-model="item.precio_neto" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Total Cargos:</label>
-                                <input class="form-control" type="number" name="total_cargos" :disabled="showItem" v-model="item.total_cargos" >
+                                <input class="form-control" type="number" :disabled="showItem" v-model="item.total_cargos" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Total Descuentos:</label>
-                                <input class="form-control" type="number" name="total_descuentos" :disabled="showItem" v-model="item.total_descuentos" >
+                                <input class="form-control" type="number" :disabled="showItem" v-model="item.total_descuentos" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Total Impuestos:</label>
-                                <input class="form-control" type="number" name="total_impuestos" :disabled="showItem" v-model="item.total_impuestos" >
+                                <input class="form-control" type="number" :disabled="showItem" v-model="item.total_impuestos" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Total:</label>
-                                <input class="form-control" type="number" name="total" :disabled="showItem" v-model="item.total" >
+                                <input class="form-control" type="number" :disabled="showItem" v-model="item.total" >
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Especificación Comprador:</label>
-                                <textarea class="form-control" name="especificacion_comprador" :disabled="showItem" v-model="item.especificacion_comprador" rows="2"></textarea>
+                                <textarea class="form-control" :disabled="showItem" v-model="item.especificacion_comprador" rows="2"></textarea>
                             </div>
 
                             <div class="form-group col-sm-3">
                                 <label>Especificación Proveedor:</label>
-                                <textarea class="form-control" name="especificacion_proveedor" :disabled="showItem" v-model="item.especificacion_proveedor" rows="2"></textarea>
+                                <textarea class="form-control" :disabled="showItem" v-model="item.especificacion_proveedor" rows="2"></textarea>
                             </div>
 
                         </div>

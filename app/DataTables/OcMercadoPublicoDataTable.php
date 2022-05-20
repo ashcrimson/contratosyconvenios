@@ -32,9 +32,6 @@ class OcMercadoPublicoDataTable extends DataTable
                  //return view('oc_mercado_publicos.modal_detalles',compact('ocMercadoPublico'))->render();
 
              })
-             ->editColumn('codigo_estado', function (OcMercadoPublico  $ocMercadoPublico) {
-                 return $ocMercadoPublico->estado->nombre ?? '';
-             })
              ->editColumn('codigo_licitacion', function (OcMercadoPublico  $ocMercadoPublico) {
                  return $ocMercadoPublico->licitacion->numero ?? '';
              })
@@ -110,7 +107,7 @@ class OcMercadoPublicoDataTable extends DataTable
         return [
             'codigo',
 //            'nombre',
-            'codigo_estado',
+            'nombre_estado',
             'codigo_licitacion',
 //            'descripcion',
             'codigo_tipo',

@@ -9,10 +9,12 @@ use App\Http\Requests\UpdateOcMercadoPublicoRequest;
 use App\Imports\OcMercadoPublicoImport;
 use App\Models\DespachoTipo;
 use App\Models\FormaPago;
+use App\Models\Licitacion;
 use App\Models\Moneda;
 use App\Models\OcMercadoPublico;
 use App\Models\OcMercadoPublicoFechas;
 use App\Models\OcMercadoPublicoItem;
+use App\Models\OrdenCompraEstado;
 use App\Models\OrdenCompraTipo;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -148,8 +150,9 @@ class OcMercadoPublicoController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateOcMercadoPublicoRequest $request)
+    public function update($id, Request $request)
     {
+
         /** @var OcMercadoPublico $ocMercadoPublico */
         $ocMercadoPublico = OcMercadoPublico::find($id);
 
@@ -248,14 +251,12 @@ class OcMercadoPublicoController extends AppBaseController
             return back()->withInput();
         }
 
-//        $response = Http::get('http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json',
-//            [
-//                'codigo' => $request->get('no_oc'),
-//                'ticket' => 'B5E38DC9-CE33-43A4-A364-F5F6DAE82328'
-//            ]
-//        );
-
         $obj = $oc['Listado'][0];
+
+        /**
+         * @var Licitacion $licitacion
+         */
+        $licitacion = Licitacion::where('numero', $obj['CodigoLicitacion'])->first();
 
         /**
          * @var Moneda $moneda
@@ -287,9 +288,10 @@ class OcMercadoPublicoController extends AppBaseController
                 'codigo' => $obj['Codigo'],
                 'nombre' => $obj['Nombre'],
                 'codigo_estado' => intval($obj['CodigoEstado']),
-                'codigo_licitacion' => intval($obj['CodigoLicitacion']),
+                'nombre_estado' => $obj['Estado'],
+                'codigo_licitacion' => $licitacion->id ?? null,
                 'descripcion' => $obj['Descripcion'],
-                'codigo_tipo' => $compraTipo->id,
+                'codigo_tipo' => $compraTipo->id ?? null,
                 'tipo_moneda' => $moneda->id ?? 1,
                 'codigo_estado_proveedor' => intval($obj['CodigoEstadoProveedor']),
                 'promedio_calificacion' => intval($obj['PromedioCalificacion']),
@@ -300,7 +302,7 @@ class OcMercadoPublicoController extends AppBaseController
                 'porcentaje_iva' => floatval($obj['PorcentajeIva']),
                 'impuestos' => floatval($obj['Impuestos']),
                 'total' => floatval($obj['Total']),
-                'financiamiento' => floatval($obj['Financiamiento']),
+                'financiamiento' => $obj['Financiamiento'],
                 'pais' => $obj['Pais'],
                 'tipo_despacho' => $despachoTipo->id,
                 'forma_pago' => $formaPago->id ?? 5
