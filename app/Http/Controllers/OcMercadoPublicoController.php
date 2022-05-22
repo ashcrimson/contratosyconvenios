@@ -16,6 +16,7 @@ use App\Models\OcMercadoPublicoFechas;
 use App\Models\OcMercadoPublicoItem;
 use App\Models\OrdenCompraEstado;
 use App\Models\OrdenCompraTipo;
+use App\Traits\GuardarLogErroresTrait;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -26,12 +27,26 @@ use Response;
 class OcMercadoPublicoController extends AppBaseController
 {
 
+    use GuardarLogErroresTrait;
+
+    private $licitaciones;
+    private $monedas;
+    private $compraTipos;
+    private $despachoTipos;
+    private $formaPagos;
+
     public function __construct()
     {
         $this->middleware('permission:Ver Oc Mercado Publicos')->only(['show']);
         $this->middleware('permission:Crear Oc Mercado Publicos')->only(['create','store']);
         $this->middleware('permission:Editar Oc Mercado Publicos')->only(['edit','update',]);
         $this->middleware('permission:Eliminar Oc Mercado Publicos')->only(['destroy']);
+
+        $this->licitaciones = Licitacion::all();
+        $this->monedas = Moneda::all();
+        $this->compraTipos = OrdenCompraTipo::all();
+        $this->despachoTipos = DespachoTipo::all();
+        $this->formaPagos = FormaPago::all();
     }
 
     /**
@@ -211,6 +226,117 @@ class OcMercadoPublicoController extends AppBaseController
 
         $import->import($archivo);
 
+        $listadoNumeroOc = $import->getListOrdenCompras();
+
+        foreach ($listadoNumeroOc as $numeroOc) {
+
+            $urlApi = 'http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json';
+
+            if (app()->environment()=='production'){
+                $oc = \Illuminate\Support\Facades\Http::withOptions([
+                    'proxy' => config('app.proxy'),
+                    'debug' => false
+                ])->get($urlApi,
+                    [
+                        'codigo' => $numeroOc,
+                        'ticket' => 'B5E38DC9-CE33-43A4-A364-F5F6DAE82328'
+                    ]
+                )->json();
+            } else {
+                $oc = \Illuminate\Support\Facades\Http::get($urlApi,
+                    [
+                        'codigo' => $numeroOc,
+                        'ticket' => 'B5E38DC9-CE33-43A4-A364-F5F6DAE82328'
+                    ]
+                )->json();
+            }
+
+            if (isset($oc["Listado"])) {
+                $obj = $oc["Listado"][0];
+
+                try {
+                    DB::beginTransaction();
+
+                    /**
+                     * @var OcMercadoPublico $ocMercadoPublico
+                     */
+                    $ocMercadoPublico = OcMercadoPublico::create([
+                        'codigo' => $obj['Codigo'],
+                        'nombre' => $obj['Nombre'],
+                        'codigo_estado' => intval($obj['CodigoEstado']),
+                        'nombre_estado' => $obj['Estado'],
+                        'codigo_licitacion' => $this->getLicitacionPorNumero($obj['CodigoLicitacion'])->id ?? null,
+                        'descripcion' => $obj['Descripcion'],
+                        'codigo_tipo' => $this->getCompraTipoPorCodigo($obj['CodigoTipo'])->id ?? null,
+                        'tipo_moneda' => $this->getMonedaPorCodigo($obj['TipoMoneda'])->id ?? 1,
+                        'codigo_estado_proveedor' => intval($obj['CodigoEstadoProveedor']),
+                        'promedio_calificacion' => intval($obj['PromedioCalificacion']),
+                        'cantidad_evaluacion' => intval($obj['CantidadEvaluacion']),
+                        'descuentos' => floatval($obj['Descuentos']),
+                        'cargos' => floatval($obj['Cargos']),
+                        'total_neto' => floatval($obj['TotalNeto']),
+                        'porcentaje_iva' => floatval($obj['PorcentajeIva']),
+                        'impuestos' => floatval($obj['Impuestos']),
+                        'total' => floatval($obj['Total']),
+                        'financiamiento' => $obj['Financiamiento'],
+                        'pais' => $obj['Pais'],
+                        'tipo_despacho' => $this->getDespachoTipoPorValor($obj['TipoDespacho'])->id,
+                        'forma_pago' => $this->getFormaPagoPorValor($obj['FormaPago'])->id ?? 5
+                    ]);
+
+                    /**
+                     * @var OcMercadoPublicoFechas $ocMercadoPublicoFechas
+                     */
+                    $ocMercadoPublicoFechas = OcMercadoPublicoFechas::create([
+                        'oc_mercado_publico_id' => $ocMercadoPublico->id,
+                        'fecha_creacion' => $obj['Fechas']['FechaCreacion'],
+                        'fecha_envio' => $obj['Fechas']['FechaEnvio'],
+                        'fecha_aceptacion' => $obj['Fechas']['FechaAceptacion'],
+                        'fecha_cancelacion' => $obj['Fechas']['FechaCancelacion'],
+                        'fecha_ultima_modificacion' => $obj['Fechas']['FechaUltimaModificacion'],
+                    ]);
+
+                    foreach ($obj['Items']['Listado'] as $item) {
+                        /**
+                         * @var OcMercadoPublicoItem $ocMercadoPublicoItem
+                         */
+                        $ocMercadoPublicoItem = OcMercadoPublicoItem::create([
+                            'oc_mercado_publico_id' => $ocMercadoPublico->id,
+                            'correlativo' => $item['Correlativo'],
+                            'codigo_categoria' => $item['CodigoCategoria'],
+                            'categoria' => $item['Categoria'],
+                            'codigo_producto' => $item['CodigoProducto'],
+                            'producto' => $item['Producto'],
+                            'especificacion_comprador' => $item['EspecificacionComprador'],
+                            'especificacion_proveedor' => $item['EspecificacionProveedor'],
+                            'cantidad' => $item['Cantidad'],
+                            'unidad' => $item['Unidad'],
+                            'moneda' => $item['Moneda'],
+                            'precio_neto' => $item['PrecioNeto'],
+                            'total_cargos' => $item['TotalCargos'],
+                            'total_descuentos' => $item['TotalDescuentos'],
+                            'total_impuestos' => $item['TotalImpuestos'],
+                            'total' => $item['Total'],
+                        ]);
+                    }
+                } catch (\Exception $exception) {
+                    DB::rollBack();
+
+                    if (auth()->user()->can('puede depurar')) {
+                        throw $exception;
+                    }
+                    flash()->error($exception->getMessage());
+                    return back()->withInput();
+                }
+                DB::commit();
+
+                sleep(2);
+            } else {
+                $this->guardarLog('No pudo Consultar o Guardar el OC: '.$numeroOc);
+            }
+
+        }
+
         flash('Listo! datos importados.')->success();
 
         return redirect(route('ocMercadoPublicos.index'));
@@ -358,5 +484,30 @@ class OcMercadoPublicoController extends AppBaseController
 
         return redirect( route('ocMercadoPublicos.index') );
 
+    }
+
+    public function getLicitacionPorNumero($numero)
+    {
+        return $this->licitaciones->where('numero', $numero)->first();
+    }
+
+    public function getMonedaPorCodigo($codigo)
+    {
+        return $this->monedas->where('codigo', $codigo)->first();
+    }
+
+    public function getCompraTipoPorCodigo($codigo)
+    {
+        return $this->compraTipos->where('codigo', $codigo)->first();
+    }
+
+    public function getDespachoTipoPorValor($valor)
+    {
+        return $this->despachoTipos->where('valor', $valor)->first();
+    }
+
+    public function getFormaPagoPorValor($valor)
+    {
+        return $this->formaPagos->where('valor', $valor)->first();
     }
 }

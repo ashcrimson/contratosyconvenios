@@ -51,7 +51,7 @@
                                 'files' => true,
                                 'role' => 'form',
                                 'class' => 'form-loading-button',
-                                'id' => 'formImportClientes'
+                                'id' => 'formImportClientesImport'
 
                             ]) !!}
                             <div class="form-row">
@@ -130,15 +130,15 @@
                 theme: "fa",
             });
 
-            $( "#formImportClientes" ).submit(function( event ) {
-                Swal({
-                    title: 'Espera por favor...',
-                    allowEscapeKey: false,
-                    allowOutsideClick: false
-                });
-                Swal.showLoading();
-            });
+        });
 
+        $( "#formImportClientesImport" ).submit(function( event ) {
+            Swal({
+                title: 'Espera por favor...',
+                allowEscapeKey: false,
+                allowOutsideClick: false
+            });
+            Swal.showLoading();
         });
 
     </script>
