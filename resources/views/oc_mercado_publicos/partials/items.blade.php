@@ -138,6 +138,7 @@
             <table class="table table-bordered table-sm table-striped mb-0">
                 <thead>
                 <tr>
+                    <th>Codigo Producto</th>
                     <th>Producto</th>
                     <th>Cantidad</th>
                     <th>Moneda</th>
@@ -151,6 +152,9 @@
                     <td colspan="10" class="text-center">Ningún Registro agregado</td>
                 </tr>
                 <tr v-for="item in itemsOcMercadoPublico">
+                    <td>
+                        <span v-text="item.codigo_producto"></span>
+                    </td>
                     <td>
                         <span v-text="item.producto"></span>
                     </td>
