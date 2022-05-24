@@ -134,6 +134,18 @@
 {{--        {!! Form::number('forma_pago', null, ['class' => 'form-control']) !!}--}}
     </div>
 
+    <!-- Estado Proveedor Field -->
+    <div class="form-group col-sm-4">
+        {!! Form::label('estado_proveedor', 'Estado Proveedor:') !!}
+        {!! Form::text('estado_proveedor', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
+    </div>
+
+    <!-- Cantidad Items Field -->
+    <div class="form-group col-sm-4">
+        {!! Form::label('cantidad_items', 'Cantidad Items:') !!}
+        {!! Form::text('cantidad_items', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
+    </div>
+
     <!-- Descripcion Field -->
     <div class="form-group col-sm-12 col-lg-12">
         {!! Form::label('descripcion', 'Descripcion:') !!}

@@ -70,6 +70,8 @@ class OcMercadoPublico extends Model
         'pais',
         'tipo_despacho',
         'forma_pago',
+        'estado_proveedor',
+        'cantidad_items',
     ];
 
     /**

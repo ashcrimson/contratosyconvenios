@@ -12,6 +12,7 @@ use App\Models\FormaPago;
 use App\Models\Licitacion;
 use App\Models\Moneda;
 use App\Models\OcMercadoPublico;
+use App\Models\OcmercadoPublicoComprador;
 use App\Models\OcMercadoPublicoFechas;
 use App\Models\OcMercadoPublicoItem;
 use App\Models\OrdenCompraEstado;
@@ -281,7 +282,9 @@ class OcMercadoPublicoController extends AppBaseController
                         'financiamiento' => $obj['Financiamiento'],
                         'pais' => $obj['Pais'],
                         'tipo_despacho' => $this->getDespachoTipoPorValor($obj['TipoDespacho'])->id,
-                        'forma_pago' => $this->getFormaPagoPorValor($obj['FormaPago'])->id ?? 5
+                        'forma_pago' => $this->getFormaPagoPorValor($obj['FormaPago'])->id ?? 5,
+                        'estado_proveedor' => $obj['EstadoProveedor'],
+                        'cantidad_items' => $obj['Items']['Cantidad'],
                     ]);
 
                     /**
@@ -295,6 +298,29 @@ class OcMercadoPublicoController extends AppBaseController
                         'fecha_cancelacion' => $obj['Fechas']['FechaCancelacion'],
                         'fecha_ultima_modificacion' => $obj['Fechas']['FechaUltimaModificacion'],
                     ]);
+
+                    if ($obj['Comprador']) {
+                        /**
+                         * @var OcmercadoPublicoComprador $ocMercadoPublicoComprador
+                         */
+                        $ocMercadoPublicoComprador = OcmercadoPublicoComprador::create([
+                            'oc_mercado_publico_id' => $ocMercadoPublico->id,
+                            'codigo_organismo' => $obj['Comprador']['CodigoOrganismo'],
+                            'nombre_organismo' => $obj['Comprador']['NombreOrganismo'],
+                            'rut_unidad' => $obj['Comprador']['RutUnidad'],
+                            'codigo_unidad' => $obj['Comprador']['CodigoUnidad'],
+                            'nombre_unidad' => $obj['Comprador']['NombreUnidad'],
+                            'actividad' => $obj['Comprador']['Actividad'],
+                            'direccion_unidad' => $obj['Comprador']['DireccionUnidad'],
+                            'comuna_unidad' => $obj['Comprador']['ComunaUnidad'],
+                            'region_unidad' => $obj['Comprador']['RegionUnidad'],
+                            'pais' => $obj['Comprador']['Pais'],
+                            'nombre_contacto' => $obj['Comprador']['NombreContacto'],
+                            'cargo_contacto' => $obj['Comprador']['CargoContacto'],
+                            'fono_contacto' => $obj['Comprador']['FonoContacto'],
+                            'mail_contacto' => $obj['Comprador']['MailContacto'],
+                        ]);
+                    }
 
                     foreach ($obj['Items']['Listado'] as $item) {
                         /**
@@ -379,31 +405,6 @@ class OcMercadoPublicoController extends AppBaseController
 
         $obj = $oc['Listado'][0];
 
-        /**
-         * @var Licitacion $licitacion
-         */
-        $licitacion = Licitacion::where('numero', $obj['CodigoLicitacion'])->first();
-
-        /**
-         * @var Moneda $moneda
-         */
-        $moneda = Moneda::where('codigo', $obj['TipoMoneda'])->first();
-
-        /**
-         * @var OrdenCompraTipo $compraTipo
-         */
-        $compraTipo = OrdenCompraTipo::where('codigo', $obj['CodigoTipo'])->first();
-
-        /**
-         * @var DespachoTipo $despachoTipo
-         */
-        $despachoTipo = DespachoTipo::where('valor', $obj['TipoDespacho'])->first();
-
-        /**
-         * @var FormaPago $formaPago
-         */
-        $formaPago = FormaPago::where('valor', $obj['FormaPago'])->first();
-
         try {
             DB::beginTransaction();
 
@@ -415,10 +416,10 @@ class OcMercadoPublicoController extends AppBaseController
                 'nombre' => $obj['Nombre'],
                 'codigo_estado' => intval($obj['CodigoEstado']),
                 'nombre_estado' => $obj['Estado'],
-                'codigo_licitacion' => $licitacion->id ?? null,
+                'codigo_licitacion' => $this->getLicitacionPorNumero($obj['CodigoLicitacion'])->id ?? null,
                 'descripcion' => $obj['Descripcion'],
-                'codigo_tipo' => $compraTipo->id ?? null,
-                'tipo_moneda' => $moneda->id ?? 1,
+                'codigo_tipo' => $this->getCompraTipoPorCodigo($obj['CodigoTipo'])->id ?? null,
+                'tipo_moneda' => $this->getMonedaPorCodigo($obj['TipoMoneda'])->id ?? 1,
                 'codigo_estado_proveedor' => intval($obj['CodigoEstadoProveedor']),
                 'promedio_calificacion' => intval($obj['PromedioCalificacion']),
                 'cantidad_evaluacion' => intval($obj['CantidadEvaluacion']),
@@ -430,8 +431,10 @@ class OcMercadoPublicoController extends AppBaseController
                 'total' => floatval($obj['Total']),
                 'financiamiento' => $obj['Financiamiento'],
                 'pais' => $obj['Pais'],
-                'tipo_despacho' => $despachoTipo->id,
-                'forma_pago' => $formaPago->id ?? 5
+                'tipo_despacho' => $this->getDespachoTipoPorValor($obj['TipoDespacho'])->id,
+                'forma_pago' => $this->getFormaPagoPorValor($obj['FormaPago'])->id ?? 5,
+                'estado_proveedor' => $obj['EstadoProveedor'],
+                'cantidad_items' => $obj['Items']['Cantidad'],
             ]);
 
             /**
@@ -445,6 +448,29 @@ class OcMercadoPublicoController extends AppBaseController
                 'fecha_cancelacion' => $obj['Fechas']['FechaCancelacion'],
                 'fecha_ultima_modificacion' => $obj['Fechas']['FechaUltimaModificacion'],
             ]);
+
+            if ($obj['Comprador']) {
+                /**
+                 * @var OcmercadoPublicoComprador $ocMercadoPublicoComprador
+                 */
+                $ocMercadoPublicoComprador = OcmercadoPublicoComprador::create([
+                    'oc_mercado_publico_id' => $ocMercadoPublico->id,
+                    'codigo_organismo' => $obj['Comprador']['CodigoOrganismo'],
+                    'nombre_organismo' => $obj['Comprador']['NombreOrganismo'],
+                    'rut_unidad' => $obj['Comprador']['RutUnidad'],
+                    'codigo_unidad' => $obj['Comprador']['CodigoUnidad'],
+                    'nombre_unidad' => $obj['Comprador']['NombreUnidad'],
+                    'actividad' => $obj['Comprador']['Actividad'],
+                    'direccion_unidad' => $obj['Comprador']['DireccionUnidad'],
+                    'comuna_unidad' => $obj['Comprador']['ComunaUnidad'],
+                    'region_unidad' => $obj['Comprador']['RegionUnidad'],
+                    'pais' => $obj['Comprador']['Pais'],
+                    'nombre_contacto' => $obj['Comprador']['NombreContacto'],
+                    'cargo_contacto' => $obj['Comprador']['CargoContacto'],
+                    'fono_contacto' => $obj['Comprador']['FonoContacto'],
+                    'mail_contacto' => $obj['Comprador']['MailContacto'],
+                ]);
+            }
 
             foreach ($obj['Items']['Listado'] as $item) {
                 /**
