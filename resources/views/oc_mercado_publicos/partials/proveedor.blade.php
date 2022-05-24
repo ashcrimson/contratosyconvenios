@@ -20,72 +20,72 @@
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('codigo', 'Codigo:') !!}
-                        {!! Form::text('codigo', $ocMercadoPublico->ocMercadoPublicoProveedor->codigo ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('codigo_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->codigo ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('nombre', 'Nombre:') !!}
-                        {!! Form::text('nombre', $ocMercadoPublico->ocMercadoPublicoProveedor->nombre ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('nombre_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->nombre ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('actividad', 'Actividad:') !!}
-                        {!! Form::text('actividad', $ocMercadoPublico->ocMercadoPublicoProveedor->actividad ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('actividad_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->actividad ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('codigo_sucursal', 'Codigo Sucursal:') !!}
-                        {!! Form::text('codigo_sucursal', $ocMercadoPublico->ocMercadoPublicoProveedor->codigo_sucursal ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('codigo_sucursal_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->codigo_sucursal ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('nombre_sucursal', 'Nombre Sucursal:') !!}
-                        {!! Form::text('nombre_sucursal', $ocMercadoPublico->ocMercadoPublicoProveedor->nombre_sucursal ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('nombre_sucursal_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->nombre_sucursal ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('rut_sucursal', 'RUT Sucursal:') !!}
-                        {!! Form::text('rut_sucursal', $ocMercadoPublico->ocMercadoPublicoProveedor->rut_sucursal ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('rut_sucursal_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->rut_sucursal ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('direccion', 'Direccion:') !!}
-                        {!! Form::text('direccion', $ocMercadoPublico->ocMercadoPublicoProveedor->direccion ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('direccion_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->direccion ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('comuna', 'Comuna:') !!}
-                        {!! Form::text('comuna', $ocMercadoPublico->ocMercadoPublicoProveedor->comuna ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('comuna_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->comuna ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('region', 'Region:') !!}
-                        {!! Form::text('region', $ocMercadoPublico->ocMercadoPublicoProveedor->region ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('region_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->region ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('pais', 'Pais:') !!}
-                        {!! Form::text('pais', $ocMercadoPublico->ocMercadoPublicoProveedor->pais ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('pais_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->pais ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('nombre_contacto', 'Nombre Contacto:') !!}
-                        {!! Form::text('nombre_contacto', $ocMercadoPublico->ocMercadoPublicoProveedor->nombre_contacto ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('nombre_contacto_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->nombre_contacto ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('cargo_contacto', 'Cargo Contacto:') !!}
-                        {!! Form::text('cargo_contacto', $ocMercadoPublico->ocMercadoPublicoProveedor->cargo_contacto ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('cargo_contacto_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->cargo_contacto ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('fono_contacto', 'Fono Contacto:') !!}
-                        {!! Form::text('fono_contacto', $ocMercadoPublico->ocMercadoPublicoProveedor->fono_contacto ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('fono_contacto_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->fono_contacto ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group col-sm-4">
                         {!! Form::label('mail_contacto', 'Mail Contacto:') !!}
-                        {!! Form::text('mail_contacto', $ocMercadoPublico->ocMercadoPublicoProveedor->mail_contacto ?? null, ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::text('mail_contacto_proveedor', $ocMercadoPublico->ocMercadoPublicoProveedor->mail_contacto ?? null, ['class' => 'form-control']) !!}
                     </div>
 
                 </div>

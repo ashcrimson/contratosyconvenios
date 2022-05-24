@@ -179,8 +179,56 @@ class OcMercadoPublicoController extends AppBaseController
             return redirect(route('ocMercadoPublicos.index'));
         }
 
-        $ocMercadoPublico->fill($request->all());
-        $ocMercadoPublico->save();
+        try {
+            DB::beginTransaction();
+
+            $ocMercadoPublico->fill($request->all());
+            $ocMercadoPublico->save();
+
+            $ocMercadoPublico->ocMercadoPublicoProveedor()->update([
+                'codigo' => $request->get('codigo_proveedor'),
+                'nombre' => $request->get('nombre_proveedor'),
+                'actividad' => $request->get('actividad_proveedor'),
+                'codigo_sucursal' => $request->get('codigo_sucursal_proveedor'),
+                'nombre_sucursal' => $request->get('nombre_sucursal_proveedor'),
+                'rut_sucursal' => $request->get('rut_sucursal_proveedor'),
+                'direccion' => $request->get('direccion_proveedor'),
+                'comuna' => $request->get('comuna_proveedor'),
+                'region' => $request->get('region_proveedor'),
+                'pais' => $request->get('pais_proveedor'),
+                'nombre_contacto' => $request->get('nombre_contacto_proveedor'),
+                'cargo_contacto' => $request->get('cargo_contacto_proveedor'),
+                'fono_contacto' => $request->get('fono_contacto_proveedor'),
+                'mail_contacto' => $request->get('mail_contacto_proveedor'),
+            ]);
+
+            $ocMercadoPublico->ocMercadoPublicoComprador()->update([
+                'codigo_organismo' => $request->get('codigo_organismo_comprador'),
+                'nombre_organismo' => $request->get('nombre_organismo_comprador'),
+                'rut_unidad' => $request->get('rut_unidad_comprador'),
+                'codigo_unidad' => $request->get('codigo_unidad_comprador'),
+                'nombre_unidad' => $request->get('nombre_unidad_comprador'),
+                'actividad' => $request->get('actividad_comprador'),
+                'direccion_unidad' => $request->get('direccion_unidad_comprador'),
+                'comuna_unidad' => $request->get('comuna_unidad_comprador'),
+                'region_unidad' => $request->get('region_unidad_comprador'),
+                'pais' => $request->get('pais_comprador'),
+                'nombre_contacto' => $request->get('nombre_contacto_comprador'),
+                'cargo_contacto' => $request->get('cargo_contacto_comprador'),
+                'fono_contacto' => $request->get('fono_contacto_comprador'),
+                'mail_contacto' => $request->get('mail_contacto_comprador'),
+            ]);
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            if (auth()->user()->can('puede depurar')) {
+                throw $exception;
+            }
+            flash()->error($exception->getMessage());
+            return back()->withInput();
+        }
+        DB::commit();
 
         Flash::success('Oc Mercado Publico actualizado con éxito.');
 

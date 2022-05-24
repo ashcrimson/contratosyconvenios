@@ -87,3 +87,9 @@
 {!! $ocMercadoPublico->cantidad_items !!}<br>
 
 @include('oc_mercado_publicos.partials.fechas_fields')
+
+@include('oc_mercado_publicos.partials.comprador')
+
+@include('oc_mercado_publicos.partials.proveedor')
+
+@include('oc_mercado_publicos.partials.items')
