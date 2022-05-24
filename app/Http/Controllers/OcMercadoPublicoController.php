@@ -148,7 +148,7 @@ class OcMercadoPublicoController extends AppBaseController
     public function edit($id)
     {
         /** @var OcMercadoPublico $ocMercadoPublico */
-        $ocMercadoPublico = OcMercadoPublico::with(['ocMercadoPublicoFechas'])->find($id);
+        $ocMercadoPublico = OcMercadoPublico::with(['ocMercadoPublicoFechas','ocMercadoPublicoComprador'])->find($id);
 
         if (empty($ocMercadoPublico)) {
             Flash::error('Oc Mercado Publico no encontrado');

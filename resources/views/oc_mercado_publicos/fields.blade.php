@@ -155,6 +155,8 @@
 
 @include('oc_mercado_publicos.partials.fechas_fields')
 @if(Route::is('ocMercadoPublicos.edit') )
+    @include('oc_mercado_publicos.partials.comprador')
+    @include('oc_mercado_publicos.partials.proveedor')
     @include('oc_mercado_publicos.partials.items')
 @endif
 

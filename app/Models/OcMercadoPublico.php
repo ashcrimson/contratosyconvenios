@@ -191,4 +191,14 @@ class OcMercadoPublico extends Model
     {
         return $this->hasOne(\App\Models\OcMercadoPublicoFechas::class, 'oc_mercado_publico_id');
     }
+
+    public function ocMercadoPublicoComprador()
+    {
+        return $this->hasOne(\App\Models\OcmercadoPublicoComprador::class, 'oc_mercado_publico_id');
+    }
+
+    public function ocMercadoPublicoProveedor()
+    {
+        return $this->hasOne(\App\Models\OcMercadoPublicoProveedor::class, 'oc_mercado_publico_id');
+    }
 }
