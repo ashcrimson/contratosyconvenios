@@ -15,6 +15,7 @@ use App\Models\OcMercadoPublico;
 use App\Models\OcmercadoPublicoComprador;
 use App\Models\OcMercadoPublicoFechas;
 use App\Models\OcMercadoPublicoItem;
+use App\Models\OcMercadoPublicoProveedor;
 use App\Models\OrdenCompraEstado;
 use App\Models\OrdenCompraTipo;
 use App\Traits\GuardarLogErroresTrait;
@@ -322,6 +323,29 @@ class OcMercadoPublicoController extends AppBaseController
                         ]);
                     }
 
+                    if ($obj['Proveedor']) {
+                        /**
+                         * @var OcMercadoPublicoProveedor $ocMercadoPublicoProveedor
+                         */
+                        $ocMercadoPublicoProveedor = OcMercadoPublicoProveedor::create([
+                            'oc_mercado_publico_id' => $ocMercadoPublico->id,
+                            'codigo' => $obj['Proveedor']['Codigo'],
+                            'nombre' => $obj['Proveedor']['Nombre'],
+                            'actividad' => $obj['Proveedor']['Actividad'],
+                            'codigo_sucursal' => $obj['Proveedor']['CodigoSucursal'],
+                            'nombre_sucursal' => $obj['Proveedor']['NombreSucursal'],
+                            'rut_sucursal' => $obj['Proveedor']['RutSucursal'],
+                            'direccion' => $obj['Proveedor']['Direccion'],
+                            'comuna' => $obj['Proveedor']['Comuna'],
+                            'region' => $obj['Proveedor']['Region'],
+                            'pais' => $obj['Proveedor']['Pais'],
+                            'nombre_contacto' => $obj['Proveedor']['NombreContacto'],
+                            'cargo_contacto' => $obj['Proveedor']['CargoContacto'],
+                            'fono_contacto' => $obj['Proveedor']['FonoContacto'],
+                            'mail_contacto' => $obj['Proveedor']['MailContacto'],
+                        ]);
+                    }
+
                     foreach ($obj['Items']['Listado'] as $item) {
                         /**
                          * @var OcMercadoPublicoItem $ocMercadoPublicoItem
@@ -469,6 +493,29 @@ class OcMercadoPublicoController extends AppBaseController
                     'cargo_contacto' => $obj['Comprador']['CargoContacto'],
                     'fono_contacto' => $obj['Comprador']['FonoContacto'],
                     'mail_contacto' => $obj['Comprador']['MailContacto'],
+                ]);
+            }
+
+            if ($obj['Proveedor']) {
+                /**
+                 * @var OcMercadoPublicoProveedor $ocMercadoPublicoProveedor
+                 */
+                $ocMercadoPublicoProveedor = OcMercadoPublicoProveedor::create([
+                    'oc_mercado_publico_id' => $ocMercadoPublico->id,
+                    'codigo' => $obj['Proveedor']['Codigo'],
+                    'nombre' => $obj['Proveedor']['Nombre'],
+                    'actividad' => $obj['Proveedor']['Actividad'],
+                    'codigo_sucursal' => $obj['Proveedor']['CodigoSucursal'],
+                    'nombre_sucursal' => $obj['Proveedor']['NombreSucursal'],
+                    'rut_sucursal' => $obj['Proveedor']['RutSucursal'],
+                    'direccion' => $obj['Proveedor']['Direccion'],
+                    'comuna' => $obj['Proveedor']['Comuna'],
+                    'region' => $obj['Proveedor']['Region'],
+                    'pais' => $obj['Proveedor']['Pais'],
+                    'nombre_contacto' => $obj['Proveedor']['NombreContacto'],
+                    'cargo_contacto' => $obj['Proveedor']['CargoContacto'],
+                    'fono_contacto' => $obj['Proveedor']['FonoContacto'],
+                    'mail_contacto' => $obj['Proveedor']['MailContacto'],
                 ]);
             }
 
