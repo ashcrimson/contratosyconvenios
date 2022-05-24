@@ -170,13 +170,13 @@
                             <i class="fa fa-eye"></i>
                         </button>
 
-                        <button type="button" @click="editarItem(item)" class='btn btn-outline-primary btn-sm' v-tooltip="'Editar'" >
-                            <i class="fa fa-edit"></i>
-                        </button>
+{{--                        <button type="button" @click="editarItem(item)" class='btn btn-outline-primary btn-sm' v-tooltip="'Editar'" >--}}
+{{--                            <i class="fa fa-edit"></i>--}}
+{{--                        </button>--}}
 
-                        <button type="button" @click="eliminarItem(item)" class='btn btn-outline-danger btn-sm' v-tooltip="'Eliminar'" >
-                            <i class="fa fa-trash"></i>
-                        </button>
+{{--                        <button type="button" @click="eliminarItem(item)" class='btn btn-outline-danger btn-sm' v-tooltip="'Eliminar'" >--}}
+{{--                            <i class="fa fa-trash"></i>--}}
+{{--                        </button>--}}
 
                     </td>
                 </tr>
