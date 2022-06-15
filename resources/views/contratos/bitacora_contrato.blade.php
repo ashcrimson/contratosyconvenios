@@ -69,12 +69,12 @@
 
 
                                 @can('Eliminar Bitacora Contratos')
-                                    <a href="#" onclick="deleteItemDt(this)" data-id="{{$contrato->id}}" data-toggle="tooltip" title="Eliminar" class='btn btn-outline-danger btn-sm'>
+                                    <a href="#" onclick="deleteItemDt(this)" data-id="{{$bitacora->id}}" data-toggle="tooltip" title="Eliminar" class='btn btn-outline-danger btn-sm'>
                                         <i class="fa fa-trash-alt"></i>
                                     </a>
 
 
-                                    <form action="{{ route('contratos.bitacora.destroy', ['contrato' => $contrato->id,'bitacora' => $bitacora->id])}}" method="POST" id="delete-form{{$contrato->id }}">
+                                    <form action="{{ route('contratos.bitacora.destroy', ['contrato' => $contrato->id,'bitacora' => $bitacora->id])}}" method="POST" id="delete-form{{$bitacora->id }}">
                                         @method('DELETE')
                                         @csrf
                                     </form>

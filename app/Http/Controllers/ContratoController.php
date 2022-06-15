@@ -272,7 +272,6 @@ class ContratoController extends AppBaseController
     public function bitacoraVista(Contrato $contrato)
     {
         return view('contratos.bitacora_contrato',compact('contrato'));
-
     }
 
     public function bitacoraStore(Contrato $contrato,Request $request)
@@ -309,9 +308,7 @@ class ContratoController extends AppBaseController
     public function bitacoraDestroy(Contrato $contrato,Bitacora $bitacora,Request $request)
     {
 
-
         $bitacora->delete();
-
 
         flash('Bitacora Eliminada!')->success();
 
