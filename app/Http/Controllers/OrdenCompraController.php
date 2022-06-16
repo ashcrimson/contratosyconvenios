@@ -6,6 +6,7 @@ use App\DataTables\OrdenCompraDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateOrdenCompraRequest;
 use App\Http\Requests\UpdateOrdenCompraRequest;
+use App\Models\Bitacora;
 use App\Models\Contrato;
 use App\Models\OrdenCompra;
 use App\Models\OrdenCompraDetalle;
@@ -28,6 +29,8 @@ class OrdenCompraController extends AppBaseController
         $this->middleware('permission:Crear Orden Compras')->only(['create','store']);
         $this->middleware('permission:Editar Orden Compras')->only(['edit','update',]);
         $this->middleware('permission:Eliminar Orden Compras')->only(['destroy']);
+        $this->middleware('permission:Eliminar Bitacora Orden de Compra')->only(['bitacoraDestroy']);
+        $this->middleware('permission:Agregar Bitacora Orden Compras')->only(['bitacoraStore','bitacoraVista']);
     }
 
     /**
@@ -275,5 +278,49 @@ class OrdenCompraController extends AppBaseController
 
 
         return $total > $contrato->saldo;
+    }
+
+    public function bitacoraVista(OrdenCompra $ordenCompra)
+    {
+        return view('orden_compras.bitacora_orden_compra', compact('ordenCompra'));
+    }
+
+    public function bitacoraStore(OrdenCompra $ordenCompra, Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            /**
+             * @var Bitacora $bitacora
+             */
+            $bitacora = $ordenCompra->addBitacora($request->titulo,$request->descripcion);
+
+            if ($request->hasFile('adjunto')){
+                $bitacora->addDocumento($request->file('adjunto'));
+            }
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            if (auth()->user()->can('puede depurar')) {
+                throw $exception;
+            }
+            flash()->error($exception->getMessage());
+            return back()->withInput();
+        }
+        DB::commit();
+
+        flash('Bitacora agregada!')->success();
+
+        return redirect(route('ordenCompras.bitacora.vista',compact('ordenCompra')));
+    }
+
+    public function bitacoraDestroy(OrdenCompra $ordenCompra,Bitacora $bitacora,Request $request)
+    {
+        $bitacora->delete();
+
+        flash('Bitacora Eliminada!')->success();
+
+        return redirect(route('ordenCompras.bitacora.vista',compact('ordenCompra')));
     }
 }

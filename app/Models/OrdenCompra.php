@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasBitacora;
 use App\Traits\HasDocumento;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;;
@@ -30,7 +31,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class OrdenCompra extends Model
 {
-    use SoftDeletes,HasDocumento;
+    use SoftDeletes,HasDocumento,HasBitacora;
 
     public $table = 'ordenes_compras';
 

@@ -52,3 +52,9 @@
     </form>
     @endcan
 @endif
+
+@can('Agregar Bitacora Orden Compras')
+    <a href="{{ route('ordenCompras.bitacora.vista', $id) }}" data-toggle="tooltip" title="Bitacora" class='btn btn-outline-secondary btn-sm'>
+        <i class="fa fa-book-open"></i>
+    </a>
+@endcan

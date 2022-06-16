@@ -22,8 +22,9 @@
 </form>
 @endcan
 
-@can('Agregar Bitacora Oc Mercado Publicos')
-    <a href="{{ route('ocMercadoPublicos.bitacora.vista', $id) }}" data-toggle="tooltip" title="Bitacora" class='btn btn-outline-secondary btn-sm'>
-        <i class="fa fa-book-open"></i>
-    </a>
-@endcan
+{{--SE COMENTA NO SE VA USAR POR EL MOMENTO, PUEDE USARSE DESPUES --}}
+{{--@can('Agregar Bitacora Oc Mercado Publicos')--}}
+{{--    <a href="{{ route('ocMercadoPublicos.bitacora.vista', $id) }}" data-toggle="tooltip" title="Bitacora" class='btn btn-outline-secondary btn-sm'>--}}
+{{--        <i class="fa fa-book-open"></i>--}}
+{{--    </a>--}}
+{{--@endcan--}}
