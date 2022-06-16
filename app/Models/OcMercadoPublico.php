@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasBitacora;
+use App\Traits\HasDocumento;
 use Illuminate\Database\Eloquent\Model;;
 use Illuminate\Database\Eloquent\SoftDeletes;
 /**
@@ -39,7 +41,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class OcMercadoPublico extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,HasDocumento,HasBitacora;
 
     public $table = 'oc_mercado_publico';
 

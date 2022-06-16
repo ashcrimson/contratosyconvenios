@@ -99,6 +99,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('formaPagos', 'FormaPagoController');
 
     Route::resource('ocMercadoPublicos', 'OcMercadoPublicoController');
+
+    Route::group(['prefix' => 'ocMercadoPublicos','as' => 'ocMercadoPublicos.'],function (){
+
+        Route::get('bitacoras/{ocMercadoPublico}', 'OcMercadoPublicoController@bitacoraVista')->name('bitacora.vista');
+        Route::post('bitacoras/{ocMercadoPublico}/store', 'OcMercadoPublicoController@bitacoraStore')->name('bitacora.store');
+        Route::delete('bitacoras/{ocMercadoPublico}/{bitacora}/destroy', 'OcMercadoPublicoController@bitacoraDestroy')->name('bitacora.destroy');
+
+    });
+
     Route::get('ocMercadoPublicos/cargar/show', 'OcMercadoPublicoController@carga')->name('ocMercadoPublicos.carga');
     Route::post('ocMercadoPublicos/cargar/store', 'OcMercadoPublicoController@cargaStore')->name('ocMercadoPublicos.carga.store');
 

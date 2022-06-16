@@ -20,5 +20,8 @@ class Permission2Seeder extends Seeder
         Permission::firstOrCreate(['name' => 'Editar Oc Mercado Publicos']);
         Permission::firstOrCreate(['name' => 'Eliminar Oc Mercado Publicos']);
 
+        Permission::firstOrCreate(['name' => 'Agregar Bitacora Oc Mercado Publicos']);
+        Permission::firstOrCreate(['name' => 'Eliminar Bitacora Oc Mercado Publicos']);
+
     }
 }

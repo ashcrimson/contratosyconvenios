@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateOcMercadoPublicoRequest;
 use App\Http\Requests\UpdateOcMercadoPublicoRequest;
 use App\Imports\OcMercadoPublicoImport;
+use App\Models\Bitacora;
 use App\Models\DespachoTipo;
 use App\Models\FormaPago;
 use App\Models\Licitacion;
@@ -43,6 +44,8 @@ class OcMercadoPublicoController extends AppBaseController
         $this->middleware('permission:Crear Oc Mercado Publicos')->only(['create','store']);
         $this->middleware('permission:Editar Oc Mercado Publicos')->only(['edit','update',]);
         $this->middleware('permission:Eliminar Oc Mercado Publicos')->only(['destroy']);
+        $this->middleware('permission:Agregar Bitacora Oc Mercado Publicos')->only(['bitacoraVista','bitacoraStore']);
+        $this->middleware('permission:Eliminar Bitacora Oc Mercado Publicos')->only(['bitacoraDestroy']);
 
         $this->licitaciones = Licitacion::all();
         $this->monedas = Moneda::all();
@@ -630,5 +633,49 @@ class OcMercadoPublicoController extends AppBaseController
     public function getFormaPagoPorValor($valor)
     {
         return $this->formaPagos->where('valor', $valor)->first();
+    }
+
+    public function bitacoraVista(OcMercadoPublico $ocMercadoPublico)
+    {
+        return view('oc_mercado_publicos.bitacora_orden_compra', compact('ocMercadoPublico'));
+    }
+
+    public function bitacoraStore(OcMercadoPublico $ocMercadoPublico, Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            /**
+             * @var Bitacora $bitacora
+             */
+            $bitacora = $ocMercadoPublico->addBitacora($request->titulo,$request->descripcion);
+
+            if ($request->hasFile('adjunto')){
+                $bitacora->addDocumento($request->file('adjunto'));
+            }
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            if (auth()->user()->can('puede depurar')) {
+                throw $exception;
+            }
+            flash()->error($exception->getMessage());
+            return back()->withInput();
+        }
+        DB::commit();
+
+        flash('Bitacora agregada!')->success();
+
+        return redirect(route('ocMercadoPublicos.bitacora.vista',compact('ocMercadoPublico')));
+    }
+
+    public function bitacoraDestroy(OcMercadoPublico $ocMercadoPublico,Bitacora $bitacora,Request $request)
+    {
+        $bitacora->delete();
+
+        flash('Bitacora Eliminada!')->success();
+
+        return redirect(route('ocMercadoPublicos.bitacora.vista',compact('ocMercadoPublico')));
     }
 }
