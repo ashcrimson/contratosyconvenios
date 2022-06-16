@@ -94,6 +94,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('bitacoras/{ordenCompra}/store', 'OrdenCompraController@bitacoraStore')->name('bitacora.store');
         Route::delete('bitacoras/{ordenCompra}/{bitacora}/destroy', 'OrdenCompraController@bitacoraDestroy')->name('bitacora.destroy');
 
+        Route::group(['prefix' => 'detalles','as' => 'detalles.'],function (){
+
+            Route::get('bitacoras/{ordenCompraDetalle}', 'OrdenCompraController@bitacoraVistaDetalle')->name('bitacora.vista');
+            Route::post('bitacoras/{ordenCompraDetalle}/store', 'OrdenCompraController@bitacoraStoreDetalle')->name('bitacora.store');
+            Route::delete('bitacoras/{ordenCompraDetalle}/{bitacora}/destroy', 'OrdenCompraController@bitacoraDestroyDetalle')->name('bitacora.destroy');
+
+        });
+
     });
 
     Route::patch('ordenCompras/anular/{compra}', 'OrdenCompraController@anular')->name('ordenCompras.anular');

@@ -323,4 +323,54 @@ class OrdenCompraController extends AppBaseController
 
         return redirect(route('ordenCompras.bitacora.vista',compact('ordenCompra')));
     }
+
+    public function bitacoraVistaDetalle(OrdenCompraDetalle $ordenCompraDetalle)
+    {
+
+//        dd($ordenCompraDetalle->bitacoras[0]->documentos->toArray());
+        return view('orden_compras.bitacora_orden_compra_detalle', compact('ordenCompraDetalle'));
+    }
+
+    public function bitacoraStoreDetalle(OrdenCompraDetalle $ordenCompraDetalle, Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            /**
+             * @var Bitacora $bitacora
+             */
+            $bitacora = $ordenCompraDetalle->addBitacora($request->titulo,$request->descripcion);
+
+            if ($request->hasFile('adjunto')) {
+
+                foreach ($request->file('adjunto') as $file) {
+                    $bitacora->addDocumento($file);
+                }
+
+            }
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            if (auth()->user()->can('puede depurar')) {
+                throw $exception;
+            }
+            flash()->error($exception->getMessage());
+            return back()->withInput();
+        }
+        DB::commit();
+
+        flash('Bitacora agregada!')->success();
+
+        return redirect(route('ordenCompras.detalles.bitacora.vista',compact('ordenCompraDetalle')));
+    }
+
+    public function bitacoraDestroyDetalle(OrdenCompra $ordenCompra,Bitacora $bitacora,Request $request)
+    {
+        $bitacora->delete();
+
+        flash('Bitacora Eliminada!')->success();
+
+        return redirect(route('ordenCompras.bitacora.vista',compact('ordenCompra')));
+    }
 }

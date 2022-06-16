@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasBitacora;
 use Illuminate\Database\Eloquent\Model;;
 use Illuminate\Database\Eloquent\SoftDeletes;
 /**
@@ -18,13 +19,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class OrdenCompraDetalle extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,HasBitacora;
 
     public $table = 'ordenes_compras_detalles';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-
 
     protected $dates = ['deleted_at'];
 
@@ -79,7 +79,7 @@ class OrdenCompraDetalle extends Model
      **/
     public function compra()
     {
-        return $this->belongsTo(\App\Models\OrdenesCompra::class, 'compra_id');
+        return $this->belongsTo(\App\Models\OrdenCompra::class, 'compra_id');
     }
 
     public function getSubTotalAttribute()
@@ -92,7 +92,6 @@ class OrdenCompraDetalle extends Model
         $this->item->saldo-=$this->cantidad;
         $this->item->save();
     }
-
 
     public function sumaSaldoItem()
     {

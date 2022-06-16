@@ -32,7 +32,6 @@ trait HasDocumento
         return $this->documentos()->orderBy('id','desc')->first();
     }
 
-
     /**
      * Assign the given role to the model.
      *
@@ -42,17 +41,12 @@ trait HasDocumento
      */
     public function addDocumento(UploadedFile $file)
     {
-
-
-
-
         $documento = new Documento([
             'name' => $file->getClientOriginalName(),
             'file_name'=> $file->getClientOriginalName(),
             'mime_type'=> $file->getMimeType(),
             'size'=> $file->getSize()
         ]);
-
 
         $model = $this->getModel();
 

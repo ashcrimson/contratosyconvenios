@@ -91,6 +91,7 @@
                         <th>CANTIDAD</th>
                         <th>PRECIO</th>
                         <th>SUB TOTAL</th>
+                        <th>OPCIONES</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -103,6 +104,11 @@
                         <td>{{dvs().nfp($det->cantidad)}}</td>
                         <td>{{dvs().nfp($det->precio)}}</td>
                         <td>{{dvs().nfp($det->subtotal)}}</td>
+                        <td>
+                            <a href="{{ route('ordenCompras.detalles.bitacora.vista', $det->id) }}" data-toggle="tooltip" title="Bitacora" class='btn btn-outline-secondary btn-sm'>
+                                <i class="fa fa-book-open"></i>
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
 
