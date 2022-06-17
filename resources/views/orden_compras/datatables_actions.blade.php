@@ -1,9 +1,13 @@
 @can('Ver Orden Compras')
     <span data-toggle="tooltip" title="Ver">
 
-        <a href="#"  data-toggle="modal" data-target="#modalDetalleOrdenCompra{{$id}}" class='btn btn-default btn-sm'>
+        <a href="{{ route('ordenCompras.show', $id) }}" class='btn btn-default btn-sm'>
             <i class="fa fa-eye"></i>
         </a>
+
+{{--        <a href="#"  data-toggle="modal" data-target="#modalDetalleOrdenCompra{{$id}}" class='btn btn-default btn-sm'>--}}
+{{--            <i class="fa fa-eye"></i>--}}
+{{--        </a>--}}
     </span>
 
     <!-- Modal -->
