@@ -431,7 +431,7 @@ class OcMercadoPublicoController extends AppBaseController
                 }
                 DB::commit();
 
-                sleep(2);
+                sleep(3);
             } else {
                 $this->guardarLog('No pudo Consultar o Guardar el OC: '.$numeroOc);
             }

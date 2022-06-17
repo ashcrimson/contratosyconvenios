@@ -34,7 +34,7 @@ class OcMercadoPublicoItemAPIController extends AppBaseController
             $query->limit($request->get('limit'));
         }
         if ($request->get('oc_mercado_publico_id')) {
-            $query->where('oc_mercado_publico_id', $request->get('oc_mercado_publico_id'));
+            $query->where('oc_mercado_publico_id', $request->get('oc_mercado_publico_id'))->with(['bitacoras']);
         }
 
         $ocMercadoPublicoItems = $query->get();

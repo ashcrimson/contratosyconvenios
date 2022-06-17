@@ -106,7 +106,7 @@
                         <td>{{dvs().nfp($det->subtotal)}}</td>
                         <td>
                             <a href="{{ route('ordenCompras.detalles.bitacora.vista', $det->id) }}" data-toggle="tooltip" title="Bitacora" class='btn btn-outline-secondary btn-sm'>
-                                <i class="fa fa-book-open"></i>
+                                <i class="fa fa-book-open" style="color: @if($det->bitacoras->isNotEmpty()) green @else '' @endif;"></i>
                             </a>
                         </td>
                     </tr>

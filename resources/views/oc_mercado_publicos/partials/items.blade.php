@@ -177,7 +177,7 @@
                         </button>
 
                         <a v-bind:href="'/ocMercadoPublicos/items/bitacoras/show/' + item.id " class='btn btn-outline-secondary btn-sm' data-toggle="tooltip" title="Bitacora" >
-                            <i class="fa fa-book-open"></i>
+                            <i class="fa fa-book-open" :style="colorIconBitacora(item)"></i>
                         </a>
 
 {{--                        <button type="button" @click="editarItem(item)" class='btn btn-outline-primary btn-sm' v-tooltip="'Editar'" >--}}
@@ -352,7 +352,19 @@
                     console.log("Retirar",confirm);
 
                 },
-            }
+                colorIconBitacora(item) {
+                    console.log(item.bitacoras.length)
+                    if (item.bitacoras) {
+                        if (item.bitacoras.length > 0) {
+                            return {color: 'green',};
+                        }
+                    }
+                    return {};
+                }
+            },
+            computed: {
+
+            },
         });
     </script>
 @endpush

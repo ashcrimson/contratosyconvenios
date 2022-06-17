@@ -53,7 +53,7 @@
                                            data-togle='tooltip'
                                            title='{{$documento->file_name}}'>
                                             {{$documento->file_name}}
-                                        </a>
+                                        </a> |
                                     @endforeach
                                 @endif
                             </td>
