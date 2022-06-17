@@ -678,4 +678,57 @@ class OcMercadoPublicoController extends AppBaseController
 
         return redirect(route('ocMercadoPublicos.bitacora.vista',compact('ocMercadoPublico')));
     }
+
+    public function bitacoraVistaItem(Request $request, $ocMercadoPublicoItemId)
+    {
+        $ocMercadoPublicoItem = OcMercadoPublicoItem::with(['OcMercadoPublico'])->findOrFail($ocMercadoPublicoItemId);
+//        return $ocMercadoPublicoItem;
+        return view('oc_mercado_publicos.bitacora_orden_compra_item', compact('ocMercadoPublicoItem'));
+    }
+
+    public function bitacoraStoreItem($ocMercadoPublicoItemId, Request $request)
+    {
+
+        $ocMercadoPublicoItem = OcMercadoPublicoItem::with(['OcMercadoPublico'])->findOrFail($ocMercadoPublicoItemId);
+
+        try {
+            DB::beginTransaction();
+
+            /**
+             * @var Bitacora $bitacora
+             */
+            $bitacora = $ocMercadoPublicoItem->addBitacora($request->titulo,$request->descripcion);
+
+            if ($request->hasFile('adjunto')){
+                foreach ($request->file('adjunto') as $file) {
+                    $bitacora->addDocumento($file);
+                }
+            }
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            if (auth()->user()->can('puede depurar')) {
+                throw $exception;
+            }
+            flash()->error($exception->getMessage());
+            return back()->withInput();
+        }
+        DB::commit();
+
+        flash('Bitacora agregada!')->success();
+
+        return redirect(route('ocMercadoPublicos.items.bitacora.vista', $ocMercadoPublicoItem->id));
+    }
+
+    public function bitacoraDestroyItem($ocMercadoPublicoItemId,Bitacora $bitacora,Request $request)
+    {
+        $ocMercadoPublicoItem = OcMercadoPublicoItem::with(['OcMercadoPublico'])->findOrFail($ocMercadoPublicoItemId);
+
+        $bitacora->delete();
+
+        flash('Bitacora Eliminada!')->success();
+
+        return redirect(route('ocMercadoPublicos.items.bitacora.vista', $ocMercadoPublicoItem->id));
+    }
 }

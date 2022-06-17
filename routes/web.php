@@ -122,6 +122,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('bitacoras/{ocMercadoPublico}/store', 'OcMercadoPublicoController@bitacoraStore')->name('bitacora.store');
         Route::delete('bitacoras/{ocMercadoPublico}/{bitacora}/destroy', 'OcMercadoPublicoController@bitacoraDestroy')->name('bitacora.destroy');
 
+        Route::group(['prefix' => 'items','as' => 'items.'],function (){
+
+            Route::get('bitacoras/show/{ocMercadoPublicoItemId}', 'OcMercadoPublicoController@bitacoraVistaItem')->name('bitacora.vista');
+            Route::post('bitacoras/{ocMercadoPublicoItemId}/store', 'OcMercadoPublicoController@bitacoraStoreItem')->name('bitacora.store');
+            Route::delete('bitacoras/{ocMercadoPublicoItemId}/{bitacora}/destroy', 'OcMercadoPublicoController@bitacoraDestroyItem')->name('bitacora.destroy');
+
+        });
+
     });
 
     Route::get('ocMercadoPublicos/cargar/show', 'OcMercadoPublicoController@carga')->name('ocMercadoPublicos.carga');

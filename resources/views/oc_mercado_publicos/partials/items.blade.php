@@ -172,9 +172,13 @@
                     </td>
                     <td class="text-nowrap text-center">
 
-                        <button type="button" @click="verItem(item)" class='btn btn-outline-info btn-sm' v-tooltip="'Ver'" >
+                        <button type="button" @click="verItem(item)" class='btn btn-outline-info btn-sm' data-toggle="tooltip" title="Vert" >
                             <i class="fa fa-eye"></i>
                         </button>
+
+                        <a v-bind:href="'/ocMercadoPublicos/items/bitacoras/show/' + item.id " class='btn btn-outline-secondary btn-sm' data-toggle="tooltip" title="Bitacora" >
+                            <i class="fa fa-book-open"></i>
+                        </a>
 
 {{--                        <button type="button" @click="editarItem(item)" class='btn btn-outline-primary btn-sm' v-tooltip="'Editar'" >--}}
 {{--                            <i class="fa fa-edit"></i>--}}

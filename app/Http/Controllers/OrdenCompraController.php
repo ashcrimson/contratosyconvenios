@@ -326,8 +326,6 @@ class OrdenCompraController extends AppBaseController
 
     public function bitacoraVistaDetalle(OrdenCompraDetalle $ordenCompraDetalle)
     {
-
-//        dd($ordenCompraDetalle->bitacoras[0]->documentos->toArray());
         return view('orden_compras.bitacora_orden_compra_detalle', compact('ordenCompraDetalle'));
     }
 
