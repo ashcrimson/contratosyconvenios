@@ -139,4 +139,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('ocMercadoPublicos/cargar/store2', 'OcMercadoPublicoController@cargaStore2')->name('ocMercadoPublicos.carga.store2');
 
     Route::resource('ocMpTipoOrdenCompras', 'OcMercadoPublicoTipoOrdenCompraController');
+
+    Route::resource('ocMercadoPublicoTipoMonedas', 'OcMercadoPublicoTipoMonedaController');
 });
