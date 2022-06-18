@@ -1,9 +1,8 @@
 <?php
 
-Route::group(['as'=>'api.','namespace' => 'API'], function () {
+Route::group(['as' => 'api.', 'namespace' => 'API'], function () {
 
     Route::resource('options', 'OptionAPIController');
-
 
 
     Route::group(['middleware' => 'auth:api'], function () {
@@ -43,8 +42,9 @@ Route::group(['as'=>'api.','namespace' => 'API'], function () {
         Route::resource('oc_mercado_publicos', 'OcMercadoPublicoAPIController');
 
         Route::resource('oc_mercado_publico_items', 'OcMercadoPublicoItemAPIController');
-    });
 
+        Route::resource('oc_mp_tipo_orden_compras', 'OcMercadoPublicoTipoOrdenCompraAPIController');
+    });
 
 });
 

@@ -7,15 +7,15 @@ Auth::routes(['verify' => true]);
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider')->name('social_auth');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('pruebas',"PruebaController@index");
+Route::get('pruebas', "PruebaController@index");
 
 
 Route::group(['middleware' => ['auth']], function () {
 
 
-    Route::group(['prefix' => 'dev','as' => 'dev.'],function (){
+    Route::group(['prefix' => 'dev', 'as' => 'dev.'], function () {
 
-        Route::get('prueba/api','PruebaApiController@index')->name('prueba.api');
+        Route::get('prueba/api', 'PruebaApiController@index')->name('prueba.api');
 
         Route::get('passport/clients', 'PassportClientsController@index')->name('passport.clients');
 
@@ -44,10 +44,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('option/create/{option}', 'OptionController@create')->name('option.create');
     Route::get('option/orden', 'OptionController@updateOrden')->name('option.order.store');
-    Route::resource('options',"OptionController");
+    Route::resource('options', "OptionController");
 
-    Route::get('documentos/descargar/{documento}',"DocumentoController@descargar")->name('documentos.descargar');
-    Route::get('documentos/eliminar/{documento}',"DocumentoController@eliminar")->name('documentos.eliminar');
+    Route::get('documentos/descargar/{documento}', "DocumentoController@descargar")->name('documentos.descargar');
+    Route::get('documentos/eliminar/{documento}', "DocumentoController@eliminar")->name('documentos.eliminar');
 
     Route::resource('roles', 'RoleController');
 
@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('contratos', 'ContratoController');
 
-    Route::group(['prefix' => 'contratos','as' => 'contratos.'],function (){
+    Route::group(['prefix' => 'contratos', 'as' => 'contratos.'], function () {
         Route::post('asignar/area/{contrato}', 'ContratoController@asignarArea')->name('asignar.area');
         Route::post('asignar/cargo/{contrato}', 'ContratoController@asignarCargo')->name('asignar.cargo');
 
@@ -88,13 +88,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('ordenCompras', 'OrdenCompraController');
 
-    Route::group(['prefix' => 'ordenCompras','as' => 'ordenCompras.'],function (){
+    Route::group(['prefix' => 'ordenCompras', 'as' => 'ordenCompras.'], function () {
 
         Route::get('bitacoras/{ordenCompra}', 'OrdenCompraController@bitacoraVista')->name('bitacora.vista');
         Route::post('bitacoras/{ordenCompra}/store', 'OrdenCompraController@bitacoraStore')->name('bitacora.store');
         Route::delete('bitacoras/{ordenCompra}/{bitacora}/destroy', 'OrdenCompraController@bitacoraDestroy')->name('bitacora.destroy');
 
-        Route::group(['prefix' => 'detalles','as' => 'detalles.'],function (){
+        Route::group(['prefix' => 'detalles', 'as' => 'detalles.'], function () {
 
             Route::get('bitacoras/{ordenCompraDetalle}', 'OrdenCompraController@bitacoraVistaDetalle')->name('bitacora.vista');
             Route::post('bitacoras/{ordenCompraDetalle}/store', 'OrdenCompraController@bitacoraStoreDetalle')->name('bitacora.store');
@@ -116,13 +116,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('ocMercadoPublicos', 'OcMercadoPublicoController');
 
-    Route::group(['prefix' => 'ocMercadoPublicos','as' => 'ocMercadoPublicos.'],function (){
+    Route::group(['prefix' => 'ocMercadoPublicos', 'as' => 'ocMercadoPublicos.'], function () {
 
         Route::get('bitacoras/{ocMercadoPublico}', 'OcMercadoPublicoController@bitacoraVista')->name('bitacora.vista');
         Route::post('bitacoras/{ocMercadoPublico}/store', 'OcMercadoPublicoController@bitacoraStore')->name('bitacora.store');
         Route::delete('bitacoras/{ocMercadoPublico}/{bitacora}/destroy', 'OcMercadoPublicoController@bitacoraDestroy')->name('bitacora.destroy');
 
-        Route::group(['prefix' => 'items','as' => 'items.'],function (){
+        Route::group(['prefix' => 'items', 'as' => 'items.'], function () {
 
             Route::get('bitacoras/show/{ocMercadoPublicoItemId}', 'OcMercadoPublicoController@bitacoraVistaItem')->name('bitacora.vista');
             Route::post('bitacoras/{ocMercadoPublicoItemId}/store', 'OcMercadoPublicoController@bitacoraStoreItem')->name('bitacora.store');
@@ -137,4 +137,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('ocMercadoPublicos/cargar/show2', 'OcMercadoPublicoController@carga2')->name('ocMercadoPublicos.carga2');
     Route::post('ocMercadoPublicos/cargar/store2', 'OcMercadoPublicoController@cargaStore2')->name('ocMercadoPublicos.carga.store2');
+
+    Route::resource('ocMpTipoOrdenCompras', 'OcMercadoPublicoTipoOrdenCompraController');
 });
