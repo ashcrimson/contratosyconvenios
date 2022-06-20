@@ -89,21 +89,21 @@ class OptionTable2Seeder extends Seeder
             'updated_at' => '2020-05-05 10:57:00',
             'deleted_at' => NULL,
         ]);
-        Option::firstOrCreate([
-            'id' => '27',
-            'option_id' => NULL,
-            'nombre' => 'OC MERCADO PUBLICO',
-            'ruta' => 'ocMercadoPublicos.index',
-            'descripcion' => NULL,
-            'icono_l' => 'fa-file',
-            'icono_r' => NULL,
-            'orden' => '4',
-            'color' => 'bg-teal',
-            'dev' => '0',
-            'created_at' => '2020-05-05 10:57:00',
-            'updated_at' => '2020-05-05 10:57:00',
-            'deleted_at' => NULL,
-        ]);
+ //       Option::firstOrCreate([
+ //           'id' => '27',
+ //           'option_id' => NULL,
+//            'nombre' => 'OC MERCADO PUBLICO',
+//            'ruta' => 'ocMercadoPublicos.index',
+//            'descripcion' => NULL,
+//            'icono_l' => 'fa-file',
+//            'icono_r' => NULL,
+//            'orden' => '4',
+//            'color' => 'bg-teal',
+ //           'dev' => '0',
+//            'created_at' => '2020-05-05 10:57:00',
+ //           'updated_at' => '2020-05-05 10:57:00',
+//            'deleted_at' => NULL,
+//        ]);
 
         Option::firstOrCreate([
             'id' => '54',
