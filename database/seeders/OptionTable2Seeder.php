@@ -106,7 +106,7 @@ class OptionTable2Seeder extends Seeder
         ]);
 
         Option::firstOrCreate([
-            'id' => '28',
+            'id' => '54',
             'option_id' => 12,
             'nombre' => 'OC MP TIPO ORDEN COMPRA',
             'ruta' => 'ocMpTipoOrdenCompras.index',
@@ -122,7 +122,7 @@ class OptionTable2Seeder extends Seeder
         ]);
 
         Option::firstOrCreate([
-            'id' => '29',
+            'id' => '55',
             'option_id' => 12,
             'nombre' => 'OC MP TIPO MONEDA',
             'ruta' => 'ocMercadoPublicoTipoMonedas.index',
