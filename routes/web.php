@@ -143,4 +143,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('ocMercadoPublicoTipoMonedas', 'OcMercadoPublicoTipoMonedaController');
 
     Route::resource('ocMercadoPublicoTipoDespachos', 'OcMercadoPublicoTipoDespachoController');
+
+    Route::resource('ocMercadoPublicTipoPagos', 'OcMercadoPublicTipoPagoController');
 });

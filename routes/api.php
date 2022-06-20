@@ -48,6 +48,8 @@ Route::group(['as' => 'api.', 'namespace' => 'API'], function () {
         Route::resource('oc_mercado_publico_tipo_monedas', 'OcMercadoPublicoTipoMonedaAPIController');
 
         Route::resource('oc_mp_tipo_despachos', 'OcMercadoPublicoTipoDespachoAPIController');
+
+        Route::resource('oc_mercado_public_tipo_pagos', 'OcMercadoPublicTipoPagoAPIController');
     });
 
 });

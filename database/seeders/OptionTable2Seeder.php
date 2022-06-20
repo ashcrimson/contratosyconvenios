@@ -152,5 +152,21 @@ class OptionTable2Seeder extends Seeder
             'updated_at' => '2020-06-19 23:14:00',
             'deleted_at' => NULL,
         ]);
+
+        Option::firstOrCreate([
+            'id' => '57',
+            'option_id' => 12,
+            'nombre' => 'OC MP TIPO PAGO',
+            'ruta' => 'ocMercadoPublicTipoPagos.index',
+            'descripcion' => NULL,
+            'icono_l' => 'fa-circle-notch',
+            'icono_r' => NULL,
+            'orden' => '4',
+            'color' => 'bg-teal',
+            'dev' => '0',
+            'created_at' => '2020-06-19 23:31:00',
+            'updated_at' => '2020-06-19 23:31:00',
+            'deleted_at' => NULL,
+        ]);
     }
 }
