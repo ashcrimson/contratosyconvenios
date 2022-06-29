@@ -453,6 +453,16 @@ class OcMercadoPublicoController extends AppBaseController
     {
 
         try {
+
+            /**
+             * @var OcMercadoPublico $ocMercadoPublicoValidar
+             */
+            $ocMercadoPublicoValidar = OcMercadoPublico::where('codigo', $request->get('no_oc'))->first();
+
+            if ($ocMercadoPublicoValidar) {
+                return redirect()->back()->withInput([$request->get('no_oc')])->withErrors(['La Orden de Compra '.$request->get('no_oc').' que ingreso ya existe en la Base de Datos']);
+            }
+
             $urlApi = 'http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json';
 
             if (app()->environment()=='production'){

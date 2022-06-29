@@ -29,6 +29,8 @@
         <div class="container-fluid">
             <div class="clearfix"></div>
 
+            @include('layouts.partials.request_errors')
+
             <div class="clearfix"></div>
             <div class="card card-primary">
                 <div class="card-body">
