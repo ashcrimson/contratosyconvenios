@@ -21,7 +21,7 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class OcMercadoPublicoImport implements ToModel
+class OcMercadoPublicoImport implements ToModel,WithBatchInserts,WithChunkReading,WithMultipleSheets
 {
 
     use Importable;
@@ -42,9 +42,25 @@ class OcMercadoPublicoImport implements ToModel
     public function model(array $row)
     {
 
-        $this->ordenCompras[] = $row[CODIGO_OC];
+        $this->ordenCompras[] = $row[1];
 //        ++$this->numeroRegistros;
 
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function batchSize(): int
+    {
+        return 1000;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function chunkSize(): int
+    {
+        return 1000;
     }
 
     public function getListOrdenCompras()
@@ -57,4 +73,10 @@ class OcMercadoPublicoImport implements ToModel
         return $this->numeroRegistros;
     }
 
+    public function sheets(): array
+    {
+        return [
+            0 => $this,
+        ];
+    }
 }
