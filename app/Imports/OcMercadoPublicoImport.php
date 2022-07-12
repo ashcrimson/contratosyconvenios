@@ -43,7 +43,7 @@ class OcMercadoPublicoImport implements ToModel,WithBatchInserts,WithChunkReadin
     {
 
         $this->ordenCompras[] = $row[1];
-//        ++$this->numeroRegistros;
+        ++$this->numeroRegistros;
 
     }
 

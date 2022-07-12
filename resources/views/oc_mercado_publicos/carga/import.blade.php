@@ -36,11 +36,11 @@
                        href="#custom-content-below-importArchivo" role="tab" aria-controls="custom-content-below-importArchivo"
                        aria-selected="true">Importar Archivo</a>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" id="custom-content-below-historialCarga-tab" data-toggle="pill"--}}
-{{--                       href="#custom-content-below-historialCarga" role="tab" aria-controls="custom-content-below-historialCarga"--}}
-{{--                       aria-selected="false">Historial</a>--}}
-{{--                </li>--}}
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-content-below-historialCarga-tab" data-toggle="pill"
+                       href="#custom-content-below-historialCarga" role="tab" aria-controls="custom-content-below-historialCarga"
+                       aria-selected="false">Historial</a>
+                </li>
             </ul>
             <div class="card card-primary">
                 <div class="card-body">
@@ -89,15 +89,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-{{--                                @foreach(\App\Models\ClienteCarga::clientes()->get() as $carga)--}}
-{{--                                    <tr>--}}
-{{--                                        <td>{{$carga->fecha_carga}}</td>--}}
-{{--                                        <td>{{$carga->nombre_archivo}}</td>--}}
-{{--                                        <td>{{$carga->total_registros}}</td>--}}
-{{--                                        <td>{{$carga->total_nuevos}}</td>--}}
-{{--                                        <td>{{$carga->user->name}}</td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
+                                @foreach(\App\Models\OcMercadoPublicoCarga::cargaOc()->get() as $carga)
+                                    <tr>
+                                        <td>{{$carga->fecha_carga}}</td>
+                                        <td>{{$carga->nombre_archivio}}</td>
+                                        <td>{{$carga->total_registros}}</td>
+                                        <td>{{$carga->total_nuevos}}</td>
+                                        <td>{{$carga->user->name}}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
