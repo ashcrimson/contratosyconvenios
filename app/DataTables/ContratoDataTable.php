@@ -156,7 +156,7 @@ class ContratoDataTable extends DataTable
         $columns = [
 //            'id',
             'id_mercado_publico',
-            'proveedor' => ['data' => 'proveedor','name' => 'proveedor','orderable' => false],
+            // 'proveedor' => ['data' => 'proveedor','name' => 'proveedor','orderable' => false],
             'licitacion' => ['data' => 'licitacion.numero','name' => 'licitacion.numero','orderable' => false],
             'monto',
             'fecha_inicio',

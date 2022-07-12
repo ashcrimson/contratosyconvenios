@@ -75,7 +75,7 @@
     !!}
 </div> -->
 
-<!-- @isset($user) -->
+
 
         <div class="form-group col-sm-12">
             {!! Form::label('name', 'Cargos que puede gestionar:') !!}
@@ -90,7 +90,6 @@
             !!}
         </div>
 
-<!-- @endisset -->
 
 @push('scripts')
 <script>
