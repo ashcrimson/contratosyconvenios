@@ -41,12 +41,15 @@ class ContratoDataTable extends DataTable
             ->editColumn('saldo' ,function (Contrato  $contrato){
                 return nfp($contrato->saldo);
             })
+            ->editColumn('proveedor', function (Contrato $contrato) {
+                return $contrato->proveedor->razon_social ?? '';
+            })
 //            ->editColumn('tiene_detalles' ,function (Contrato  $contrato){
 //                return $contrato->items->count() > 0 ? "Sí" : 'NO';
 //            })
 
             ->editColumn('fecha_termino' ,function (Contrato  $contrato){
-                if (is_null($contrato->fecha_termino)){  
+                if (is_null($contrato->fecha_termino)){
                     return '';
                 }else{
                     return $contrato->fecha_termino->format('d/m/Y');;
@@ -54,7 +57,7 @@ class ContratoDataTable extends DataTable
             })
 
             ->editColumn('fecha_inicio' ,function (Contrato  $contrato){
-                if (is_null($contrato->fecha_inicio)){  
+                if (is_null($contrato->fecha_inicio)){
                     return '';
                 }else{
                     return $contrato->fecha_inicio->format('d/m/Y');;
@@ -153,7 +156,7 @@ class ContratoDataTable extends DataTable
         $columns = [
 //            'id',
             'id_mercado_publico',
-            'proveedor' => ['data' => 'proveedor.razon_social','name' => 'proveedor.razon_social','orderable' => false],
+            'proveedor' => ['data' => 'proveedor','name' => 'proveedor','orderable' => false],
             'licitacion' => ['data' => 'licitacion.numero','name' => 'licitacion.numero','orderable' => false],
             'monto',
             'fecha_inicio',
@@ -166,7 +169,7 @@ class ContratoDataTable extends DataTable
 
         ];
 
-        
+
 
         if (auth()->user()->can('Asignar Contratos a area')){
             $columns['asignar_area'] = ['searchable' => false,'orderable' => false];
