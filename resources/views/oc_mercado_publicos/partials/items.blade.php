@@ -19,13 +19,13 @@
                 <div class="form-row">
 
                     <div class="form-group col-sm-2">
-                        <div>
+                        <!-- <div>
                             @if(!Route::is('ocMercadoPublicos.show') )
                                 <button type="button" class="btn btn-success" @click.prevent="openModalAdd()" >
                                     <span >Agregar Item</span>
                                 </button>
                             @endif
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>
