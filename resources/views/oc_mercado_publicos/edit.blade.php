@@ -38,12 +38,12 @@
                             <!-- Submit Field -->
                             <div class="form-group col-sm-12 text-right">
                                 <a href="{!! route('ocMercadoPublicos.index') !!}" class="btn btn-outline-secondary">
-                                    Cancelar
+                                    Volver Atrás
                                 </a>
                                 &nbsp;
-                                <button type="submit" class="btn btn-outline-success">
+                                <!-- <button type="submit" class="btn btn-outline-success">
                                     <i class="fa fa-floppy-o"></i> Guardar
-                                </button>
+                                </button> -->
                             </div>
                         </div>
 
