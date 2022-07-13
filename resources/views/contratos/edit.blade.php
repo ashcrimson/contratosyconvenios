@@ -39,12 +39,12 @@
                             <!-- Submit Field -->
                             <div class="form-group col-sm-12 text-right">
                                 <a href="{!! route('contratos.index') !!}" class="btn btn-outline-secondary">
-                                    Volver atrás
+                                    Cancelar
                                 </a>
                                 &nbsp;
-                                <!-- <button type="submit" class="btn btn-outline-success">
+                                <button type="submit" class="btn btn-outline-success">
                                     <i class="fa fa-floppy-o"></i> Guardar
-                                </button> -->
+                                </button>
                             </div>
                         </div>
 
