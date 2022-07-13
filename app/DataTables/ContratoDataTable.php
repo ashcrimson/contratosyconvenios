@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Contrato;
+use App\Models\Proveedor;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -41,7 +42,7 @@ class ContratoDataTable extends DataTable
             ->editColumn('saldo' ,function (Contrato  $contrato){
                 return nfp($contrato->saldo);
             })
-            ->editColumn('proveedor', function (Contrato $contrato) {
+            ->editColumn('proveedor.razon_social', function (Contrato $contrato) {
                 return $contrato->proveedor->razon_social ?? '';
             })
 //            ->editColumn('tiene_detalles' ,function (Contrato  $contrato){
@@ -156,7 +157,7 @@ class ContratoDataTable extends DataTable
         $columns = [
 //            'id',
             'id_mercado_publico',
-            // 'proveedor' => ['data' => 'proveedor','name' => 'proveedor','orderable' => false],
+            'proveedor' => ['data' => 'proveedor.razon_social','name' => 'proveedor.razon_social','orderable' => false],
             'licitacion' => ['data' => 'licitacion.numero','name' => 'licitacion.numero','orderable' => false],
             'monto',
             'fecha_inicio',
