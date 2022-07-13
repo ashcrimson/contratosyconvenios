@@ -84,8 +84,8 @@
                                     <th>Fecha</th>
                                     <th>Nombre Archivo</th>
                                     <th>Total Registros</th>
-                                    <th>Total Nuevos</th>
                                     <th>Usuario</th>
+                                    <th>Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -94,8 +94,12 @@
                                         <td>{{$carga->fecha_carga}}</td>
                                         <td>{{$carga->nombre_archivio}}</td>
                                         <td>{{$carga->total_registros}}</td>
-                                        <td>{{$carga->total_nuevos}}</td>
                                         <td>{{$carga->user->name}}</td>
+                                        <td>
+                                            <a href="{{ route('ocMercadoPublicos.carga.detalle', $carga->id) }}" class="btn btn-sm btn-outline-info" title="Ver detalle Carga">
+                                                <i class="fa fa-list"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
