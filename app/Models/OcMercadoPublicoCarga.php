@@ -90,7 +90,7 @@ class OcMercadoPublicoCarga extends Model
 
     public function scopeCargaOc($query)
     {
-        $query->where('tipo', 'CARGA OC MERCADO PUBLICO DB');
+        $query->where('tipo', 'CARGA OC MERCADO PUBLICO DB')->orderByDesc('fecha_carga');
     }
 
 }

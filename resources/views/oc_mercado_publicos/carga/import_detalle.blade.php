@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@section('title_page',__('Carga Orden Compra Mercado Publicos'))
-@include('layouts.plugins.bootstrap_fileinput')
+@section('title_page',__('Detalle Carga Orden Compra'))
 
 @section('content')
 
@@ -34,26 +33,32 @@
             <div class="card card-primary card-outline">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-4 col-6">
+                        <div class="col-sm-3 col-6">
                             <div class="description-block border-right">
                                 <h5 class="description-header text-gray">{{ $totalDetallesSinConsultar }}</h5>
                                 <span class="description-text text-gray">TOTAL SIN CONSULTAR</span>
                             </div>
                         </div>
 
-                        <div class="col-sm-4 col-6">
+                        <div class="col-sm-3 col-6">
                             <div class="description-block border-right">
                                 <h5 class="description-header text-success">{{ $totalDetallesConsultadoExito }}</h5>
                                 <span class="description-text text-success">TOTAL CONSULTADO EXITO</span>
                             </div>
                         </div>
 
-                        <div class="col-sm-4 col-6">
+                        <div class="col-sm-3 col-6">
                             <div class="description-block border-right">
                                 <h5 class="description-header text-danger">{{ $totalDetallesConsultadoError }}</h5>
                                 <span class="description-text text-danger">TOTAL CONSULTADO ERROR</span>
                             </div>
+                        </div>
 
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block">
+                                <h5 class="description-header text-danger">{{ $totalDetallesConsultadoDuplicado }}</h5>
+                                <span class="description-text text-danger">TOTAL CONSULTADO DUPLICADO BASE DATOS</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -90,7 +95,7 @@
 @push('scripts')
     <script>
 
-        $(function () {
+        $( document ).ready(function() {
 
             $('#tableCargaDetalle').DataTable({
                 dom: "<'row'<'col-sm-6'l><'col-sm-6'fT>>" +
@@ -100,12 +105,14 @@
                 oLanguage: { "sUrl": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Spanish.json" }
             });
 
-            $('#btnRealizarCarga').click(function () {
-                Swal({
+            $( "#btnRealizarCarga" ).click(function() {
+                Swal.fire({
                     title: 'Espera por favor...',
                     allowEscapeKey: false,
-                    allowOutsideClick: false
+                    allowOutsideClick: false,
+                    timerProgressBar: true,
                 });
+
                 Swal.showLoading();
             });
 
