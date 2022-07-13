@@ -109,7 +109,7 @@
                 Swal.showLoading();
             });
 
-        }
+        });
 
     </script>
 @endpush
