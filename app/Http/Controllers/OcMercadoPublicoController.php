@@ -8,6 +8,7 @@ use App\Http\Requests\CreateOcMercadoPublicoRequest;
 use App\Http\Requests\UpdateOcMercadoPublicoRequest;
 use App\Imports\OcMercadoPublicoImport;
 use App\Models\Bitacora;
+use App\Models\Contrato;
 use App\Models\DespachoTipo;
 use App\Models\FormaPago;
 use App\Models\Licitacion;
@@ -307,8 +308,8 @@ class OcMercadoPublicoController extends AppBaseController
             foreach ($listadoNumeroOc as $oc) {
 
                 OcMercadoPublicoCargaDetalle::create([
-                    'orden_compra' => $oc,
-                    'contrato_id' => NULL,
+                    'orden_compra' => $oc[1],
+                    'contrato_id' => $oc[0],
                     'estado_consulta' => 'SIN CONSULTA',
                     'detalle_consulta' => NULL,
                     'carga_id' => $carga->id
@@ -525,6 +526,16 @@ class OcMercadoPublicoController extends AppBaseController
                                 'total_impuestos' => $item['TotalImpuestos'],
                                 'total' => $item['Total'],
                             ]);
+                        }
+
+                        /**
+                         * @var Contrato $contrato
+                         */
+                        $contrato = Contrato::where('id_mercado_publico', $ordenCompra->contrato_id)->first();
+
+                        if ($contrato) {
+                            $contrato->monto = $contrato->monto - floatval($obj['Total']);
+                            $contrato->save();
                         }
 
                         $ordenCompra->estado_consulta = 'CONSULTADO EXITO';

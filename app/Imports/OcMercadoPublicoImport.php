@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+const CONTRATO_ID = 0;
 const CODIGO_OC = 1;
 
 use App\Models\ClienteCarga;
@@ -42,7 +43,7 @@ class OcMercadoPublicoImport implements ToModel,WithBatchInserts,WithChunkReadin
     public function model(array $row)
     {
 
-        $this->ordenCompras[] = $row[1];
+        $this->ordenCompras[] = [$row[0], $row[1]];
         ++$this->numeroRegistros;
 
     }
