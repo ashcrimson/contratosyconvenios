@@ -21,31 +21,31 @@
                     <!-- Fecha Creacion Field -->
                     <div class="form-group col-sm-4">
                         {!! Form::label('fecha_creacion', 'Fecha Creación:') !!}
-                        {!! Form::date('fecha_creacion', onlyDate($ocMercadoPublico->ocMercadoPublicoFechas->fecha_creacion ?? null), ['class' => 'form-control','id'=>'fecha_creacion']) !!}
+                        {!! Form::date('fecha_creacion', onlyDate($ocMercadoPublico->ocMercadoPublicoFechas->fecha_creacion ?? null), ['class' => 'form-control','id'=>'fecha_creacion', isset($isShow) ? 'disabled' : '']) !!}
                     </div>
 
                     <!-- Fecha Envio Field -->
                     <div class="form-group col-sm-4">
                         {!! Form::label('fecha_envio', 'Fecha Envió:') !!}
-                        {!! Form::date('fecha_envio', onlyDate($ocMercadoPublico->ocMercadoPublicoFechas->fecha_envio ?? null), ['class' => 'form-control','id'=>'fecha_envio']) !!}
+                        {!! Form::date('fecha_envio', onlyDate($ocMercadoPublico->ocMercadoPublicoFechas->fecha_envio ?? null), ['class' => 'form-control','id'=>'fecha_envio', isset($isShow) ? 'disabled' : '']) !!}
                     </div>
 
                     <!-- Fecha Aceptacion Field -->
                     <div class="form-group col-sm-4">
                         {!! Form::label('fecha_aceptacion', 'Fecha Aceptación:') !!}
-                        {!! Form::date('fecha_aceptacion', onlyDate($ocMercadoPublico->ocMercadoPublicoFechas->fecha_aceptacion ?? null), ['class' => 'form-control','id'=>'fecha_aceptacion']) !!}
+                        {!! Form::date('fecha_aceptacion', onlyDate($ocMercadoPublico->ocMercadoPublicoFechas->fecha_aceptacion ?? null), ['class' => 'form-control','id'=>'fecha_aceptacion', isset($isShow) ? 'disabled' : '']) !!}
                     </div>
 
                     <!-- Fecha Cancelacion Field -->
                     <div class="form-group col-sm-4">
                         {!! Form::label('fecha_cancelacion', 'Fecha Cancelación:') !!}
-                        {!! Form::date('fecha_cancelacion', onlyDate($ocMercadoPublico->ocMercadoPublicoFechas->fecha_cancelacion ?? null), ['class' => 'form-control','id'=>'fecha_cancelacion']) !!}
+                        {!! Form::date('fecha_cancelacion', onlyDate($ocMercadoPublico->ocMercadoPublicoFechas->fecha_cancelacion ?? null), ['class' => 'form-control','id'=>'fecha_cancelacion', isset($isShow) ? 'disabled' : '']) !!}
                     </div>
 
                     <!-- Fecha Ultima Modificacion Field -->
                     <div class="form-group col-sm-4">
                         {!! Form::label('fecha_ultima_modificacion', 'Fecha Ultima Modificación:') !!}
-                        {!! Form::date('fecha_ultima_modificacion', onlyDate($ocMercadoPublico->ocMercadoPublicoFechas->fecha_ultima_modificacion ?? null), ['class' => 'form-control','id'=>'fecha_ultima_modificacion']) !!}
+                        {!! Form::date('fecha_ultima_modificacion', onlyDate($ocMercadoPublico->ocMercadoPublicoFechas->fecha_ultima_modificacion ?? null), ['class' => 'form-control','id'=>'fecha_ultima_modificacion', isset($isShow) ? 'disabled' : '']) !!}
                     </div>
 
                 </div>
