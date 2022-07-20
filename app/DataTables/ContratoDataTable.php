@@ -45,10 +45,6 @@ class ContratoDataTable extends DataTable
             ->editColumn('proveedor.razon_social', function (Contrato $contrato) {
                 return $contrato->proveedor->razon_social ?? '';
             })
-//            ->editColumn('tiene_detalles' ,function (Contrato  $contrato){
-//                return $contrato->items->count() > 0 ? "Sí" : 'NO';
-//            })
-
             ->editColumn('fecha_termino' ,function (Contrato  $contrato){
                 if (is_null($contrato->fecha_termino)){
                     return '';
@@ -56,7 +52,6 @@ class ContratoDataTable extends DataTable
                     return $contrato->fecha_termino->format('d/m/Y');;
                 }
             })
-
             ->editColumn('fecha_inicio' ,function (Contrato  $contrato){
                 if (is_null($contrato->fecha_inicio)){
                     return '';
@@ -64,7 +59,6 @@ class ContratoDataTable extends DataTable
                     return $contrato->fecha_inicio->format('d/m/Y');;
                 }
             })
-
             ->editColumn('adjunto' ,function (Contrato  $contrato){
 
                 $doc = $contrato->getLastDocumento();
@@ -75,8 +69,6 @@ class ContratoDataTable extends DataTable
                     return "";
                 }
             })
-
-
             ->rawColumns(['asignar','adjunto','action','id']);
 
         if (auth()->user()->can('Asignar Contratos a area')){

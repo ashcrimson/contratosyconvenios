@@ -9,12 +9,12 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($contrato->compras->sortByDesc('fecha_envio') as $compra)
+    @foreach($contrato->compras as $compra)
     <tr>
        <!--  <td>{{$compra->id}}</td> -->
         <td>{{$compra->numero}}</td>
         <td>{{\Carbon\Carbon::parse($compra->fecha_envio)->format('d/m/Y')}}</td>
-        <td>{{$compra->estado->nombre}}</td>
+        <td>{{$compra->nombre_estado}}</td>
         <td>${{number_format($compra->total,0,',','.')}}</td>
     </tr>
     @endforeach

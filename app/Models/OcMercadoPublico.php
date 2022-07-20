@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \App\Models\UnidadMonetaria $tipoMoneda
  * @property \App\Models\OrdenCompraEstado $estado
  * @property \App\Models\Licitacion $licitacion
+ * @property \App\Models\Contrato $contrato
  * @property \Illuminate\Database\Eloquent\Collection $ocMercadoPublicoFechas
  * @property string $codigo
  * @property string $nombre
@@ -38,6 +39,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $pais
  * @property integer $tipo_despacho
  * @property integer $forma_pago
+ * @property integer $contrato_id
  */
 class OcMercadoPublico extends Model
 {
@@ -74,6 +76,7 @@ class OcMercadoPublico extends Model
         'forma_pago',
         'estado_proveedor',
         'cantidad_items',
+        'contrato_id'
     ];
 
     /**
@@ -202,5 +205,13 @@ class OcMercadoPublico extends Model
     public function ocMercadoPublicoProveedor()
     {
         return $this->hasOne(\App\Models\OcMercadoPublicoProveedor::class, 'oc_mercado_publico_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function contrato()
+    {
+        return $this->belongsTo(\App\Models\Contrato::class, 'contrato_id');
     }
 }

@@ -41,6 +41,12 @@ class OcMercadoPublicoDataTable extends DataTable
              ->editColumn('tipo_despacho', function (OcMercadoPublico  $ocMercadoPublico) {
                  return $ocMercadoPublico->tipoDespacho->descripcion ?? '';
              })
+             ->editColumn('contrato', function (OcMercadoPublico  $ocMercadoPublico) {
+                 return $ocMercadoPublico->contrato->id_mercado_publico ?? '';
+             })
+             ->editColumn('contrato_id_mercado', function (OcMercadoPublico  $ocMercadoPublico) {
+                 return $ocMercadoPublico->contrato->id_mercado_publico ?? '';
+             })
              ->rawColumns(['action','id']);
 
     }
@@ -53,7 +59,7 @@ class OcMercadoPublicoDataTable extends DataTable
      */
     public function query(OcMercadoPublico $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['contrato']);
     }
 
     /**
@@ -106,25 +112,14 @@ class OcMercadoPublicoDataTable extends DataTable
     {
         return [
             'codigo',
-//            'nombre',
             'nombre_estado',
             'codigo_licitacion',
-//            'descripcion',
+            'contrato' => ['data' => 'contrato', 'name' => 'contrato', 'orderable' => 'false', 'searchable' => 'false'],
             'codigo_tipo',
-//            'tipo_moneda',
-//            'codigo_estado_proveedor',
-//            'promedio_calificacion',
-//            'cantidad_evaluacion',
-//            'descuentos',
-//            'cargos',
-//            'total_neto',
-//            'porcentaje_iva',
-//            'impuestos',
-//            'total',
-//            'financiamiento',
-//            'pais',
             'tipo_despacho',
-//            'forma_pago'
+
+            'contrato_id_mercado' => ['data' => 'contrato_id_mercado','name' => 'contrato.id_mercado_publico','visible' => false,'printable' => false, 'exportable' => false]
+
         ];
     }
 

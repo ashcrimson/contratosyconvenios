@@ -418,6 +418,11 @@ class OcMercadoPublicoController extends AppBaseController
                         DB::beginTransaction();
 
                         /**
+                         * @var Contrato $contrato
+                         */
+                        $contrato = Contrato::where('id_mercado_publico', $ordenCompra->contrato_id)->first();
+
+                        /**
                          * @var OcMercadoPublico $ocMercadoPublico
                          */
                         $ocMercadoPublico = OcMercadoPublico::create([
@@ -444,6 +449,7 @@ class OcMercadoPublicoController extends AppBaseController
                             'forma_pago' => $this->getFormaPagoPorValor($obj['FormaPago'])->id ?? 5,
                             'estado_proveedor' => $obj['EstadoProveedor'],
                             'cantidad_items' => $obj['Items']['Cantidad'],
+                            'contrato_id' => $contrato->id ?? null,
                         ]);
 
                         /**
@@ -526,16 +532,6 @@ class OcMercadoPublicoController extends AppBaseController
                                 'total_impuestos' => $item['TotalImpuestos'],
                                 'total' => $item['Total'],
                             ]);
-                        }
-
-                        /**
-                         * @var Contrato $contrato
-                         */
-                        $contrato = Contrato::where('id_mercado_publico', $ordenCompra->contrato_id)->first();
-
-                        if ($contrato) {
-                            $contrato->monto = $contrato->monto - floatval($obj['Total']);
-                            $contrato->save();
                         }
 
                         $ordenCompra->estado_consulta = 'CONSULTADO EXITO';

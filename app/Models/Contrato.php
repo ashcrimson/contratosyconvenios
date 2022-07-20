@@ -236,16 +236,14 @@ class Contrato extends Model
      **/
     public function compras()
     {
-        return $this->hasMany(\App\Models\OrdenCompra::class, 'contrato_id');
+        return $this->hasMany(\App\Models\OcMercadoPublico::class, 'contrato_id');
     }
 
     public function getSaldoAttribute()
     {
-        return $this->monto - $this->compras->sum(function (OrdenCompra $compra){
-                    if ($compra->estado_id!=OrdenCompraEstado::ANULADA){
-                        return $compra->total;
-                    }
-            });
+        return $this->monto - $this->compras->sum(function (OcMercadoPublico $compra){
+            return $compra->total;
+        });
     }
 
     public function getMontoBoletaGarantiaFAttribute()
