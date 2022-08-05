@@ -585,7 +585,7 @@ class OcMercadoPublicoController extends AppBaseController
 //                return redirect()->back()->withInput([$request->get('no_oc')])->withErrors(['La Orden de Compra '.$request->get('no_oc').' que ingreso ya existe en la Base de Datos']);
 //            }
 
-            $urlApi = 'http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json';
+            $urlApi = 'https://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json';
 
             if (app()->environment()=='production'){
                 $oc = \Illuminate\Support\Facades\Http::withOptions([
