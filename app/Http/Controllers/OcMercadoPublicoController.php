@@ -389,7 +389,7 @@ class OcMercadoPublicoController extends AppBaseController
 
             } else {
 
-                $urlApi = 'http://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json';
+                $urlApi = 'https://api.mercadopublico.cl/servicios/v1/publico/ordenesdecompra.json';
 
                 if (app()->environment()=='production') {
                     $oc = \Illuminate\Support\Facades\Http::withOptions([
@@ -549,7 +549,7 @@ class OcMercadoPublicoController extends AppBaseController
                     }
                     DB::commit();
 
-                    sleep(3);
+                    sleep(5);
                 } else {
                     $ordenCompra->estado_consulta = 'CONSULTADO ERROR';
                     $ordenCompra->detalle_consulta = 'El numero orden no existe en la consulta API';
