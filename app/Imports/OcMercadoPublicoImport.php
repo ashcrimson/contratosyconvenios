@@ -43,8 +43,10 @@ class OcMercadoPublicoImport implements ToModel,WithBatchInserts,WithChunkReadin
     public function model(array $row)
     {
 
-        $this->ordenCompras[] = [$row[0], $row[1]];
-        ++$this->numeroRegistros;
+        if ($row[1]) {
+            $this->ordenCompras[] = [$row[0], $row[1]];
+            ++$this->numeroRegistros;
+        }
 
     }
 
