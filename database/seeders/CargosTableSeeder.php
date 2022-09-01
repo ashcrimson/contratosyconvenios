@@ -19,22 +19,22 @@ class CargosTableSeeder extends Seeder
     {
 
 
-        DB::table('cargos')->delete();
+        // DB::table('cargos')->delete();
 
-        $cargos = DB::connection('old')->table('CARGOS')->orderBy('ID_CARGO')->get();
+        // $cargos = DB::connection('old')->table('CARGOS')->orderBy('ID_CARGO')->get();
 
-        foreach ($cargos as $index => $cargo) {
-            Cargo::create([
-                'id' => $cargo->id_cargo,
-                'nombre' => $cargo->nombre
-            ]);
-        }
+        // foreach ($cargos as $index => $cargo) {
+        //     Cargo::create([
+        //         'id' => $cargo->id_cargo,
+        //         'nombre' => $cargo->nombre
+        //     ]);
+        // }
 
-        $maxId = $cargos->max('id_cargo');
+        // $maxId = $cargos->max('id_cargo');
 
 //        DB::statement("ALTER SEQUENCE CARGOS_ID_SEQ RESTART WITH ".$cargos->count().";");
 
-        setStartValSequence('CARGOS_ID_SEQ',$maxId);
+        // setStartValSequence('CARGOS_ID_SEQ',$maxId);
 
-    }
+    // }
 }

@@ -20,18 +20,18 @@ class MonedasTableSeeder extends Seeder
 
         \DB::table('monedas')->delete();
 
-        $monedas = DB::connection('old')->table('MONEDA')->orderBy('CODIGO')->get();
+        // $monedas = DB::connection('old')->table('MONEDA')->orderBy('CODIGO')->get();
 
-        foreach ($monedas as $index => $moneda) {
-//            dump($moneda);
-            Moneda::create([
-                'nombre' => $moneda->nombre,
-                'codigo' => $moneda->codigo,
-                'equivalencia' => $moneda->equivalencia
-            ]);
-        }
+//         foreach ($monedas as $index => $moneda) {
+// //            dump($moneda);
+//             Moneda::create([
+//                 'nombre' => $moneda->nombre,
+//                 'codigo' => $moneda->codigo,
+//                 'equivalencia' => $moneda->equivalencia
+//             ]);
+//         }
 
 
 
-    }
+    // }
 }

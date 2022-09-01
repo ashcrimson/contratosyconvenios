@@ -20,20 +20,20 @@ class ProveedoresTableSeeder extends Seeder
 
         DB::table('proveedores')->delete();
 
-        $proveedors = DB::connection('old')->table('PROVEEDORES')->orderBy('FECHA_CREACION')->get();
+        // $proveedors = DB::connection('old')->table('PROVEEDORES')->orderBy('FECHA_CREACION')->get();
 
-        foreach ($proveedors as $index => $proveedor) {
-            Proveedor::create([
-                'rut' => $proveedor->rut_proveedor,
-                'razon_social' => $proveedor->razon_social,
-                'nombre_fantasia' => $proveedor->nombre_fantasia,
-                'telefono' => $proveedor->telefono,
-                'email' => $proveedor->email,
-                'comuna' => $proveedor->comuna,
-                'direccion' => $proveedor->direccion
-            ]);
-        }
+        // foreach ($proveedors as $index => $proveedor) {
+        //     Proveedor::create([
+        //         'rut' => $proveedor->rut_proveedor,
+        //         'razon_social' => $proveedor->razon_social,
+        //         'nombre_fantasia' => $proveedor->nombre_fantasia,
+        //         'telefono' => $proveedor->telefono,
+        //         'email' => $proveedor->email,
+        //         'comuna' => $proveedor->comuna,
+        //         'direccion' => $proveedor->direccion
+        //     ]);
+        // }
 
 
-    }
+    // }
 }

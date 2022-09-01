@@ -18,24 +18,24 @@ class AreasTableSeeder extends Seeder
     {
 
 
-        DB::table('areas')->delete();
+        // DB::table('areas')->delete();
 
-        $areas = DB::connection('old')->table('AREAS')->orderBy('ID_AREA')->get();
+        // $areas = DB::connection('old')->table('AREAS')->orderBy('ID_AREA')->get();
 
-        foreach ($areas as $index => $area) {
-            Area::create([
-                'id' => $area->id_area,
-                'cargo_id' => $area->id_cargo,
-                'nombre' => $area->area
-            ]);
-        }
+        // foreach ($areas as $index => $area) {
+        //     Area::create([
+        //         'id' => $area->id_area,
+        //         'cargo_id' => $area->id_cargo,
+        //         'nombre' => $area->area
+        //     ]);
+        // }
 
-        $maxId = $areas->max('id_area');
+        // $maxId = $areas->max('id_area');
 
-        setStartValSequence('AREAS_ID_SEQ',$maxId);
-
-
+        // setStartValSequence('AREAS_ID_SEQ',$maxId);
 
 
-    }
+
+
+    // }
 }

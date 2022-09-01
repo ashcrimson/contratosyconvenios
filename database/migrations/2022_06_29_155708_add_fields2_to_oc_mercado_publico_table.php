@@ -14,7 +14,7 @@ class AddFields2ToOcMercadoPublicoTable extends Migration
     public function up()
     {
         Schema::table('oc_mercado_publico', function (Blueprint $table) {
-            $table->string('nombre_estado')->nullable();
+            // $table->string('nombre_estado')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddFields2ToOcMercadoPublicoTable extends Migration
     public function down()
     {
         Schema::table('oc_mercado_publico', function (Blueprint $table) {
-            $table->dropColumn('nombre_estado');
+            // $table->dropColumn('nombre_estado');
         });
     }
 }
